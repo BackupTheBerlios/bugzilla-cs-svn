@@ -1,0 +1,100 @@
+[%# 1.0@bugzilla.org %]
+[%# -*- mode: html -*- %]
+[%# The contents of this file are subject to the Mozilla Public
+  # License Version 1.1 (the "License"); you may not use this file
+  # except in compliance with the License. You may obtain a copy of
+  # the License at http://www.mozilla.org/MPL/
+  #
+  # Software distributed under the License is distributed on an "AS
+  # IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+  # implied. See the License for the specific language governing
+  # rights and limitations under the License.
+  #
+  # The Original Code is the Bugzilla Bug Tracking System.
+  #
+  # The Initial Developer of the Original Code is Netscape Communications
+  # Corporation. Portions created by Netscape are
+  # Copyright (C) 1998 Netscape Communications Corporation. All
+  # Rights Reserved.
+  #
+  # Contributor(s): Terry Weissman <terry@mozilla.org>
+  #                 Jacob Steenhagen <jake@bugzilla.org>
+  #%]
+
+[%# INTERFACE:
+  # This template has no interface.
+  #%]
+
+[% PROCESS global/variables.none.tmpl %]
+
+[% title = BLOCK %]
+[% terms.Bugzilla %] – Hlavní strana
+[% END %]
+[% PROCESS global/header.html.tmpl %]
+
+
+<script type="text/javascript" language="JavaScript">
+<!--
+function addSidebar() {
+  if ((typeof window.sidebar == "object") && (typeof window.sidebar.addPanel == "function"))
+  {
+    var sidebarname=window.location.host;
+    if (!/bug/i.test(sidebarname))
+      sidebarname="[% terms.Bugzilla %] "+sidebarname;
+    window.sidebar.addPanel (sidebarname, "[% Param('urlbase') %]sidebar.cgi", "");
+  }
+  else
+  {
+    var rv = window.confirm ("Váš prohlížeč nepodporuje postranní panely. " + "Chtěli byste stáhnout novější verzi?");
+    if (rv)
+      document.location.href = "http://www.mozilla.org/binaries.html";
+  }
+}
+//-->
+</script>
+
+
+<table width="100%"><tr>
+ <td>
+  <p>Sem umisťujeme všechna ta slovíčka, která vysvětlují všechno o [% terms.Bugzilla_6sg %].</p>
+
+  Ale ve skutečnosti jde jenom o volbu z:
+  <p>
+  <a href="query.cgi">Hledat v již nahlášených [% terms.chyba_6pl %]</a><br>
+  <a href="enter_bug.cgi">Ohlásit nov[% terms.x_chyba_4sg %]</a><br>
+  <a href="report.cgi">Shrnutí, statistiky a tabulky</a><br>
+  </p><p>
+[% IF user.id %]
+  <a href="userprefs.cgi">Změnit heslo či nastavení</a><br>
+  <a href="relogin.cgi">Odhlásit [% user.login FILTER html %]</a><br>
+[% ELSE %]
+  <a href="query.cgi?GoAheadAndLogIn=1">Přihlásit se k existujícímu účtu</a><br>
+  [% IF Param('createemailregexp') %]
+    <a href="createaccount.cgi">Vytvořit nový účet na [% terms.Bugzilla_6sg %]</a><br>
+  [% END %]
+[% END %]
+  </p><p>
+  <a href="javascript:addSidebar()">Nainstalovat postranní panel</a> (Vyžaduje Mozillu nebo Netscape 6)<br>
+  </p>
+  <form name="f" action="show_bug.cgi" method="get"
+      onsubmit="QuickSearch(f.id.value); return false;">
+  <p>
+  Zadejte číslo [% terms.chyba_2sg %] nebo nějaký hledaný výraz:<br>
+  <input type="text" name="id">
+  <input type="submit" value="Zobrazit">
+  <a href="quicksearch.html">[Nápověda]</a>
+  </p>
+  </form>
+ </td>
+ <td align="right"><img src="ant.jpg" width="329" height="220" border="2" alt="ant.jpg [8.5k]"></td>
+</tr></table>
+
+<script type="text/javascript" language="JavaScript" src="localconfig.js"></script>
+<script type="text/javascript" language="JavaScript" src="quicksearch.js"></script>
+<script type="text/javascript">
+<!--
+document.forms['f'].id.focus();
+//-->
+</script>
+
+[% PROCESS global/footer.html.tmpl %]

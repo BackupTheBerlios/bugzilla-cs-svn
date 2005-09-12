@@ -1,0 +1,306 @@
+[%# 1.0@bugzilla.org %]
+[%# The contents of this file are subject to the Mozilla Public
+  # License Version 1.1 (the "License"); you may not use this file
+  # except in compliance with the License. You may obtain a copy of
+  # the License at http://www.mozilla.org/MPL/
+  #
+  # Software distributed under the License is distributed on an "AS
+  # IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+  # implied. See the License for the specific language governing
+  # rights and limitations under the License.
+  #
+  # The Original Code is the Bugzilla Bug Tracking System.
+  #
+  # The Initial Developer of the Original Code is Netscape Communications
+  # Corporation. Portions created by Netscape are
+  # Copyright (C) 1998 Netscape Communications Corporation. All
+  # Rights Reserved.
+  #
+  # Contributor(s): Gervase Markham <gerv@gerv.net>
+  #%]
+
+[%# INTERFACE:
+  # header_done: boolean. True if the header has already been printed.
+  # error: string. The tag of the error.
+  # variables: hash. Useful data about the problem. The keys are the variable
+  #  names, and the values the variable values.
+  #%]
+
+[%# This is a list of all the possible code errors. Please keep them in
+  # alphabetical order by error tag, and leave a blank line between errors.
+  #
+  # Note that you must explicitly filter every single template variable
+  # in this file; if you do not wish to change it, use the "none" filter.
+  #%]
+
+[% PROCESS global/variables.none.tmpl %]
+
+[% DEFAULT title = "Interní chyba" %]
+
+[% error_message = BLOCK %]
+  [% IF    error == "action_unrecognized" %]
+    Neznám dodanou hodnotu (<em>[% action FILTER html %]</em>)
+    pro proměnnou <em>action</em>.
+  
+  [% ELSIF error == "attachment_already_obsolete" %]
+    Příloha #[% attach_id FILTER html %] ([% description FILTER html %]) 
+    již byla označena jako neplatná.
+
+  [% ELSIF error == "auth_err" %]
+    [% title = "Interní chyba přihlášení" %]
+    [%# Authentication errors are in a template depending on the auth method,
+        for pluggability.
+      #%] 
+    [% INCLUDE "account/auth/$authmethod-error.html.tmpl" %]
+
+  [% ELSIF error == "authres_unhandled" %]
+    Autorizace skončila výsledkem, který není ošetřen.
+
+  [% ELSIF error == "bad_page_cgi_id" %]
+    [% title = "Invalid Page ID" %]
+    Identifikátor <code>[% page_id FILTER html %]</code> není
+    platným identifikátorem stránky.
+
+  [% ELSIF error == "bug_error" %]
+    Pokus o načtení [% terms.chyba_4sg %] [%+ bug.bug_id FILTER html %] skončil
+    s chybou [% bug.error FILTER html %].
+    
+  [% ELSIF error == "chart_data_not_generated" %]
+    Nástroj, který počítá množství [% terms.chyba_2pl %] dosud nebyl ani jednou spuštěn.
+        
+  [% ELSIF error == "chart_datafile_corrupt" %]
+    Soubor s daty tabulek [% file FILTER html %] je poškozen.
+        
+  [% ELSIF error == "chart_dir_nonexistent" %]
+    Jeden z adresářů <tt>[% dir FILTER html %]</tt> a
+    <tt>[% graphdir FILTER html %]</tt> neexistuje.
+  
+  [% ELSIF error == "chart_file_open_fail" %]
+    Nepodařilo se otevřít soubor s daty tabulek <tt>[% filename FILTER html %]</tt>.
+  
+  [% ELSIF error == "chart_lines_not_installed" %]
+    Tabulky nebudou fungovat bez nainstalovaného perlovského modulu Chart::Lines.
+    Informace o instalaci vám po spuštění sdělí checksetup.pl.
+
+  [% ELSIF error == "cookies_need_value" %]
+    Každá cookie musí mít hodnotu.
+
+  [% ELSIF error == "field_type_mismatch" %]
+    Nemyslím, že dám dohromady <code>[% field FILTER html %]</code>
+    a <code>[% type FILTER html %]</code>.
+
+  [% ELSIF error == "gd_not_installed" %]
+    Tabulky nebudou fungovat bez nainstalovaného perlovského modulu GD.
+    Informace o instalaci vám po spuštění sdělí checksetup.pl.
+
+  [% ELSIF error == "illegal_content_type_method" %]
+    Váš příspěvek byl nějakým způsobem poškozen, Položka <em>metoda obsahu</em>,
+    která určuje, jak se má zjistit typ obsahu, musí mít jednu
+    z hodnot <em>autodetect</em>, <em>list</em>,
+    nebo <em>manual</em>, ale místo toho je nastavena na
+    <em>[% contenttypemethod FILTER html %]</em>.
+
+  [% ELSIF error == "illegal_field" %]
+    Nebyla nastavena platná hodnota [% field FILTER html %].
+
+  [% ELSIF error == "inactive_group" %]
+    Pokus o přidání [% terms.chyba_2sg %] do neaktivní skupiny, identifikované bitem
+    '[% bit FILTER html %]'.
+
+  [% ELSIF error == "bad_arg" %]
+    Do funkce <code>[% function FILTER html %]</code> předán
+    špatný parametr <code>[% argument FILTER html %]</code>.
+
+  [% ELSIF error == "invalid_attach_id_to_obsolete" %]
+     Číslo jedné z příloh, které jste chtěli označit jako neplatné,
+     [% attach_id FILTER html %] je špatné.
+          
+  [% ELSIF error == "invalid_column_name_cookie" %]
+    [% title = "Chybný název sloupce" %]
+     Uživatelské pořadí řazení uložené ve vaší cookie obsahuje neplatný
+     název sloupce <em>[% fragment FILTER html %]</em>. 
+     Tato cookie byla smazána.
+         
+  [% ELSIF error == "invalid_column_name_form" %]
+    [% title = "Chybný název sloupec" %]
+     Uživatelské pořadí řazení určené ve vámi odeslaném formuláři
+     obsahuje neplatný název sloupce <em>[% fragment FILTER html %]</em>.
+         
+  [% ELSIF error == "invalid_component" %]
+    [% title = "Neplatná komponenta" %]
+    Komponent [% name FILTER html %] v produktu
+    [% product FILTER html %] neexistuje.
+    
+  [% ELSIF error == "invalid_dimensions" %]
+    [% title = "Neplatné rozměry" %]
+    Určená šířka nebo výška není kladným číslem.
+    
+  [% ELSIF error == "invalid_series_id" %]
+    [% title = "Neplatná série" %]
+    Identifikátor série [% series_id FILTER html %] je neplatný. Je možné,
+    že tato série byla smazána.
+    
+  [% ELSIF error == "mismatched_bug_ids_on_obsolete" %]
+    Příloha [% attach_id FILTER html %] ([% description FILTER html %]) 
+    je připojena k [% terms.chyba_3sg %] [%+ attach_bug_id FILTER html %], 
+    ale snažili jste se označit [% terms.koho %] jako neplatnou při vytváření nové přílohy k
+    [% terms.chyba_3sg %] [%+ my_bug_id FILTER html %].
+
+  [% ELSIF error == "invalid_flag_association" %]
+    [% title = "Neplatné přiřazení příznaků" %]
+    Některé příznaky nepatří k
+    [% IF attach_id %]
+      příloze [% attach_id FILTER html %].
+    [% ELSE %]
+      [%+ terms.chyba_3sg %] [%+ bug_id FILTER html %].
+    [% END %]
+
+  [% ELSIF error == "flag_nonexistent" %]
+    Neexistuje příznak s ID #[% id FILTER html %].
+
+  [% ELSIF error == "flags_not_available" %]
+    [% title = "Editace příznaků není povolena" %]
+    Příznaky nemohou být nastavovány či měněny při
+    současných změnách několika [% terms.chyba_2pl %].
+
+  [% ELSIF error == "flag_requestee_disabled" %]
+    [% title = "Příznak nelze vyžádat samostatně" %]
+    Příznak <em>[% name FILTER html %]</em> nelze vyžádat samostatně.
+
+  [% ELSIF error == "flag_status_invalid" %]
+    Příznakový stav <em>[% status FILTER html %]</em>
+    [% IF id %]
+      pro příznak ID #[% id FILTER html %]
+    [% END %]
+    je neplatný.
+  
+  [% ELSIF error == "flag_type_component_nonexistent" %]
+    Komponenta <em>[% name FILTER html %]</em>
+    v produktu <em>[% product FILTER html %]</em>
+    neexistuje.
+  
+  [% ELSIF error == "flag_type_component_without_product" %]
+    Byla zvolena komponenta, ale nikoli produkt.
+  
+  [% ELSIF error == "flag_type_id_invalid" %]
+    Typ příznaku s ID <em>[% id FILTER html %]</em> není
+    kladné celé číslo.
+
+  [% ELSIF error == "flag_type_inactive" %]
+    [% title = "Neaktivní typy příznaků" %]
+    Některé typy příznaků jsou neaktivní a nelze je použít k vytvoření nových.
+
+  [% ELSIF error == "flag_type_nonexistent" %]
+    Neexistuje typ příznaku s ID <em>[% id FILTER html %]</em>.
+  
+  [% ELSIF error == "flag_type_product_nonexistent" %]
+    Produkt <em>[% product FILTER html %]</em> neexistuje.
+  
+  [% ELSIF error == "flag_type_target_type_invalid" %]
+    Cílový typ nebyl ani <em>[% terms.chyba %]</em> ani <em>příloha</em>,
+    ale <em>[% variables.target_type FILTER html %]</em>.
+  
+  [% ELSIF error == "invalid_field_name" %]
+    [% field FILTER html %] nelze použít jako jméno položky.
+
+  [% ELSIF error == "invalid_keyword_id" %]
+    Klíčové slovo s ID <em>[% id FILTER html %]</em> nebylo nalezeno.
+    
+  [% ELSIF error == "missing_bug_id" %]
+    Nebylo zadáno číslo [% terms.chyba_2sg %].
+    
+  [% ELSIF error == "missing_series_id" %]
+    Po vložení série do databáze nebylo vráceno series_id.
+    Série: [% series.category FILTER html %] / 
+    [%+ series.subcategory FILTER html %] / 
+    [%+ series.name FILTER html %].
+    
+  [% ELSIF error == "no_y_axis_defined" %]
+    Při vytváření zprávy nebyla zadána osa Y. Osa X je nepovinná,
+    ale osu Y je nutno zadat.
+    
+  [% ELSIF error == "need_quipid" %]
+    Je vyžadován platný identifikátor vtípku.
+
+  [% ELSIF error == "request_queue_group_invalid" %]
+    Pole <em>[% group FILTER html %]</em> je neplatné.
+
+  [% ELSIF error == "report_axis_invalid" %]
+    <em>[% val FILTER html %]</em> není platná hodnota pro položku
+    [%+ IF    fld == "x" %]vodorovné osy
+    [%+ ELSIF fld == "y" %]svislé osy
+    [%+ ELSIF fld == "z" %]více tabulek/obrázků
+    [%+ ELSE %]osy tabulky[% END %].
+
+  [% ELSIF error == "token_generation_error" %]
+    S generovacím systémem tokenů je něco opravdu špatně.
+
+  [% ELSIF error == "template_error" %]
+    [% template_error_msg FILTER html %]
+
+  [% ELSIF error == "unable_to_retrieve_password" %]
+     Nepodařilo se z databáze získat vaše staré heslo.
+
+  [% ELSIF error == "undefined_field" %]
+    Položka [% field FILTER html %] formuláře nebyla definována; [% Param('browserbugmessage') %]
+    [%# Useful message if browser did not select show_bug radio button %]
+    [% IF field == "knob" %]
+      Zkontrolujte, že políčko „Ponechat…“ bylo vybráno.
+    [% END %]
+
+  [% ELSIF error == "unknown_action" %]
+    [% IF action %]
+       Neznámá akce [% action FILTER html %]!
+    [% ELSE %]
+       Nechápu, o co se snažíte.
+    [% END %]
+
+  [% ELSE %]
+    [% title = "Interní chyba" %]
+    Nastala interní chyba, ale [% terms.Bugzilla %] neví,
+    co označuje kód chyby <code>[% error FILTER html %]</code>.
+
+    Pokud jste koncový uživatel [% terms.Bugzilla_2sg %] a vidíte tuto zprávu, uložte si laskavě
+    tuto stránku a pošlete ji správci systému ([% Param('maintainer') %]).
+  [% END %]
+[% END %]
+
+[% UNLESS header_done %]
+  [% PROCESS global/header.html.tmpl %]
+[% END %]
+
+<tt>
+  <p>
+    V [% terms.Bugzilla_6sg %] došlo k interní chybě. Uložte si laskavě tuto zprávu a pošlete ji
+    správci systému ([% Param("maintainer") %]) s podrobnostmi o tom, co jste dělali ve chvíli,
+    kdy k této chybě došlo.
+  </p>
+  <script type="text/javascript"> <!--
+    document.write("<p>URL: " + 
+                    document.location.href.replace(/&/g,"&amp;")
+                                          .replace(/</g,"&lt;")
+                                          .replace(/>/g,"&gt;") + "</p>");
+  // -->
+  </script>
+</tt>
+
+<table cellpadding="20">
+  <tr>
+    <td bgcolor="#ff0000">
+      <font size="+2">
+        [% error_message FILTER none %]
+      </font>
+    </td>
+  </tr>
+</table>
+
+[% IF variables %]
+  <pre>
+Proměnné:
+  [% FOREACH key = variables.keys %]
+    [%+ key FILTER html %]: [%+ variables.$key FILTER html %]
+  [% END %]
+  </pre>
+[% END %]
+
+[% PROCESS global/footer.html.tmpl %]

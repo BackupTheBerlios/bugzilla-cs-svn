@@ -1,0 +1,151 @@
+[%# 1.0@bugzilla.org %]
+[%# The contents of this file are subject to the Mozilla Public
+  # License Version 1.1 (the "License"); you may not use this file
+  # except in compliance with the License. You may obtain a copy of
+  # the License at http://www.mozilla.org/MPL/
+  #
+  # Software distributed under the License is distributed on an "AS
+  # IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+  # implied. See the License for the specific language governing
+  # rights and limitations under the License.
+  #
+  # The Original Code is the Bugzilla Bug Tracking System.
+  #
+  # The Initial Developer of the Original Code is Netscape Communications
+  # Corporation. Portions created by Netscape are
+  # Copyright (C) 1998 Netscape Communications Corporation. All
+  # Rights Reserved.
+  #
+  # Contributor(s): Gervase Markham <gerv@gerv.net>
+  #%]
+
+[% PROCESS global/variables.none.tmpl %]
+
+[% IF !header_done %]
+  [% h2 = voting_user.login FILTER html %]
+  [% IF canedit %]
+    [% title = "Změnit hlasy" %]
+  [% ELSE %]
+    [% title = "Zobrazit hlasy" %]
+  [% END %]
+  [% PROCESS global/header.html.tmpl %]
+[% ELSE %]
+  <hr>
+[% END %]
+
+[% IF votes_recorded %]
+  <p>
+    <font color="red">
+      Změny ve vašem hlasování byly zaznamenány.
+    </font>
+  </p>
+[% ELSE %]
+  <br>
+[% END %]
+
+[% IF products.size %]
+  <form method="post" action="votes.cgi">
+    <input type="hidden" name="action" value="vote">
+    <table cellspacing="4">
+      <tr>
+        <td></td>
+        <th>Hlasy</th>
+        <th>[% terms.Chyba %] #</th>
+        <th>Shrnutí</th>
+      </tr>
+
+      [% onevoteproduct = 0 %]
+      [% multivoteproduct = 0 %]
+      [% FOREACH product = products %]
+        [% IF product.onevoteonly %]
+          [% onevoteproduct = 1 %]
+        [% ELSE %]
+          [% multivoteproduct = 1 %]
+        [% END %]
+        <tr>
+          <th>[% product.name FILTER html %]</th>
+          <td></td>
+          [% IF product.maxperbug < product.maxvotes AND
+                product.maxperbug > 1 %]
+            <td>
+              <font size="-1">
+                (Poznámka: maximální povolený počet hlasů pro [% terms.chyba_4sg %] je v tomto produktu [% product.maxperbug %].)
+              </font>
+            </td>
+          [% END %]
+        </tr>
+
+        [% FOREACH bug = product.bugs %]
+          <tr>
+            <td></td>
+            <td align="right">
+              [% IF canedit %]
+                [% IF product.onevoteonly %]
+                  <input type="checkbox" name="[% bug.id %]" value="1"
+                    [% " checked" IF bug.count %]>
+                [% ELSE %]
+                  <input name="[% bug.id %]" value="[% bug.count %]"
+                         size="2">
+                [% END %]
+              [% ELSE %]
+                [% bug.count %]
+              [% END %]
+            </td>
+            <td align="right">
+              [% isclosed = !bug.opened %]
+                <a href="show_bug.cgi?id=[% bug.id %]">
+                  [% bug.id FILTER closed(isclosed) %]</a>
+            </td>
+            <td>
+              <a href="votes.cgi?action=show_bug&amp;bug_id=[% bug.id %]">
+                [% bug.summary FILTER html %]
+              </a>
+            </td>
+          </tr>
+        [% END %]
+
+        <tr>
+          <td></td>
+          <td colspan="3">Využito: [% product.total %] hlas
+            [% "y" IF product.total >= 2 && product.total <= 4 %]
+            [% "ů" IF product.total == 0 || product.total > 4 %]
+            z dovoleného maxima [% product.maxvotes %].
+            <br>
+            <br>
+          </td>
+        </tr>
+      [% END %]
+    </table>
+
+    [% IF canedit %]
+      <input type="submit" value="Změnit mé hlasování">
+      <br>
+      <br>
+      Pro změnu vašeho hlasování
+      [% IF multivoteproduct %]
+        zadejte nové počty (nula znamená nehlasovat)
+        [% " or " IF onevoteproduct %]
+      [% END %]
+      [% IF onevoteproduct %]
+        změňte zaškrtnutí čtverečku
+      [% END %]
+      a klikněte na <b>Změnit mé hlasování</b>.
+    [% END %]
+  </form>
+[% ELSE %]
+  <p>
+    V současné době
+    [% IF canedit %]
+    nehlasujete
+    [% ELSE %]
+    tento uživatel nehlasuje
+    [% END %]
+    pro žádné [% terms.chyba_4pl %].
+  </p>
+[% END %]
+
+<p>
+  <a href="page.cgi?id=voting.html">Nápověda k hlasování</a>.
+</p>
+
+[% PROCESS global/footer.html.tmpl %]

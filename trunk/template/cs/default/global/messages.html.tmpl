@@ -1,0 +1,173 @@
+[%# 1.0@bugzilla.org %]
+[%# The contents of this file are subject to the Mozilla Public
+  # License Version 1.1 (the "License"); you may not use this file
+  # except in compliance with the License. You may obtain a copy of
+  # the License at http://www.mozilla.org/MPL/
+  #
+  # Software distributed under the License is distributed on an "AS
+  # IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+  # implied. See the License for the specific language governing
+  # rights and limitations under the License.
+  #
+  # The Original Code is the Bugzilla Bug Tracking System.
+  #
+  # The Initial Developer of the Original Code is Netscape Communications
+  # Corporation. Portions created by Netscape are
+  # Copyright (C) 1998 Netscape Communications Corporation. All
+  # Rights Reserved.
+  #
+  # Contributor(s): Gervase Markham <gerv@gerv.net>
+  #%]
+
+[%# This is a list of all the possible messages. Please keep them in
+  # alphabetical order by message tag, and leave a blank line between messages.
+  #%]
+
+[% PROCESS global/variables.none.tmpl %]
+
+[% message_tag = message %]
+
+[% message = BLOCK %]
+  [% IF    message_tag == "buglist_adding_field" %]
+    [% title = "Přidává se pole do hledání…" %]
+    [% link  = "Klikněte sem, pokud se stránka neobnoví automaticky" %]
+
+  [% ELSIF message_tag == "buglist_load_named_query" %]
+    [% title = BLOCK %]
+      Načítá se hledání uložené jako [% namedcmd FILTER html %]
+    [% END %]
+    [% link  = "Klikněte sem, pokud se stránka neobnoví automaticky" %]
+
+  [% ELSIF message_tag == "buglist_updated_named_query" %]
+    OK, vaše hledání uložené jako <code>[% queryname FILTER html %]</code> bylo aktualizováno.
+
+  [% ELSIF message_tag == "buglist_new_default_query" %]
+    OK, nyní máte nové implicitní hledání. Můžete si také
+    uložit výsledky libovolného jednotlivého hledání.
+
+  [% ELSIF message_tag == "buglist_new_named_query" %]
+    OK, nyní máte nové hledání uložené jako <code>[% queryname FILTER html %]</code>.
+
+  [% ELSIF message_tag == "buglist_query_gone" %]
+    [% title = "Hledání je pryč" %]
+    [% link  = "Vrátit se zpět na stránku vyhledávání." %]
+    OK, vyhledávání <b>[% namedcmd FILTER html %]</b> bylo smazáno.
+
+  [% ELSIF message_tag == "buglist_sorted_by_relevance" %]
+    [% terms.Chyby %] na tomto seznamu jsou setříděny podle relevance, nejrelevantnější
+    [% terms.chyby %] jsou navrchu.
+    [% IF bugs.size == 200 %]
+      Je zobrazeno jen 200 nejrelevantnějších [% terms.chyba_2pl %].
+    [% END %]
+
+  [% ELSIF message_tag == "change_columns" %]
+    [% title = "Změna sloupců" %]
+    Vaše hledání se provádí s novým nastavením sloupců…
+    Klikněte <a href="[% redirect_url FILTER html %]">sem</a>,
+    pokud se stránka neobnoví automaticky.
+
+  [% ELSIF message_tag == "emailold_change_cancelled" %]
+    [% title = "Zrušen požadavek na změnu e-mailu" %]
+    Požadavek na změnu e-mailové adresy k vašemu účtu na
+    [%+ new_email FILTER html %] byl zrušen.
+
+  [% ELSIF message_tag == "email_change_cancelled" %]
+    [% title = "Zrušen požadavek na změnu e-mailu" %]
+    Požadavek na změnu e-mailové adresy k vašemu účtu
+    [%+ old_email FILTER html %] na
+    [%+ new_email FILTER html %] byl zrušen.
+
+  [% ELSIF message_tag == "email_change_cancelled_reinstated" %]
+    [% title = "Zrušen požadavek na změnu e-mailu" %]
+    Požadavek na změnu e-mailové adresy k vašemu účtu
+    [%+ old_email FILTER html %] na
+    [%+ new_email FILTER html %] byl zrušen.
+    Vaše předchozí nastavení bylo obnoveno.
+
+  [% ELSIF message_tag == "logged_out" %]
+    [% title = "Odhlášen" %]
+    [% url = "query.cgi?GoAheadAndLogIn=1" %]
+    [% link = "Znovu se přihlásit." %]
+    <b>Vaše přihlášení bylo zapomenuto.</b>
+    Cookie, která obsahovala vaše uložené přihlášení, byla smazána.
+    V případě potřeby budete příště vyzváni k opětovnému přihlášení.
+
+  [% ELSIF message_tag == "login_changed" %]
+    [% title = "Přihlášení do $terms.Bugzilla_2sg změněno" %]
+    Vaše přihlášení do [% terms.Bugzilla_2sg %] bylo změněno.
+
+  [% ELSIF message_tag == "password_change_cancelled" %]
+    [% title = "Zrušen požadavek na změnu hesla" %]
+    Váš požadavek byl zrušen.
+
+  [% ELSIF message_tag == "password_change_request" %]
+    [% title = "Požadavek na změnu hesla" %]
+    Žeton pro změnu vašeho hesla vám byl poslán e-mailem.
+    Pro změnu hesla postupujte podle instrukcí v mailu.
+
+  [% ELSIF message_tag == "password_changed" %]
+    [% title = "Heslo změněno" %]
+    Vaše heslo bylo změněno.
+
+  [% ELSIF message_tag == "flag_type_created" %]
+    [% title = "Vytvořen typ příznaku" %]
+      Typ příznaku <em>[% name FILTER html %]</em> byl úspěšně vytvořen.
+      <a href="editflagtypes.cgi">Zpět k typům příznaků.</a>
+    
+  [% ELSIF message_tag == "flag_type_changes_saved" %]
+    [% title = "Změny typu příznaku uloženy" %]
+    <p>
+      Vaše změny typu příznaku <em>[% name FILTER html %]</em> 
+      byly uloženy.
+      <a href="editflagtypes.cgi">Zpět k typům příznaků.</a>
+    </p>
+    
+  [% ELSIF message_tag == "flag_type_deleted" %]
+    [% title = "Typ příznaku smazán" %]
+    <p>
+      Typ příznaku <em>[% name FILTER html %]</em> byl úspěšně smazán.
+      <a href="editflagtypes.cgi">Zpět k typům příznaků.</a>
+    </p>
+    
+  [% ELSIF message_tag == "flag_type_deactivated" %]
+    [% title = "Typ příznaku deaktivován" %]
+    <p>
+      Typ příznaku <em>[% flag_type.name FILTER html %]</em> 
+      byl deaktivován.
+      <a href="editflagtypes.cgi">Zpět k typům příznaků.</a>
+    </p>
+    
+  [% ELSIF message_tag == "product_invalid" %]
+    [% title = "$terms.Bugzilla Component Descriptions" %]
+    Produkt <em>[% product FILTER html %]</em> neexistuje, nebo
+    k němu nemáte přístup. Níže můžete vidět seznam produktů,
+    ze kterých si můžete vybrat.
+
+  [% ELSIF message_tag == "series_created" %]
+    [% title = "Série vytvořena" %]
+      Řada <em>[% series.category FILTER html %] /
+      [%+ series.subcategory FILTER html %] / 
+      [%+ series.name FILTER html %]</em>
+      byla úspěšně vytvořena. Uvědomte si, že může být potřeba až
+      [%+ series.frequency * 2 %] dnů před tím, než se nashromáždí dostatek dat
+      pro vytvoření tabulky této řady.
+      <br><br>
+      Můžete se vrátit, nebo
+      <a href="query.cgi?format=create-series">vytvořit další řadu</a>.
+    
+  [% ELSIF message_tag == "shutdown" %]
+    [% title = "$terms.Bugzilla je mimo provoz" %]
+    [% Param("shutdownhtml") %]
+    
+  [% ELSE %]
+    [%# Give sensible error if error functions are used incorrectly.
+      #%]
+    Vaše použití funkcí zpráv v [% terms.Bugzilla_6sg %] je nesprávné.
+    Předali jste řetězec '[% message_tag %]', správný postup je předat
+    označení zprávy a definovat tuto zprávu v souboru messages.html.tmpl.<br>
+    <br>
+    Pokud jste koncový uživatel [% terms.Bugzilla_2sg %] a vidíte tuto zprávu,
+    uložte laskavě tuto stránku a pošlete ji správci systému ([% Param('maintainer') %]).
+    
+  [% END %]
+[% END %]
