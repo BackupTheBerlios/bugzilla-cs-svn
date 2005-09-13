@@ -22,20 +22,20 @@
 [% PROCESS global/variables.none.tmpl %]
 
 [% PROCESS global/header.html.tmpl
-  title = "Change Columns"
+  title = "Upravit sloupce"
 %]
 
 <p>
-  Select the columns you wish to appear in your [% terms.bug %] lists. Note that
-  this feature requires cookies to work.
+  Zvolte sloupce, které chcete zobrazovat ve vašich seznamech [% terms.chyba_2pl %]. Uvědomte
+  si, že tato funkce pracuje pomocí cookies.
 </p>
 
 [% PROCESS "global/field-descs.none.tmpl" %]
-[% field_descs.short_short_desc     = "Summary (first 60 characters)" %]
-[% field_descs.short_desc           = "Full Summary" %]
-[% field_descs.assigned_to_realname = "Assignee Realname" %]
-[% field_descs.reporter_realname    = "Reporter Realname" %]
-[% field_descs.qa_contact_realname  = "QA Contact Realname" %]
+[% field_descs.short_short_desc     = "Shrnutí (prvních 60 znaků)" %]
+[% field_descs.short_desc           = "Úplné shrnutí" %]
+[% field_descs.assigned_to_realname = "Skutečné jméno majitele" %]
+[% field_descs.reporter_realname    = "Skutečné jméno ohlašovatele" %]
+[% field_descs.qa_contact_realname  = "Skutečné jméno kontaktu QA" %]
 
 <form action="colchange.cgi">
   <input type="hidden" name="rememberedquery" value="[% buffer FILTER html %]">
@@ -52,26 +52,26 @@
     <input id="nosplitheader" type="radio" name="splitheader" value="0"
       [% "checked='checked'" IF NOT splitheader %]>
     <label for="nosplitheader">
-      Normal headers (prettier)
+      Klasická záhlaví (hezčí)
     </label>
     <br>
 
     <input id="splitheader" type="radio" name="splitheader" value="1"
       [% "checked='checked'" IF splitheader %]>
     <label for="splitheader">
-      Stagger headers (often makes list more compact)
+      Schodovitá záhlaví (seznam je pak často kompaktnější)
     </label>
   </p>
 
   <p>
-    <input type="submit" value="Change Columns">
+    <input type="submit" value="Změnit sloupce">
   </p>
 </form>
 
 <form action="colchange.cgi">
   <input type="hidden" name="rememberedquery" value="[% buffer FILTER html %]">
   <input type="hidden" name="resetit" value="1">
-  <input type="submit" value="Reset to [% terms.Bugzilla %] default">
+  <input type="submit" value="Vrátit na implicitní nastavení">
 </form>
 
 [% PROCESS global/footer.html.tmpl %]

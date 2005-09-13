@@ -48,16 +48,15 @@
 
     <tr>
       <td colspan="4">
-        If you want to help cover for someone when they're on vacation, or if
-        you need to do the QA related to all of their [% terms.bugs %], you can tell
-        [%+ terms.Bugzilla %] to send mail related to their [% terms.bugs %] to you, too.  List the
-        email addresses of any accounts you wish to watch here, separated by
-        commas.
+        Pokud chcete pomoci nahradit někoho, kdo je na dovolené, nebo potřebujete
+	provádět QA k některým jejich [% terms.chyba_3pl %], můžete [%+ terms.Bugzilla_4sg %]
+	požádat o posílání všech mailů týkajících se i jejich [% terms.chyba_2pl %]. Uveďte
+	zde všechny adresy účtů, které si přejete sledovat, oddělené čárkami.
       </td>
     </tr>
 
     <tr>
-      <th align="right">Users to watch:</th>
+      <th align="right">Sledovaní uživatelé:</th>
       <td>
         <input size="35" name="watchedusers" 
                value="[% watchedusers FILTER html %]">
@@ -68,9 +67,9 @@
   <tr>
     <td colspan="2">
       <p>
-        If you don't like getting a notification for "trivial"
-        changes to [% terms.bugs %], you can use the settings below to
-        filter some (or even all) notifications.
+        Pokud si nepřejete dostávat hlášení o „triviálních“ změnách [% terms.chyba_2pl %],
+	můžete si níže nastavit, aby [% terms.Bugzilla %]
+	některá (či dokonce všechna) hlášení odfiltroval[% koncovky.Bugzilla %].
       </p>
     </td>
   </tr>
@@ -81,7 +80,7 @@
 <table>
   <tr>
     <td colspan="2">
-      <b>Global options:</b>
+      <b>Globální nastavení:</b>
     </td>
   </tr>
 
@@ -90,7 +89,7 @@
     <td>
       <input type="checkbox" name="ExcludeSelf" id="ExcludeSelf" value="on"
         [% " checked" IF excludeself %]>
-      <label for="ExcludeSelf">Only email me reports of changes made by other people</label>
+      <label for="ExcludeSelf">Posílejte mi zprávy jen o změnách provedených jinými lidmi</label>
       <br>
     </td>
   </tr>
@@ -99,7 +98,7 @@
     <td>
       <input type="checkbox" name="FlagRequestee" id="FlagRequestee" value="on"
         [% " checked" IF FlagRequestee %]>
-      <label for="FlagRequestee">Email me when someone asks me to set a flag</label>
+      <label for="FlagRequestee">Posílejte mi zprávy, když mě někdo požádá o nastavení příznaku</label>
       <br>
     </td>
   </tr>
@@ -108,12 +107,12 @@
     <td>
       <input type="checkbox" name="FlagRequester" id="FlagRequester" value="on"
         [% " checked" IF FlagRequester %]>
-      <label for="FlagRequester">Email me when someone sets a flag I asked for</label>
+      <label for="FlagRequester">Posílejte mi zprávy, když někdo nastaví příznak, o který jsem žádal</label>
       <br>
     </td>
   </tr>
 </table>
-<noscript>If you had Javascript active, you could toggle all of these with one click.<br></noscript>
+<noscript>Pokud byste měli zapnutý Javascript, mohli byste přepínat vše jedním kliknutím.<br></noscript>
 <script type="text/javascript">
 <!--
 function SetCheckboxes(setting) {
@@ -130,12 +129,12 @@ function SetCheckboxes(setting) {
   }
 }
 
-document.write('<input type="button" value="Enable All Mail" onclick="SetCheckboxes(true); return false;">\n');
-document.write('<input type="button" value="Disable All Mail" onclick="SetCheckboxes(false); return false;">\n');
+document.write('<input type="button" value="Povolit vše" onclick="SetCheckboxes(true); return false;">\n');
+document.write('<input type="button" value="Zakázat vše" onclick="SetCheckboxes(false); return false;">\n');
 // -->
 </script>
 <hr>
-<b>Field/recipient specific options:</b>
+<b>Konkrétní volby:</b>
 <br>
 <br>
 
@@ -143,23 +142,23 @@ document.write('<input type="button" value="Disable All Mail" onclick="SetCheckb
 <table width="100%" border="1">
   <tr>
     <td colspan="[% (useqacontact AND usevotes) ? '5' : ((useqacontact OR usevotes) ? '4' : '3') %]" align="center" width="50%">
-      <b>When my relationship to this [% terms.bug %] is:</b>
+      <b>Když je můj vztah k této [% terms.chyba_3sg %]:</b>
     </td>
     <td rowspan="2" width="50%">
-      <b>I want to receive mail when:</b>
+      <b>Chci dostávat zprávy, když…</b>
     </td>
   </tr>
 
   <tr>
     <td align="center" width="10%">
-      <b>Reporter</b>
+      <b>Ohlašovatel</b>
     </td>
     <td align="center" width="10%">
-      <b>Assignee</b>
+      <b>Majitel</b>
     </td>
     [% IF useqacontact %]
       <td align="center" width="10%">
-        <b>QA Contact</b>
+        <b>Kontakt QA</b>
       </td>
     [% END %]
     <td align="center" width="10%">
@@ -167,34 +166,38 @@ document.write('<input type="button" value="Disable All Mail" onclick="SetCheckb
     </td>
     [% IF usevotes %]
       <td align="center" width="10%">
-        <b>Voter</b>
+        <b>Hlasující</b>
       </td>
     [% END %]
   </tr>
 
 [% bugLabelLower = BLOCK %]
-[% terms.bug %]
+[% terms.chyba %]
+[% END %]
+
+[% koncovka = BLOCK %]
+[% koncovky.verb %]
 [% END %]
 
   [% FOREACH reason = [
       { name = 'Removeme',
-        description = "I'm added to or removed from this capacity" },
+        description = "…jsem sem přidán či odstraněn." },
       { name = 'Comments',
-        description = "New Comments are added" },
+        description = "…je přidán nový komentář." },
       { name = 'Attachments',
-        description = "New Attachments are added" },
+        description = "…je přidána nová příloha." },
       { name = 'Status',
-        description = "Priority, status, severity, and/or milestone changes" },
+        description = "…je změněna priorita, status, závažnost či milník." },
       { name = 'Resolved',
-        description = "The ${bugLabelLower} is resolved or verified" },
+        description = "…${bugLabelLower} je vyřešen${koncovka} či ověřen${koncovka}." },
       { name = 'Keywords',
-        description = "Keywords field changes" },
+        description = "…pole klíčová slova je změněno." },
       { name = 'CC',
-        description = "CC field changes" },
+        description = "…seznam CC je změněn." },
       { name = 'Other',
-        description = "Any field not mentioned above changes" },
+        description = "…nějaké jiné, výše neuvedené, pole je změněno." },
       { name = 'Unconfirmed',
-        description = "The ${bugLabelLower} is in the unconfirmed state" },
+        description = "…${bugLabelLower} je dosud nepotvrzen${koncovka}." },
   ] %]
     <tr>
       [% FOREACH role = [ "Reporter", "Owner", "QAcontact", "CClist", "Voter" ]

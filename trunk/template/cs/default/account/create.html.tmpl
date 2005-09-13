@@ -29,29 +29,28 @@
 [% PROCESS global/variables.none.tmpl %]
 
 [% title = BLOCK %]
-Create a new [% terms.Bugzilla %] account
+Tvorba nového účtu na [% terms.Bugzilla_6sg %]
 [% END %]
 [% PROCESS global/header.html.tmpl %]
 
 <p>
-  To create a [% terms.Bugzilla %] account, all you need to do is
-  enter a legitimate e-mail address. The account will be created, and
-  its password will be mailed to you. <b>You will not be able to log
-  in until you receive the password.</b> If it doesn't arrive within a
-  reasonable amount of time, you can contact the maintainer of
-  this [% terms.Bugzilla %] installation
-  at <a href="mailto:[% Param("maintainer") %]">[% Param("maintainer") %]</a>.
+  Pro vytvoření účtu na [% terms.Bugzilla_6sg %] stačí zadat
+  jenom platnou e-mailovou adresu. Po vytvoření účtu vám heslo k němu
+  pošleme mailem. <b>Dokud neobdržíte toto heslo, nebudete se moci
+  přihlásit.</b> Pokud heslo v rozumném čase nedorazí, kontaktujte správce
+  této instalace [% terms.Bugzilla_2sg %] na adrese
+  <a href="mailto:[% Param("maintainer") %]">[% Param("maintainer") %]</a>.
 </p>
 
 <p>
-  Optionally you may enter your real name as well.
+  Nepovinně také můžete zadat své pravé jméno.
 </p>
 
 <form method="get" action="createaccount.cgi">
   <table>
     <tr>
       <td align="right">
-        <b>E-mail address:</b>
+        <b>E-mailová adresa:</b>
       </td>
       <td>
         <input size="35" name="login">
@@ -61,7 +60,7 @@ Create a new [% terms.Bugzilla %] account
 
     <tr>
       <td align="right">
-        <b>Real name:</b>
+        <b>Skutečné jméno:</b>
       </td>
       <td>
         <input size="35" name="realname">
@@ -69,7 +68,7 @@ Create a new [% terms.Bugzilla %] account
     </tr>
   </table>
   <br>
-  <input type="submit" value="Create Account">
+  <input type="submit" value="Vytvořit účet">
 </form>
 
 [% PROCESS global/footer.html.tmpl %]

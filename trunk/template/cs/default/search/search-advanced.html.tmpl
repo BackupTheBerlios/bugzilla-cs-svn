@@ -31,7 +31,7 @@
 [% cgi = Bugzilla.cgi %]
 
 [% PROCESS global/header.html.tmpl
-  title = "Search for $terms.bugs"
+  title = "Hledání $terms.chyba_2pl"
   h1 = ""
   onload = "selectProduct(document.forms['queryform']);initHelp();"
   style = "td.selected_tab {
@@ -49,24 +49,24 @@
 
 [% PROCESS search/tabs.html.tmpl %]
 
-[% button_name = "Search" %]
+[% button_name = "Hledat" %]
 
 [%# The decent help requires Javascript %]
 [% IF NOT help %]
   [% IF cgi.user_agent("Mozilla/5") %]
     <script type="text/javascript"> <!--
-      document.write("<p><a href='query.cgi?help=1&amp;format=advanced'>Give me some help</a> (reloads page.)</p>");
+      document.write("<p><a href='query.cgi?help=1&amp;format=advanced'>Pomozte mi s tím trochu</a> (obnoví stránku)</p>");
       // -->
     </script>
   [% END %]
 [% ELSE %]
   <p>
-      For help, mouse over the page elements.
+      Pro nápovědu najeďte myší nad jednotlivé prvky.
       <font color="red">
       [% IF cgi.user_agent("Mozilla/5") %]
-        Note that if the help popups are hidden by form element scroll bars,
-        this is a b<!-- word broken up to pass test 009 -->ug in your browser,
-        not in [% terms.Bugzilla %].
+        Pokud jsou texty nápovědy skryté pod posuvníky, je to
+        c<!-- word broken up to pass test 009 -->hyba ve vašem prohlížeči,
+	nikoli v [% terms.Bugzilla_6sg %].
       [% END %]
     </font>
   </p>

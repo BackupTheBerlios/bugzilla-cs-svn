@@ -26,73 +26,73 @@ From: bugzilla-admin-daemon
 To: [% emailaddress %]
 Subject: [% PROCESS subject %]
 
-A request was cancelled from [% remoteaddress %].
+Požadavek stornován z [% remoteaddress %].
 
-If you did not request this, it could be either an honest
-mistake or someone attempting to break into your [% terms.Bugzilla %] account.
+Pokud jste o to nežádali, může se jednat o prostý
+omyl, nebo se někdo snaží narušit váš účet na [% terms.Bugzilla_6sg %].
 
-Take a look at the information below and forward this email
-to [% maintainer %] if you suspect foul play.
+Pokud máte podezření na pokus o podvod, zkontrolujte níže uvedené
+informace a přepošlete tento mail správci ([% maintainer %]).
 
-            Token: [% token %]
-       Token Type: [% tokentype %]
-             User: [% emailaddress %]
-       Issue Date: [% issuedate %]
-       Event Data: [% eventdata %]
-Cancelled Because:
+            Žeton: [% token %]
+              Typ: [% tokentype %]
+         Uživatel: [% emailaddress %]
+     Datum vydání: [% issuedate %]
+    Data události: [% eventdata %]
+Zrušeno, protože:
 [% PROCESS cancelactionmessage %]
 
 [% BLOCK subject %]
   [% IF tokentype == 'password' %]
+    Požadavek na změnu hesla stornován.
     Password change request cancelled
   [% ELSIF tokentype == 'emailnew' OR tokentype == 'emailold' %]
-    Email change request cancelled
+    Požadavek na změnu e-mailu stornován.
   [% ELSE %]
-    [% tokentype %] token cancelled
+    Žeton [% tokentype %] zrušen.
   [% END %]
 [% END %]
 
 [% BLOCK cancelactionmessage %]
   [% IF    cancelaction == 'account_exists' %]
-    Account [% email %] already exists.
+    Účet [% email %] již existuje.
 
   [% ELSIF cancelaction == 'email_change_cancelled' %]
-    The request to change the email address for
-    the [% old_email %] account to [% new_email %] has
-    been cancelled.
+    Požadavek na změnu e-mailové adresy pro účet
+    [% old_email %] na [% new_email %] byl stornován.
 
   [% ELSIF cancelaction == 'email_change_cancelled_reinstated' %]
-    The request to change the email address for your account
-    to [% new_email %] has been cancelled. Your old account
-    settings have been reinstated.
+    Požadavek na změnu e-mailové adresy pro účet
+    [% old_email %] na [% new_email %] byl stornován.
+    Bylo obnoveno vaše původní nastavení.
 
   [% ELSIF cancelaction == 'emailold_change_cancelled' %]
-    The request to change the email address for your account
-    to [% new_email %] has been cancelled.
+    Požadavek na změnu e-mailové adresy vašeho účtu
+    na [% new_email %] byl stornován.
 
   [% ELSIF cancelaction == 'password_change_cancelled' %]
-    You have requested cancellation.
+    Žádali jste o stornování.
 
   [% ELSIF cancelaction == 'user_logged_in' %]
-    You have logged in.
+    Přihlásili jste se.
 
   [% ELSIF cancelaction == 'wrong_token_for_changing_passwd' %]
-    You have tried to use the token to change the password.
+    Pokusili jste se použít žeton ke změně hesla.
 
   [% ELSIF cancelaction == 'wrong_token_for_cancelling_email_change' %]
-    You have tried to use the token to cancel the email address change.
+    Pokusili jste se použít žeton ke stornování změny e-mailové adresy.
 
   [% ELSIF cancelaction == 'wrong_token_for_confirming_email_change' %]
-    You have tried to use the token to confirm the email address change.
+    Pokusili jste se použít žeton k potvrzení změny e-mailové adresy.
 
   [% ELSE %]
     [%# Give sensible error if the cancel-token function is used incorrectly.
       #%]
-    You are using [% terms.Bugzilla %]'s cancel-token function incorrectly. You
-    passed in the string '[% cancelaction %]'. The correct use is to pass
-    in a tag, and define that tag in the file cancel-token.txt.tmpl.
-
-    If you are a [% terms.Bugzilla %] end-user seeing this message, please forward this
-    email to [% Param('maintainer') %].
+    Vaše použití funkcí stornovacích žetonů v [% terms.Bugzilla_6sg %] je nesprávné.
+    Předali jste řetězec '[% cancelaction %]', správný postup je předat
+    označení zprávy a definovat tuto zprávu v souboru cancel-token.txt.tmpl.<br>
+    <br>
+    Pokud jste koncový uživatel [% terms.Bugzilla_2sg %] a vidíte tuto zprávu,
+    uložte laskavě tuto stránku a pošlete ji správci systému ([% Param('maintainer') %]).
   [% END %]
 [% END %]

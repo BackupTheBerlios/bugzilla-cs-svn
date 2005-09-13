@@ -26,30 +26,30 @@
   #%]
   
 [% IF action == "update" %]
-  [% title = "Update keyword"%]
-  [% status = "updated" %]
+  [% title = "Aktualizace klíčového slova"%]
+  [% status = "aktualizováno" %]
 [% ELSIF action == "delete" %]
-  [% title = "Delete keyword" %]
-  [% status = "deleted" %]
+  [% title = "Smazání klíčového slova" %]
+  [% status = "smazáno" %]
 [% END %]
 
 [% PROCESS global/header.html.tmpl %]
 
-Keyword [% name FILTER html %] [%+status FILTER html %].
+Klíčové slovo [% name FILTER html %] [%+status FILTER html %].
 
 <p>
-  <b>After you have finished deleting or modifying keywords,
-  you need to rebuild the keyword cache.</b><br>
+  <b>Po skončení změn či mazání klíčových slov je potřeba
+  aktualizovat paměť klíčových slov.</b><br>
   
-  Warning: on a very large installation of [% terms.Bugzilla %],
-  this can take several minutes.
+  Upozornění: na velmi velké instalaci [% terms.Bugzilla_2sg %] to
+  může trvat i několik minut.
 </p>
 
 <p>
-  <b><a href="sanitycheck.cgi?rebuildkeywordcache=1">Rebuild
-  keyword cache</a></b>
+  <b><a href="sanitycheck.cgi?rebuildkeywordcache=1">Aktualizovat
+  paměť klíčových slov</a></b>
 </p>
 
-<p><a href="editkeywords.cgi">Edit more keywords</a>.</p>
+<p><a href="editkeywords.cgi">Upravit další klíčová slova</a>.</p>
 
 [% PROCESS global/footer.html.tmpl %] 

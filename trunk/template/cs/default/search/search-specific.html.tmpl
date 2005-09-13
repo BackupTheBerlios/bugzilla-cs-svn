@@ -22,7 +22,7 @@
 [% PROCESS global/variables.none.tmpl %]
 
 [% PROCESS global/header.html.tmpl 
-  title = "Find a Specific " _ terms.Bug
+  title = "Najít konkrétní " _ terms.chyba_4sg
   h1 = ""
   style = "td.selected_tab {
              border-width: 2px 2px 0px;
@@ -37,32 +37,37 @@
 [% PROCESS search/tabs.html.tmpl %]
 
 <p>
-Find a specific [% terms.bug %] by entering words that describe it.  
-[% terms.Bugzilla %] will search [% terms.bug %] descriptions and comments
-for those words and return a list of matching [% terms.bugs %] sorted
-by relevance.
+Konkrétní [% terms.chyba_4sg %] můžete zadáním popisujících slov. [% terms.Bugzilla %] bude
+tato slova hledat v popisech [% terms.chyba_2pl %] a komentářích
+a zobrazí seznam vyhovujících [% terms.chyba_2pl %], seřazený podle relevance.
 </p>
 
 <p>
-For example, if the [% terms.bug %] you are looking for is a browser crash when you go to a secure web site with an embedded Flash animation, you might search
-for "crash secure SSL flash".
+Pokud například hledáte [% terms.chyba_4sg %], která se týká pádu prohlížeče na zabezpečené webové stránce s animací ve Flashi,
+můžete zkusit hledat „pád zabezpečený SSL flash“.
 </p>
 
 <form name="queryform" method="get" action="buglist.cgi">
 <input type="hidden" name="query_format" value="specific">
 <input type="hidden" name="order" value="relevance desc">
 
+[% statusdesc = {
+   "open" => "otevřené",
+   "closed" => "uzavřené",
+   "all" => "vše",
+   } %]
+
 <table>
   <tr>
     <td align="right" valign="baseline">
-      <b><label for="bug_status">Status:</label></b>
+      <b><label for="bug_status">Stav:</label></b>
     </td>
     <td>
       <select name="bug_status" id="bug_status">
-        [% FOREACH s = ['open', 'closed', 'all'] %]
+	[% FOREACH s = ['open', 'closed', 'all'] %]
             <option value="__[% s %]__" 
                   [% " selected" IF default.bug_status.0 == "__${s}__" %]>
-            [% s %]
+            [% statusdesc.$s %]
           </option>
         [% END %]
       </select>
@@ -70,11 +75,11 @@ for "crash secure SSL flash".
   </tr>
   <tr>
     <td align="right" valign="baseline">
-      <b><label for="product">Product:</label></b>
+      <b><label for="product">Produkt:</label></b>
     </td>
     <td>
       <select name="product" id="product">
-        <option value="">All</option>
+        <option value="">Všechny</option>
         [% FOREACH p = product %]
           <option value="[% p.name FILTER html %]"
             [% " selected" IF lsearch(default.product, p.name) != -1 %]>
@@ -85,7 +90,7 @@ for "crash secure SSL flash".
   </tr>
   <tr>
     <td align="right" valign="baseline">
-      <b><label for="content">Words:</label></b>
+      <b><label for="content">Slova:</label></b>
     </td>
     <td>
       <input name="content" size="40" id="content"
@@ -99,7 +104,7 @@ for "crash secure SSL flash".
   <tr>
     <td></td>
     <td>
-      <input type="submit" value="Search">
+      <input type="submit" value="Hledat">
       [% IF known_name %]
         <input type="hidden" name="query_based_on" 
                value="[% known_name FILTER html %]">

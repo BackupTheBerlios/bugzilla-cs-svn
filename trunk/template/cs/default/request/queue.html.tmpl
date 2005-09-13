@@ -42,19 +42,19 @@
 
   <table id="filter">
     <tr>
-      <th>Requester:</th>
+      <th>Žádající:</th>
       <td><input type="text" name="requester" value="[% cgi.param('requester') FILTER html %]" size="20"></td>
-      <th>Product:</th>
+      <th>Produkt:</th>
       <td>
-        <select name="product" onchange="selectProduct(this.form, 'product', 'component', 'Any');">
-          <option value="">Any</option>
+        <select name="product" onchange="selectProduct(this.form, 'product', 'component', 'Vše');">
+          <option value="">Vše</option>
           [% FOREACH item = products %]
             <option value="[% item FILTER html %]"
                     [% "selected" IF cgi.param('product') == item %]>[% item FILTER html %]</option>
           [% END %]
         </select>
       </td>
-      <th>Flag:</th>
+      <th>Příznak:</th>
       <td>
         [% PROCESS "global/select-menu.html.tmpl"
                     name="type"
@@ -64,40 +64,47 @@
 
       [%# We could let people see a "queue" of non-pending requests. %]
       <!--
-      <th>Status:</th>
+      <th>Stav:</th>
       <td>
+        [% statuses = {
+	    "vše" => 'all',
+	    "?" => '?',
+	    "+-" => '+-',
+	    "+" => '+',
+	    "-" => '-'
+	  } %]
         [%# PROCESS "global/select-menu.html.tmpl"
                     name="status"
-                    options=["all", "?", "+-", "+", "-"]
+                    options=statuses
                     default=cgi.param('status') %]
       </td>
       -->
 
     </tr>
     <tr>
-      <th>Requestee:</th>
+      <th>Žádaný:</th>
       <td><input type="text" name="requestee" value="[% cgi.param('requestee') FILTER html %]" size="20"></td>
-      <th>Component:</th>
+      <th>Komponenta:</th>
       <td>
         <select name="component">
-          <option value="">Any</option>
+          <option value="">Vše</option>
           [% FOREACH item = components %]
             <option value="[% item FILTER html %]" [% "selected" IF cgi.param('component') == item %]>
               [% item FILTER html %]</option>
           [% END %]
         </select>
       </td>
-      <th>Group By:</th>
+      <th>Seskupit podle:</th>
       <td>
         [% groups = {
-            "Requester" => 'requester' ,
-            "Requestee" => 'requestee',
-            "Flag" => 'type' ,
-            "Product/Component" => 'category'
+            "Žádající" => 'requester' ,
+            "Žádaný" => 'requestee',
+            "Příznak" => 'type' ,
+            "Produkt/Komponenta" => 'category'
           } %]
         [% PROCESS "global/select-menu.html.tmpl" name="group" options=groups default=cgi.param('group') %]
       </td>
-      <td><input type="submit" value="Filter"></td>
+      <td><input type="submit" value="Přefiltrovat"></td>
     </tr>
   </table>
 
@@ -105,14 +112,15 @@
 [% END %]
 
 [% column_headers = {
-      "type"       => "Flag" ,
-      "status"     => "Status" ,
-      "bug"        => "$terms.Bug" ,
-      "attachment" => "Attachment" ,
-      "requester"  => "Requester" ,
-      "requestee"  => "Requestee" ,
-      "created"    => "Created" ,
-      "category"   => "Product/Component"    } %]
+      "type"       => "Příznak",
+      "status"     => "Stav",
+      "bug"        => "$terms.Chyba",
+      "attachment" => "Příloha",
+      "requester"  => "Žádající",
+      "requestee"  => "Žádaný",
+      "created"    => "Vytvořeno",
+      "category"   => "Produkt/Komponenta"
+    } %]
 
 [% DEFAULT display_columns = ["requester", "requestee", "type", "bug", "attachment", "created"]
            group_field     = "Requestee"
@@ -121,13 +129,13 @@
 
 
 [% PROCESS global/header.html.tmpl
-  title="Request Queue"
+  title="Fronta žádostí"
   h2=filter_form
   style = "
     table.requests th { text-align: left; }
     table#filter th { text-align: right; }
   "
-  onload="selectProduct(document.forms[0], 'product', 'component', 'Any');"
+  onload="selectProduct(document.forms[0], 'product', 'component', 'Vše');"
   javascript_urls=["productmenu.js"]
 %]
 
@@ -137,7 +145,7 @@
 
 [% IF requests.size == 0 %]
   <p>
-    No requests.
+    Žádné žádosti.
   </p>
 [% ELSE %]
   [% FOREACH request = requests %]

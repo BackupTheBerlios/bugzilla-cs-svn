@@ -21,81 +21,83 @@
   
 [% help_html = [ 
 { id => "short_desc_type", 
-  html => "The type of summary search you would like" },   
+  html => "Typ prohledávání shrnutí, který si přejete." },
 { id => "short_desc", 
-  html => "The $terms.bug summary is a short sentence which succinctly  
-           describes <br> what the $terms.bug is about." },   
-{ id => "product", 
-  html => "$terms.Bugs are categorised into Products and Components. Product is 
-           the<br>top-level categorisation." },   
+  html => "Shrnutí $terms.chyba_2sg je krátká věta, která stručně popisuje,<br>
+           v čem $terms.chyba spočívá." },   
+{ id => "product",
+  html => "$terms.Chyby jsou kategorizovány do produktů a komponent. Produkty<br>
+           jsou nejvyšší kategorií." },   
 { id => "component", 
-  html => "Components are second-level categories; each belongs to a<br> 
-           particular Product. Select a Product to narrow down this list." },   
+  html => "Komponenty jsou kategorie druhé úrovně; každá patří do konkrétního<br> 
+           produktu. Pro zúžení seznamu si zvolte produkt." },
 { id => "version", 
-  html => "The version field defines the version of the software the 
-           $terms.bug<br>was found in." },   
+  html => "V poli Verze můžete identifikovat verzi softwaru, ve které byl${koncovky.verb}<br>
+           $terms.chyba objeven${koncovky.verb}." },
 { id => "target_milestone", 
-  html => "The target_milestone field is used to define when the engineer<br>
-           the $terms.bug is assigned to expects to fix it." },   
+  html => "Cílový milník může vývojář, kterému byl$koncovky.verb $terms.chyba přidělena, nastavit<br>
+           pro určení, kdy plánuje opravu." },
 { id => "long_desc", 
-  html => "$terms.Bugs have comments added to them by $terms.Bugzilla users.  
-           You can<br>search for some text in those comments." },   
+  html => "K $terms.chyba_3sg mohou uživatelé $terms.Bugzilla_2sg přidávat komentáře.<br>
+           V těchto komentářích můžete hledat nějaký text." },
 { id => "long_desc_type", 
-  html => "The type of comment search you would like" },   
+  html => "Typ prohledávání komentáře, který si přejete." },
 { id => "bug_file_loc", 
-  html => "$terms.Bugs can have a URL associated with them - for example, a 
-           pointer<br>to a web site where the problem is seen." },   
+  html => "$terms.Chyby u sebe mohou mít uvedeno URL – například adresu<br>
+           webové stránky, na které je problém viditelný." },
 { id => "bug_file_loc_type", 
-  html => "The type of URL search you would like" },   
+  html => "Typ prohledávání URL, který si přejete." },
 { id => "status_whiteboard", 
-  html => "Each $terms.bug has a free-form single line text entry box for 
-           adding<br>tags and status information." },   
+  html => "$terms.Chyby mají u sebe volné textové pole, do kterého lze zadávat<br>
+           informace o stavu a značky." },
 { id => "status_whiteboard_type", 
-  html => "The type of whiteboard search you would like" },   
+  html => "Typ prohledávání tabule, který si přejete." },
 { id => "keywords", 
-  html => "You can add keywords from a defined list to $terms.bugs, in order 
-           to<br>tag and group them." },   
+  html => "K $terms.chyba_3pl můžete přidávat klíčová slova definovaná v seznamu, čímž<br>
+           je můžete označovat a seskupovat." },   
 { id => "keywords_type", 
-  html => "The type of keyword search you would like" },   
+  html => "Typ prohledávání klíčových slov, který si přejete." },
 { id => "bug_status", 
-  html => "A $terms.bug may be in any of a number of states." },   
+  html => "$terms.Chyba může být v jednom z mnoha stavů." },
 { id => "resolution", 
-  html => "If a $terms.bug is in a resolved state, then one of these reasons 
-           will<br>be given for its resolution." },   
+  html => "Pokud již byl$koncovky.verb $terms.chyba vyřešen${koncovky.verb}, pro řešení
+           je udán jeden z těchto důvodů." },
 { id => "bug_severity", 
-  html => "How severe the $terms.bug is, or whether it's an enhancement." },   
+  html => "Závažnost $terms.chyba_2sg, případně zda se jedná o vylepšení." },
 { id => "priority", 
-  html => "Engineers prioritise their $terms.bugs using this field." },   
+  html => "Prostřednictvím tohoto pole vývojáři prioritizují své ${terms.chyby}." },   
 { id => "rep_platform", 
-  html => "The hardware platform the $terms.bug was observed on." },   
+  html => "Hardwarová platforma, na které byl$koncovky.verb $terms.chyba pozorován${koncovky.verb}." },
 { id => "op_sys", 
-  html => "The operating system the $terms.bug was observed on." },   
+  html => "Operační systém, na kterém byl$koncovky.verb $terms.chyba pozorován${koncovky.verb}." },
 { id => "email1", 
-  html => "Every $terms.bug has people associated with it in different 
-           roles.<br>Here, you can search on what people are in what role." },
+  html => "U $terms.chyba_2pl mají různí lidé různé role.<br>
+           Zde můžete vyhledávat podle toho, kdo je v jaké roli." },
 { id => "email2", 
-  html => "Every $terms.bug has people associated with it in different 
-           roles.<br>Here, you can search on what people are in what role." },
+  html => "U $terms.chyba_2pl mají různí lidé různé role.<br>
+           Zde můžete vyhledávat podle toho, kdo je v jaké roli." },
 { id => "bug_id", 
-  html => "You can limit your search to a specific set of $terms.bugs ." },   
+  html => "Můžete své hledání omezit na danou množinu ${terms.chyba_2pl}." },   
 { id => "votes", 
-  html => "Some $terms.bugs can be voted for, and you can limit your search to 
-           $terms.bugs<br>with more than a certain number of votes." },   
+  html => "O $terms.chyba_6pl se dá hlasovat a své hledání můžete omezit na $terms.chyby<br>
+           s nejméně zadaným počtem hlasů." },
 { id => "chfield", 
-  html => "You can search for specific types of change - this field define <br>
-           which field you are interested in changes for." },   
+  html => "Můžete hledat konkrétní typy změn – zde zadejte pole,<br>
+           jejichž změny vás zajímají." },
 { id => "chfieldfrom", 
-  html => "Specify the start and end dates either in YYYY-MM-DD format<br>
-           (optionally followed by HH:mm, in 24 hour clock), or in relative<br>
-           dates such as 1d, 2w, 3m, 4y, which respectively mean one day,<br>
-           two weeks, three months, or four years ago. 0d is last midnight,<br>
-           and 0w, 0m, 0y is the beginning of this week, month, or year." },
+  html => "Zadejte počáteční a koncové datum buď ve formátu RRRR-MM-DD,<br>
+           (volitelně následované časem HH:mm), nebo jako relativní čas<br>
+	   ve formátu např. 1d, 2w, 3m nebo 4y (což označuje jeden den,<br>
+	   dva týdny, tři měsíce nebo čtyři roky zpět). 0d označuje<br>
+	   poslední půlnoc, 0w, 0m, 0y označuje začátek tohoto týdne,<br>
+	   měsíce, resp. roku." },
 { id => "chfieldto", 
-  html => "Specify the start and end dates either in YYYY-MM-DD format<br>
-           (optionally followed by HH:mm, in 24 hour clock), or in relative<br>
-           dates such as 1d, 2w, 3m, 4y, which respectively mean one day,<br>
-           two weeks, three months, or four years ago. 0d is last midnight,<br>
-           and 0w, 0m, 0y is the beginning of this week, month, or year." },
+  html => "Zadejte počáteční a koncové datum buď ve formátu RRRR-MM-DD,<br>
+           (volitelně následované časem HH:mm), nebo jako relativní čas<br>
+	   ve formátu např. 1d, 2w, 3m nebo 4y (což označuje jeden den,<br>
+	   dva týdny, tři měsíce nebo čtyři roky zpět). 0d označuje<br>
+	   poslední půlnoc, 0w, 0m, 0y označuje začátek tohoto týdne,<br>
+	   měsíce, resp. roku." },
 { id => "chfieldvalue", 
-  html => "The value the field defined above changed to during that time." },   
+  html => "Na co byla hodnota zvoleného pole v udanou dobu změněna." },
 ] %]

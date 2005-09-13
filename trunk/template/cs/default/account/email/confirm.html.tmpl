@@ -23,11 +23,11 @@
   # token: string. The token to be used in this address change.
   #%]
   
-[% title = "Confirm Change Email" %]
+[% title = "Potvrzení změny e-mailu" %]
 [% PROCESS global/header.html.tmpl %]
 
 <p>
-  To change your email address, please enter the old email address:
+  Pro změnu vaší e-mailové adresy zadejte původní adresu:
 </p>
 
 <form method="post" action="token.cgi">
@@ -35,12 +35,12 @@
   <input type="hidden" name="a" value="chgem">
   <table>
     <tr>
-      <th align="right">Old Email Address:</th>
+      <th align="right">Stará e-mailová adresa:</th>
       <td><input type="text" name="email" size="36"></td>
     </tr>
     <tr>
       <th align="right">&nbsp;</th>
-      <td><input type="submit" value="Submit"></td>
+      <td><input type="submit" value="Odeslat"></td>
     </tr>
   </table>
 </form>

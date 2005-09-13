@@ -27,28 +27,27 @@
   #%]
 
 [% PROCESS global/header.html.tmpl
-  title = "Delete Keyword"
+  title = "Smazat klíčové slovo"
 %]
 
 <p>
   [% IF bug_count == 1 %]
-    There is one [% terms.bug %] with this keyword set.
+    Toto klíčové slovo se používá u 1 [% terms.chyba_2sg %].
   [% ELSE %]
-    There are [% bug_count %] [%+terms.bugs %] with
-    this keyword set.
+    Toto klíčové slovo se používá (počet [%+ terms.chyba_2pl %]: [% bug_count %]).
   [% END %]
   
-  Are you <b>sure</b> you want to delete
-  the <code>[% name FILTER html %]</code> keyword?
+  Jste si <b>jisti</b>, že chcete smazat
+  klíčové slovo <code>[% name FILTER html %]</code>?
 </p>
 
 <form method="post" action="editkeywords.cgi">
   <input type="hidden" name="id" value="[% keyword_id %]">
   <input type="hidden" name="action" value="delete">
   <input type="hidden" name="reallydelete" value="1">
-  <input type="submit" value="Yes, really delete the keyword">
+  <input type="submit" value="Ano, klíčové slovo opravdu smazat">
 </form>
 
-<p><a href="editkeywords.cgi">Edit other keywords</a>.</p>
+<p><a href="editkeywords.cgi">Upravit jiná klíčová slova</a>.</p>
 
 [% PROCESS global/footer.html.tmpl %] 

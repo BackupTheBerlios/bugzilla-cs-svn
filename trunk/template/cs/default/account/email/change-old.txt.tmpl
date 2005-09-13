@@ -29,19 +29,19 @@
 [% expiration_ts = token_ts + (max_token_age * 86400) %]
 From: bugzilla-admin-daemon
 To: [% emailaddress %]
-Subject: [% terms.Bugzilla %] Change Email Address Request
+Subject: [% terms.Bugzilla %] Požadavek na změnu e-mailové adresy
 Importance: High
 X-MSMail-Priority: High
 X-Priority: 1
 
-[%+ terms.Bugzilla %] has received a request to change the email address
-for your account to [%+ newemailaddress %].
+[%+ terms.Bugzilla %] obdržela požadavek na změnu e-mailové adresy
+vašeho účtu na [% newemailaddress %].
 
-If you are not the person who made this request, or you wish to cancel
-this request, visit the following link:
+Pokud jste o tuto změnu nežádali, nebo si přejete tuto žádost stornovat,
+navštivte následující odkaz:
 
 [%+ Param('urlbase') %]token.cgi?t=[% token FILTER url_quote %]&a=cxlem
 
-If you do nothing, and [%+ newemailaddress %] confirms this request, the
-change will be made permanent after [%+ max_token_age %] days (at precisely 
-[%+ time2str("%H:%M on the %o of %B, %Y", expiration_ts) %]).
+Pokud budete tento e-mail ignorovat a [%+ newemailaddress %] tuto žádost potvrdí,
+bude žádost po [%+ max_token_age %] dnech provedena
+(přesně [%+ time2str("%H:%M %e. %L. %Y", expiration_ts) %]).

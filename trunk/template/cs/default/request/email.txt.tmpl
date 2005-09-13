@@ -25,43 +25,43 @@
 [% bugidsummary = flag.target.bug.id _ ': ' _ flag.target.bug.summary %]
 [% attidsummary = flag.target.attachment.id _ ': ' _
                   flag.target.attachment.summary %]
-[% statuses = { '+' => "granted" , '-' => 'denied' , 'X' => "cancelled" ,
-                '?' => "asked" } %]
+[% statuses = { '+' => "odsouhlaseno" , '-' => 'zamítnuto' , 'X' => "zrušeno" ,
+                '?' => "žádáno" } %]
 [% IF flag.status == '?' %]
    [% to_email = flag.requestee.email IF flag.requestee.email_prefs.FlagRequestee %]
    [% to_identity = flag.requestee.identity %]
-   [% subject_status = "requested" %]
+   [% subject_status = "Žádost o " _ ${flag.type.name} %]
 [% ELSE %]
    [% to_email = flag.setter.email IF flag.setter.email_prefs.FlagRequester %]
    [% to_identity = flag.setter.identity _ "'s request" %]
-   [% subject_status = statuses.${flag.status} %]
+   [% subject_status = ${flag.type.name} _ " " _ statuses.${flag.status} %]
 [% END %]
 From: bugzilla-request-daemon
 To: [% to_email %]
 CC: [% flag.type.cc_list %]
-Subject: [% flag.type.name %] [%+ subject_status %]: [[% terms.Bug %] [%+ flag.target.bug.id %]] [% flag.target.bug.summary %]
+Subject: [%+ subject_status %]: [[% terms.Chyba %] [%+ flag.target.bug.id %]] [% flag.target.bug.summary %]
 [%- IF flag.target.attachment.exists %] :
-  [Attachment [% flag.target.attachment.id %]] [% flag.target.attachment.summary %][% END %]
+  [Příloha [% flag.target.attachment.id %]] [% flag.target.attachment.summary %][% END %]
 
 [%+ USE wrap -%]
 [%- FILTER bullet = wrap(80) -%]
 
-[% user.identity %] has [% statuses.${flag.status} %] [%+ to_identity %] for [% flag.type.name %]:
+[% user.identity %]: [% statuses.${flag.status} %] [% flag.type.name %] pro [%+ to_identity %]:
 
-[% terms.Bug %] [%+ bugidsummary %]
+[% terms.Chyba %] [%+ bugidsummary %]
 [% END %]
 [%+ Param('urlbase') %]show_bug.cgi?id=[% flag.target.bug.id %]
 [% IF flag.target.attachment.exists %]
 
 [% FILTER bullet = wrap(80) %]
-Attachment [% attidsummary %]
+Příloha [% attidsummary %]
 [%- END %]
 [%+ Param('urlbase') %]attachment.cgi?id=[% flag.target.attachment.id %]&action=edit
 [%- END %]
 [%- FILTER bullet = wrap(80) %]
 
 [% IF form.comment.length > 0 %]
-------- Additional Comments from [% user.identity %]
+------- Dodatečné komentáře od [% user.identity %]
 [%+ form.comment %]
 [% END %]
 

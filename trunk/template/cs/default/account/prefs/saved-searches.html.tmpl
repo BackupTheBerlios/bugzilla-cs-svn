@@ -19,33 +19,33 @@
   # Contributor(s): Gervase Markham <gerv@gerv.net>
   #%]
 
-<p>Your saved searches are as follows:</p>
+<p>Máte uložena následující hledání:</p>
 
 <blockquote>
   <table border="1" cellpadding="3">  
     <tr>
       <th>
-        Search
+        Hledání
       </th>
       <th>
-        Run
+        Spustit
       </th>
       <th>
-        Edit
+        Upravit
       </th>
       <th>
-        Forget
+        Zapomenout
       </th>
       <th>
-        Show in
-        Footer
+        Zobrazovat
+        v patičce
       </th>
     </tr>
     <tr>
-      <td>My Bugs</td>
+      <td>Moje chyby</td>
       <td>
         [% filtered_username = user.login FILTER url_quote %]
-        <a href="[% Param('mybugstemplate').replace('%userid%', filtered_username) %]">Run</a>
+        <a href="[% Param('mybugstemplate').replace('%userid%', filtered_username) %]">Spustit</a>
       </td>
       <td>
         &nbsp;
@@ -64,14 +64,14 @@
       <tr>
         <td>[% q.name FILTER html %]</td>
         <td>
-          <a href="buglist.cgi?[% q.query FILTER html %]">Run</a>
+          <a href="buglist.cgi?[% q.query FILTER html %]">Spustit</a>
         </td>
         <td>
-          <a href="query.cgi?[% q.query FILTER html %]&known_name=[% q.name FILTER url_quote %]">Edit</a>
+          <a href="query.cgi?[% q.query FILTER html %]&known_name=[% q.name FILTER url_quote %]">Upravit</a>
         </td>
         <td>
           <a href="buglist.cgi?cmdtype=dorem&amp;remaction=forget&amp;namedcmd=
-                   [% q.name FILTER html %]">Forget</a>
+                   [% q.name FILTER html %]">Zapomenout</a>
         </td>
         <td align="center">
           <input type="checkbox" 

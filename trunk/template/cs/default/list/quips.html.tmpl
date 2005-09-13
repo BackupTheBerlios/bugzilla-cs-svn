@@ -30,16 +30,16 @@
 [% PROCESS global/variables.none.tmpl %]
 
 [% PROCESS global/header.html.tmpl
-           title = "$terms.Bugzilla Quip System"
-           h1 = "Add your own clever headline"
+           title = "Vtípky $terms.Bugzilla_2sg"
+           h1 = "Přidejte vlastní vtipné záhlaví"
  %]
 
 [% IF added_quip %]
   <p>
     <font color="red">
-      Your quip '<tt>[% added_quip FILTER html %]</tt>' has been added.
+      Váš vtípek '<tt>[% added_quip FILTER html %]</tt>' byl přidán.
       [% IF Param("enablequips") == "approved" AND !user.groups.admin %]
-        It will be used as soon as it gets approved.
+        Začne se používat hned po schválení.
       [% END %]
     </font>
   </p>
@@ -48,21 +48,21 @@
 [% IF deleted_quip %]
   <p>
     <font color="red">
-      The quip '<tt>[% deleted_quip FILTER html %]</tt>' has been deleted.
+      Vtípek '<tt>[% deleted_quip FILTER html %]</tt>' byl smazán.
     </font>
   </p>
 [% END %]
 
 [% IF approved or unapproved %]
-  <p>[% approved.size %] quips approved and [% unapproved.size %] quips unapproved</p>
+  <p>Schválených vtípků: [% approved.size %], neschválených vtípků: [% unapproved.size %]</p>
 [% END %]
 
 <p>
-  [% terms.Bugzilla %] will pick a random quip for the headline on each [% terms.bug %] list, and
-  you can extend the quip list. Type in something clever or funny or boring
-  (but not obscene or offensive, please) and bonk on the button.
+  U každého seznamu [% terms.chyba_2pl %] [%+ terms.Bugzilla %] vybere náhodný vtípek
+  do záhlaví, seznam vtípků můžete rozšířit. Napište něco chytrého či vtipného či nudného
+  (ale laskavě nic sprostého nebo urážlivého) a prašťte do tlačítka.
   [% IF Param("enablequips") == "approved" AND !user.groups.admin %]
-    Note that your quip has to be approved before it is used.
+    Uvědomte si, že váš vtípek bude muset být před použitím schválen.
   [% END %]
 </p>
 
@@ -70,14 +70,14 @@
   <input type="hidden" name="action" value="add">
   <input size="80" name="quip">
   <p>
-    <input type="submit" value="Add This Quip">
+    <input type="submit" value="Přidat tento vtípek">
   </p>
 </form>
 
 [% IF show_quips %]
   [% IF !UserInGroup('admin') %]
     <h2>
-      Existing quips:
+      Existující vtípky:
     </h2>
     <ul>
       [% FOREACH quipid = quipids %]
@@ -86,20 +86,19 @@
       [% END %]
     </ul>
   [% ELSE %]
-    <h2>Edit existing quips:</h2>
+    <h2>Upravit existující vtípky:</h2>
     <p>
-      <strong>Note:</strong> Only approved quips will be shown.
-      If enablequips is set to <q>on</q>, entered quips are automatically
-      approved.
+      <strong>Poznámka:</strong> Zobrazeny jsou pouze schválené vtípky.
+      Pokud je enablequips nastaveno na <q>on</q>, vložené vtípky jsou automaticky schváleny.
     </p>
     <form name="editform" method="post" action="quips.cgi">
       <input type="hidden" name="action" value="approve">
       <table border="1">
         <thead><tr>
-          <th>Quip</th>
-          <th>Author</th>
-          <th>Action</th>
-          <th>Approved</th>
+          <th>Vtípek</th>
+          <th>Autor</th>
+          <th>Činnost</th>
+          <th>Schválen</th>
         </tr></thead><tbody>
         [% FOREACH quipid = quipids %]
           <tr>
@@ -107,11 +106,11 @@
             <td>
               [% userid = quips.$quipid.userid  %]
               [% users.$userid FILTER html      %]
-              [% "Unknown" IF NOT users.$userid %]
+              [% "Neznámý" IF NOT users.$userid %]
             </td>
             <td>
               <a href="quips.cgi?action=delete&amp;quipid=[% quipid FILTER uri%]">
-                Delete
+                Smazat
               </a>
             </td>
             <td>
@@ -133,23 +132,23 @@
           }
         }
         document.write(' <input type="button" name="uncheck_all" '
-                      +'value="Uncheck All" onclick="SetCheckboxes(false);">');
+                      +'value="Odškrtnout vše" onclick="SetCheckboxes(false);">');
         document.write(' <input type="button" name="check_all" '
-                      +'value="Check All" onclick="SetCheckboxes(true);">');
+                      +'value="Zaškrtnout vše" onclick="SetCheckboxes(true);">');
         //--></script>
 
-      <input type="submit" value="Update">
+      <input type="submit" value="Uložit">
     </form>
     <br>
   [% END %]
 [% ELSE %]
   <p>
-    Those who like their wisdom in large doses can
-    <a href="quips.cgi?action=show">view
+    Ti, kdo rádi získávají moudrost ve velkých dávkách, mohou
+    <a href="quips.cgi?action=show">studovat
     [% IF UserInGroup('admin') %]
-      and edit
+      a upravovat
     [% END %]
-    the whole quip list</a>.
+    úplný seznam vtípků</a>.
   </p>
 [% END %]
 

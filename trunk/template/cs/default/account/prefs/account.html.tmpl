@@ -28,11 +28,11 @@
 <table>
   <tr>
     <td colspan="3">
-      Please enter your existing password to confirm account changes.
+      Zadejte laskavě své současné heslo pro potvrzení změn.
     </td>
   </tr>
   <tr>
-    <th align="right">Password:</th>
+    <th align="right">Heslo:</th>
     <td>
       <input type="hidden" name="Bugzilla_login" 
              value="[% user.login FILTER html %]">
@@ -44,21 +44,21 @@
   </tr>
 
   <tr>
-    <th align="right">New password:</th>
+    <th align="right">Nové heslo:</th>
     <td>
       <input type="password" name="new_password1">
     </td>
   </tr>              
 
   <tr>
-    <th align="right">Re-enter new password:</th>
+    <th align="right">Zopakujte nové heslo:</th>
     <td>
       <input type="password" name="new_password2">
     </td>
   </tr>              
 
   <tr>
-    <th align="right">Your real name (optional, but encouraged):</th>
+    <th align="right">Vaše skutečné jméno (nepovinné, ale doporučené):</th>
     <td>
       <input size="35" name="realname" value="[% realname FILTER html %]">
     </td>
@@ -68,26 +68,26 @@
     [% IF login_change_date %]
       [% IF new_login_name %]
         <tr>
-          <th align="right">Pending email address:</th>
+          <th align="right">Zatím nepotvrzená e-mailová adresa:</th>
           <td>[% new_login_name FILTER html %]</td>
         </tr>
         <tr>
-          <th align="right">Change request expires:</th>
+          <th align="right">Požadavek na změnu vyprší:</th>
           <td>[% login_change_date FILTER time %]</td>
         </tr>
       [% ELSE %]
         <tr>
-          <th align="right">Confirmed email address:</th>
+          <th align="right">Potvrzená e-mailová adresa:</th>
           <td>[% user.login FILTER html %]</td>
         </tr>
         <tr>
-          <th align="right">Completion date:</th>
+          <th align="right">Datum vyřízení:</th>
           <td>[% login_change_date FILTER time %]</td>
         </tr>
       [% END %]
     [% ELSE %]
       <tr>
-        <th align="right">New email address:</th>
+        <th align="right">Nová e-mailová adresa:</th>
         <td>
           <input size="35" name="new_login_name">
         </td>

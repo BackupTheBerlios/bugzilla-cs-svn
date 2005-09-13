@@ -27,15 +27,15 @@
 [% PROCESS global/variables.none.tmpl %]
 
 [% PROCESS global/header.html.tmpl
-  title = "Generate Graphical Report"
+  title = "Vytvořit grafický report"
   onload = "selectProduct(document.forms['reportform']);chartTypeChanged()"
 %]
 
 [% PROCESS "search/search-report-select.html.tmpl" %]
 
 <p>
-  Choose one or more fields as your axes, and then refine your set of 
-  [% terms.bugs %] using the rest of the form.
+  Zvolte jedno či více polí pro osy, poté upřesněte množinu [% terms.chyba_2pl %]
+  pomocí zbytku formuláře.
 </p>
 
 <script type="text/javascript"><!--
@@ -55,41 +55,41 @@
 // -->
 </script>
 
-[% button_name = "Generate Report" %]
+[% button_name = "Vytvořit report" %]
 
 <form method="get" action="report.cgi" name="reportform">
 
 <table align="center">
   <tr>
     <td valign="middle">
-      <b>Vertical Axis:</b><br>
-      <noscript><small>(not for pie charts)</small><br></noscript>
+      <b>Svislá osa:</b><br>
+      <noscript><small>(mimo koláčových grafů)</small><br></noscript>
       [% PROCESS select name = 'y_axis_field' %]<br>
       <br>
-        <b>Plot Data Sets:</b><br>
+        <b>Vykreslovat data:</b><br>
         <input type="radio" name="cumulate" value="0"
         [% " checked" IF default.cumulate.0 != "1" %]>
-        Individually<br>
+        Jednotlivě<br>
         <input type="radio" name="cumulate" value="1"
         [% " checked" IF default.cumulate.0 == "1" %]>
-        Summed
+        Součtem
     </td>
     <td width="150" height="150">
       <table border="1" width="100%" height="100%">
         <tr>
           <td align="center" valign="middle">
-            <b>Multiple Images:</b><br>
+            <b>Více obrázků:</b><br>
             [% PROCESS select name = 'z_axis_field' %]
           </td>
         </tr>
       </table>
     </td>
     <td rowspan="2">
-      <b>Format:</b><br>
+      <b>Formát:</b><br>
       [% chart_formats = [
-        { name => "line", description => "Line Graph" },
-        { name => "bar",  description => "Bar Chart" },
-        { name => "pie",  description => "Pie Chart" } ] %]
+        { name => "line", description => "Čárový graf" },
+        { name => "bar",  description => "Pruhový graf" },
+        { name => "pie",  description => "Koláčový graf" } ] %]
       [% default.chart_format.0 = default.chart_format.0 || "bar" %]
 
       [% FOREACH chart_format = chart_formats %]
@@ -106,9 +106,9 @@
     <td>
     </td>
     <td align="left">
-      <b>Horizontal Axis:</b>
+      <b>Vodorovná osa:</b>
       [% PROCESS select name = 'x_axis_field' %]<br>
-      <label for="x_labels_vertical"><b>Vertical labels:</b></label>
+      <label for="x_labels_vertical"><b>Svislé nadpisy:</b></label>
       <input type="checkbox" name="x_labels_vertical" id="x_labels_vertical"
              value="1"
          [% " checked" IF default.x_labels_vertical.0 == "1" %]>

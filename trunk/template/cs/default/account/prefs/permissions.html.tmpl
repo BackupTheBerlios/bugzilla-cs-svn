@@ -36,7 +36,7 @@
   <tr>
     <td>
       [% IF has_bits.size %]
-        You have the following permission [% terms.bits %] set on your account:
+        Na svém účtu máte nastavena následující oprávnění:
         <p>
         <br>
         <table align="center">
@@ -48,17 +48,17 @@
           [% END %]
         </table>
       [% ELSE %]
-        There are no permission [% terms.bits %] set on your account.
+        Na svém účtu nemáte nastavena žádná oprávnění.
       [% END %]
 
       [% IF user.groups.editusers %]
         <br>
-        You have editusers privileges.  You can turn on and off
-        all permissions for all users.
+	Máte oprávnění editusers; můžete zapínat i vypínat všechna oprávnění
+	libovolnému uživateli.
       [% ELSIF set_bits.size %]
         <br>
-        And you can turn on or off the following [% terms.bits %] for
-        <a href="editusers.cgi">other users</a>:
+	A <a href="editusers.cgi">ostatním uživatelům</a> můžete přidávat a ubírat
+	následující oprávnění:
         <p>
           <table align="center">
           [% FOREACH bit_description = set_bits %]

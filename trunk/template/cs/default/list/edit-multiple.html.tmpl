@@ -21,7 +21,7 @@
 
 [% PROCESS global/variables.none.tmpl %]
 
-[% dontchange = "--do_not_change--" %]
+[% dontchange = "—neměnit—" %]
 <input type="hidden" name="dontchange" value="[% dontchange FILTER html %]">
 
 <script type="text/javascript" language="JavaScript">
@@ -33,33 +33,32 @@
           item.checked = value;
       }
   }
-  document.write(' <input type="button" name="uncheck_all" value="Uncheck All" onclick="SetCheckboxes(false);">');
-  document.write(' <input type="button" name="check_all" value="Check All" onclick="SetCheckboxes(true);">');
+  document.write(' <input type="button" name="uncheck_all" value="Nevybrat nic" onclick="SetCheckboxes(false);">');
+  document.write(' <input type="button" name="check_all" value="Vybrat vše" onclick="SetCheckboxes(true);">');
 </script>
 
 <hr>
 
 <p><font size="-1">
-  To change multiple [% terms.bugs %]:
+  Pro hromadnou změnu [% terms.chyba_2pl %]:
   <ol>
-    <li>Check the [% terms.bugs %] you want to change above.</li>
-    <li>Make your changes in the form fields below.  If the change
-        you are making requires an explanation, include it in
-        the comments box.</li>
-    <li>Click the <em>Commit</em> button.</li>
+    <li>Nahoře zaškrtněte [% terms.chyba_4pl %], kter[% koncovky.mlady_4pl %] chcete změnit.</li>
+    <li>Proveďte vaše změny ve formuláři níže. Pokud prováděné změny vyžadují vysvětlení, můžete
+        vyplnit dodatečný komentář.</li>
+    <li>Klikněte na tlačítko <em>Uložit</em>.</li>
   </ol>
 </font></p>
 
 <table id="form">
   <tr>
 
-    <th><label for="product">Product:</label></th>
+    <th><label for="product">Produkt:</label></th>
     <td>
       [% PROCESS selectmenu menuname = "product"
                             menuitems = products %]
     </td>
 
-    <th><label for="version">Version:</label></th>
+    <th><label for="version">Verze:</label></th>
     <td>
       [% PROCESS selectmenu menuname = "version"
                             menuitems = versions %]
@@ -70,7 +69,7 @@
 
     <th>
       <label for="rep_platform">
-        <a href="page.cgi?id=fields.html#rep_platform">Platform</a>:
+        <a href="page.cgi?id=fields.html#rep_platform">Platforma</a>:
       </label>
     </th>
     <td>
@@ -80,7 +79,7 @@
 
     <th>
       <label for="priority">
-        <a href="page.cgi?id=fields.html#priority">Priority</a>:
+        <a href="page.cgi?id=fields.html#priority">Priorita</a>:
       </label>
     </th>
     <td>
@@ -91,7 +90,7 @@
   </tr>
   <tr>
 
-    <th><label for="component">Component:</label></th>
+    <th><label for="component">Komponenta:</label></th>
     <td>
       [% PROCESS selectmenu menuname = "component"
                             menuitems = components %]
@@ -99,7 +98,7 @@
 
     <th>
       <label for="bug_severity">
-        <a href="page.cgi?id=fields.html#bug_severity">Severity</a>:
+        <a href="page.cgi?id=fields.html#bug_severity">Závažnost</a>:
       </label>
     </th>
     <td>
@@ -111,7 +110,7 @@
 
   [% IF Param("usetargetmilestone") %]
     <tr>
-      <th><label for="target_milestone">Target Milestone:</label></th>
+      <th><label for="target_milestone">Cílový milník:</label></th>
       <td colspan="3">
         [% PROCESS selectmenu menuname = "target_milestone"
                               menuitems = targetmilestones %]
@@ -121,14 +120,14 @@
 
   [% IF UserInGroup(Param("timetrackinggroup")) %]
     <tr>
-      <th><label for="estimated_time">Estimated Hours:</label></th>
+      <th><label for="estimated_time">Odhad hodin:</label></th>
       <td>
         <input id="estimated_time"
                name="estimated_time"
                value="[% dontchange FILTER html %]"
                size="6">
       </td>
-      <th><label for="remaining_time">Remaining Hours:</label></th>
+      <th><label for="remaining_time">Zbývajících hodin:</label></th>
       <td>
         <input id="remaining_time"
                name="remaining_time"
@@ -140,7 +139,7 @@
 
   [% IF Param("useqacontact") %]
     <tr>
-      <th><label for="qa_contact">QA Contact:</label></th>
+      <th><label for="qa_contact">Kontact QA:</label></th>
       <td colspan="3">
         <input id="qa_contact"
                name="qa_contact"
@@ -152,12 +151,12 @@
 
   <tr>
 
-    <th><label for="masscc">CC List:</label></th>
+    <th><label for="masscc">Seznam CC:</label></th>
     <td colspan="3">
       <input id="masscc" name="masscc" size="32">
       <select name="ccaction">
-        <option value="add">Add these to the CC List</option>
-        <option value="remove">Remove these from the CC List</option>
+        <option value="add">Přidat do seznamu CC</option>
+        <option value="remove">Odstranit ze seznamu CC</option>
       </select>
     </td>
 
@@ -168,15 +167,15 @@
 
       <th>
         <label for="keywords">
-          <a href="describekeywords.cgi">Keywords</a>:
+          <a href="describekeywords.cgi">Klíčová slova</a>:
         </label>
       </th>
       <td colspan="3">
         <input id="keywords" name="keywords" size="32">
         <select name="keywordaction">
-          <option value="add">Add these keywords</option>
-          <option value="delete">Delete these keywords</option>
-          <option value="makeexact">Make the keywords be exactly this list</option>
+          <option value="add">Přidat klíčová slova</option>
+          <option value="delete">Smazat klíčová slova</option>
+          <option value="makeexact">Nastavit klíčová slova na právě tento seznam</option>
         </select>
       </td>
 
@@ -185,18 +184,18 @@
 
 </table>
 
-<label for="comment"><b>Additional Comments:</b></label><br>
+<label for="comment"><b>Dodatečný komentář:</b></label><br>
 <textarea id="comment" name="comment" rows="5" cols="80" wrap="hard"></textarea><br>
 
 [% IF groups.size > 0 %]
 
-  <b>Groupset:</b><br>
+  <b>Skupiny:</b><br>
   <table border="1">
     <tr>
-      <th>Don't<br>change<br>this group<br>restriction</td>
-      <th>Remove<br>[% terms.bugs %]<br>from this<br>group</td>
-      <th>Add<br>[% terms.bugs %]<br>to this<br>group</td>
-      <th>Group Name:</td>
+      <th>Neměnit<br>omezení<br>této<br>skupiny</td>
+      <th>Odstranit<br>[% terms.chyba_4pl %]<br>z této<br>skupiny</td>
+      <th>Přidat<br>[% terms.chyba_4pl %]<br>do této<br>skupiny</td>
+      <th>Název skupiny:</td>
     </tr>
 
     [% FOREACH group = groups %]
@@ -230,8 +229,8 @@
   </table>
 
   [% IF foundinactive %]
-    <font size="-1">(Note: [% terms.Bugs %] may not be added to [% FILTER inactive %]inactive
-    groups[% END %], only removed.)</font><br>
+    <font size="-1">(Poznámka: [% terms.Chyby %] nemohou být přidávány do [% FILTER inactive %]neaktivních
+    skupin[% END %], pouze z nich vyjímány.)</font><br>
   [% END %]
 
 [% END %]
@@ -240,13 +239,13 @@
 
 [% knum = 0 %]
 <input id="knob-none" type="radio" name="knob" value="none" checked="checked">
-<label for="knob-none">Do nothing else</label><br>
+<label for="knob-none">Nic dalšího nedělat</label><br>
 
 [% IF bugstatuses.size == 1 && bugstatuses.0 == unconfirmedstate %]
   [% knum = knum + 1 %]
   <input id="knob-confirm" type="radio" name="knob" value="confirm">
   <label for="knob-confirm">
-    Confirm [% terms.bugs %] (change status to <b>NEW</b>)
+    Potvrdit [% terms.chyba_4pl %] (změnit stav na <b>[% statuscs.NEW %]</b>)
   </label><br>
 [% END %]
 
@@ -256,17 +255,17 @@
   [% knum = knum + 1 %]
   <input id="knob-accept" type="radio" name="knob" value="accept">
   <label for="knob-accept">
-    Accept [% terms.bugs %] (change status to <b>ASSIGNED</b>)
+    Převzít [% terms.chyba_4pl %] (změnit stav na <b>[% statuscs.ASSIGNED %]</b>)
   </label><br>
 
   [% knum = knum + 1 %]
   <input id="knob-clearresolution" type="radio" name="knob" value="clearresolution">
-  <label for="knob-clearresolution">Clear the resolution</label><br>
+  <label for="knob-clearresolution">Smazat řešení</label><br>
 
   [% knum = knum + 1 %]
   <input id="knob-resolve" type="radio" name="knob" value="resolve">
   <label for="knob-resolve">
-    Resolve [% terms.bugs %], changing <a href="page.cgi?id=fields.html#resolution">resolution</a> to
+    Vyřešit [% terms.chyba_4pl %], nastavit <a href="page.cgi?id=fields.html#resolution">řešení</a> na
   </label>
   <select name="resolution" onchange="document.forms.changeform.knob[[% knum %]].checked=true">
     [% FOREACH resolution = resolutions %]
@@ -283,27 +282,27 @@
 [% IF !bugstatuses.containsany(openstates) %]
   [% knum = knum + 1 %]
   <input id="knob-reopen" type="radio" name="knob" value="reopen">
-  <label for="knob-reopen">Reopen [% terms.bugs %]</label><br>
+  <label for="knob-reopen">Znovuotevřít [% terms.chyba_4pl %]</label><br>
 [% END %]
 
 [% IF bugstatuses.size == 1 %]
   [% IF bugstatuses.contains('RESOLVED') %]
     [% knum = knum + 1 %]
     <input id="knob-verify" type="radio" name="knob" value="verify">
-    <label for="knob-verify">Mark [% terms.bugs %] as <b>VERIFIED</b></label><br>
+    <label for="knob-verify">Označit [% terms.chyba_4pl %] jako <b>[% statuscs.VERIFIED %]</b></label><br>
   [% END %]
 [% END %]
 
 [% IF !bugstatuses.containsany(openstates) AND !bugstatuses.contains('CLOSED') %]
   [% knum = knum + 1 %]
   <input id="knob-close" type="radio" name="knob" value="close">
-  <label for="knob-close">Mark [% terms.bugs %] as <b>CLOSED</b></label><br>
+  <label for="knob-close">Označit [% terms.chyba_4pl %] jako <b>[% statuscs.CLOSED %]</b></label><br>
 [% END %]
 
 [% knum = knum + 1 %]
 <input id="knob-reassign" type="radio" name="knob" value="reassign">
-<label for="knob-reassign"><a href="page.cgi?id=fields.html#assigned_to">
-  Reassign</a> [% terms.bugs %] to
+<label for="knob-reassign">Změnit
+  <a href="page.cgi?id=fields.html#assigned_to">majitele</a> [% terms.chyba_2pl %] na
 </label>
 <input name="assigned_to"
        value="[% user.login FILTER html %]"
@@ -316,10 +315,10 @@
        name="knob"
        value="reassignbycomponent">
 <label for="knob-reassignbycomponent">
-  Reassign [% terms.bugs %] to owner of selected component
+  Změnit majitele [% terms.chyba_2pl %] na vlastníka příslušných komponent
 </label><br>
 
-<input type="submit" value="Commit">
+<input type="submit" value="Uložit">
 
 [% IF ismover %]
   <input type="submit" name="action" value="[% Param('move-button-text') %]">

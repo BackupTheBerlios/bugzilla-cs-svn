@@ -320,14 +320,14 @@ function selectProduct(f) {
 </script>
 
 [% query_variants = [
-  { value => "allwordssubstr", description => "contains all of the words/strings" },
-  { value => "anywordssubstr", description => "contains any of the words/strings" },
-  { value => "substring", description => "contains the string" },
-  { value => "casesubstring", description => "contains the string (exact case)" },
-  { value => "allwords", description => "contains all of the words" },
-  { value => "anywords", description => "contains any of the words" },
-  { value => "regexp", description => "matches the regexp" },
-  { value => "notregexp", description => "doesn't match the regexp" } ] %]
+  { value => "allwordssubstr", description => "obsahuje všechna slova/řetězce" },
+  { value => "anywordssubstr", description => "obsahuje libovolné ze slov/řetězců" },
+  { value => "substring", description => "obsahuje řetězec" },
+  { value => "casesubstring", description => "obsahuje řetězec (citlivé na velikost)" },
+  { value => "allwords", description => "obsahuje všechna slova" },
+  { value => "anywords", description => "obsahuje libovolné slovo" },
+  { value => "regexp", description => "vyhovuje regulárnímu výrazu" },
+  { value => "notregexp", description => "nevyhovuje regulárnímu výrazu" } ] %]
 
 [% PROCESS "global/field-descs.none.tmpl" %]
 
@@ -339,7 +339,7 @@ function selectProduct(f) {
 
 <table>
   <tr>
-    <th align="right"><u>S</u>ummary:</th>
+    <th align="right"><u>S</u>hrnutí:</th>
     <td>
       <select name="short_desc_type">
       [% FOREACH qv = query_variants %]
@@ -372,7 +372,7 @@ function selectProduct(f) {
           <td valign="top">
             <table>
               <tr valign="bottom">
-                <th align="left"><u>P</u>roduct:</th>
+                <th align="left"><u>P</u>rodukt:</th>
               </tr>
               <tr valign="top">
                 [%# Can't use the select block here because of the onChange %]
@@ -395,7 +395,7 @@ function selectProduct(f) {
             <table>
               <tr valign="bottom">
                 <th align="left">
-                  <a href="describecomponents.cgi">Co<u>m</u>ponent</a>:
+                  <a href="describecomponents.cgi">Ko<u>m</u>ponenta</a>:
                 </th>
               </tr>
               <tr valign="top">
@@ -419,7 +419,7 @@ function selectProduct(f) {
           <td valign="top">
             <table>
               <tr valign="bottom">
-                <th align="left"><u>V</u>ersion:</th>
+                <th align="left"><u>V</u>erze:</th>
               </tr>
               <tr valign="top">
                 [% PROCESS select sel = { name => 'version',
@@ -432,7 +432,7 @@ function selectProduct(f) {
           <td valign="top">
             <table>
               <tr valign="bottom">
-                <th align="left"><u>T</u>arget:</th>
+                <th align="left"><u>C</u>íl:</th>
               </tr>
               <tr valign="top">
                 [% PROCESS select sel = { name => 'target_milestone',
@@ -450,12 +450,12 @@ function selectProduct(f) {
 [%# *** Comment URL Whiteboard Keywords *** %]
 
   [% FOREACH field = [
-    { name => "long_desc", description => "A&nbsp;<u>C</u>omment",
-      accesskey => 'c' },
-    { name => "bug_file_loc", description => "The&nbsp;<u>U</u>RL",
+    { name => "long_desc", description => "Ko<u>m</u>entář",
+      accesskey => 'm' },
+    { name => "bug_file_loc", description => "<u>U</u>RL",
       accesskey => 'u' },
-    { name => "status_whiteboard", description => "<u>W</u>hiteboard",
-      accesskey => 'w' } ] %]
+    { name => "status_whiteboard", description => "<u>T</u>abule",
+      accesskey => 't' } ] %]
 
     [% UNLESS field.name == 'status_whiteboard' AND NOT Param('usestatuswhiteboard') %]
     <tr>
@@ -481,14 +481,14 @@ function selectProduct(f) {
   [% IF have_keywords %]
     <tr>
       <th align="right">
-        <a href="describekeywords.cgi"><u>K</u>eywords</a>:
+        <a href="describekeywords.cgi"><u>K</u>líčová slova</a>:
       </th>
       <td>
         <select name="keywords_type">
         [% FOREACH qv = [
-          { name => "allwords", description => "contains all of the keywords" },
-          { name => "anywords", description => "contains any of the keywords" },
-          { name => "nowords",  description => "contains none of the keywords" } ] %]
+          { name => "allwords", description => "obsahuje všechna klíčová slova" },
+          { name => "anywords", description => "obsahuje libovolné z klíčových slov" },
+          { name => "nowords",  description => "neobsahuje žádné z klíčových slov" } ] %]
 
           <option value="[% qv.name %]"
             [% " selected" IF default.keywords_type.0 == qv.name %]>
@@ -526,7 +526,7 @@ function selectProduct(f) {
       <table>
         <tr>
           <th align="left">
-            <u>R</u>esolution:
+            <u>R</u>ozhodnutí:
           </th>
         </tr>
         <tr valign="top">
@@ -539,19 +539,19 @@ function selectProduct(f) {
     <td>
       <table>
         <tr>
-          <th align="left">S<u>e</u>verity:</th>
+          <th align="left"><u>Z</u>ávažnost:</th>
         </tr>
         <tr valign="top">
           [% PROCESS select sel = { name => 'bug_severity',
                                     size => 7,
-                                    accesskey => 'e' } %]
+                                    accesskey => 'z' } %]
         </tr>
       </table>
     </td>
     <td>
       <table>
         <tr>
-          <th align="left">Pr<u>i</u>ority:</th>
+          <th align="left">Pr<u>i</u>orita:</th>
         </tr>
         <tr valign="top">
           [% PROCESS select sel = { name => 'priority',
@@ -597,7 +597,7 @@ function selectProduct(f) {
       <fieldset>
         <legend>
           <strong>
-            Email and Numbering
+            E-mail a číslování
           </strong>
         </legend>
 
@@ -611,7 +611,7 @@ function selectProduct(f) {
 <table cellspacing="0" cellpadding="0">
   <tr>
     <td>
-      Any of:
+      Libovolné z:
     </td>
   </tr>
   <tr>
@@ -620,7 +620,7 @@ function selectProduct(f) {
              id="emailassigned_to[% n %]" value="1"
              [% " checked" IF default.emailassigned_to.$n %]>
       <label for="emailassigned_to[% n %]">
-        [% terms.bug %] owner
+        Majitel [% terms.chyba_2sg %]
       </label>
     </td>
   </tr>
@@ -630,7 +630,7 @@ function selectProduct(f) {
              id="emailreporter[% n %]" value="1"
              [% " checked" IF default.emailreporter.$n %]>
       <label for="emailreporter[% n %]">
-        reporter
+        ohlašovatel
       </label>
     </td>
   </tr>
@@ -641,7 +641,7 @@ function selectProduct(f) {
              id="emailqa_contact[% n %]" value="1"
              [% " checked" IF default.emailqa_contact.$n %]>
       <label for="emailqa_contact[% n %]">
-        QA contact
+        kontakt QA
       </label>
     </td>
   </tr>
@@ -652,7 +652,7 @@ function selectProduct(f) {
              id="emailcc[% n %]" value="1"
              [% " checked" IF default.emailcc.$n %]>
       <label for="emailcc[% n %]">
-        CC list member
+        člen seznamu CC
       </label>
     </td>
   </tr>
@@ -662,7 +662,7 @@ function selectProduct(f) {
                id="emaillongdesc[% n %]" value="1"
                [% " checked" IF default.emaillongdesc.$n %]>
       <label for="emaillongdesc[% n %]">
-        commenter
+        komentující
       </label>
     </td>
   </tr>
@@ -670,10 +670,10 @@ function selectProduct(f) {
     <td>
       <select name="emailtype[% n %]">
       [% FOREACH qv = [
-        { name => "substring", description => "contains" },
-        { name => "exact", description => "is" },
-        { name => "regexp", description => "matches regexp" },
-        { name => "notregexp", description => "doesn't match regexp" } ] %]
+        { name => "substring", description => "obsahuje" },
+        { name => "exact", description => "je" },
+        { name => "regexp", description => "vyhovuje regulárnímu výrazu" },
+        { name => "notregexp", description => "nevyhovuje regulárnímu výrazu" } ] %]
 
         <option value="[% qv.name %]"
           [% " selected" IF default.emailtype.$n == qv.name %]>[% qv.description %]</option>
@@ -698,10 +698,10 @@ function selectProduct(f) {
   <tr>
     <td>
       <select name="bugidtype">
-        <option value="include"[% " selected" IF default.bugidtype.0 == "include" %]>Only include</option>
-        <option value="exclude"[% " selected" IF default.bugidtype.0 == "exclude" %]>Exclude</option>
+        <option value="include"[% " selected" IF default.bugidtype.0 == "include" %]>Jenom [% terms.chyba_4pl %]</option>
+        <option value="exclude"[% " selected" IF default.bugidtype.0 == "exclude" %]>Kromě [% terms.chyba_2pl %]</option>
       </select>
-      [% terms.bugs %] numbered:
+      s čísly:
     </td>
     <td>
       <input type="text" name="bug_id" value="[% default.bug_id.0 FILTER html %]" size="20">
@@ -709,15 +709,15 @@ function selectProduct(f) {
   </tr>
   <tr>
     <td></td>
-    <td>(comma-separated list)</td>
+    <td>(seznam oddělovaný čárkami)</td>
   </tr>
   [% IF Param('usevotes') %]
     <tr>
       <td align="right">
-        Only [% terms.bugs %] with at least:
+        Pouze [% terms.chyby %] s nejméně
       </td>
       <td>
-        <input name="votes" size="3" value="[% default.votes.0 FILTER html %]"> votes
+        <input name="votes" size="3" value="[% default.votes.0 FILTER html %]"> hlasy
       </td>
     </tr>
   [% END %]
@@ -731,17 +731,17 @@ function selectProduct(f) {
 
     <td valign="top">
       <fieldset>
-        <legend><strong>[% terms.Bug %] Changes</strong></legend>
+        <legend><strong>Změny [% terms.chyba_2pl %]</strong></legend>
 
 
 <dl class="bug_changes">
-  <dt>Only [% terms.bugs %] changed between:</dt>
+  <dt>Jenom [% terms.chyby %] změněné mezi:</dt>
   <dd>
     <input name="chfieldfrom" size="10" value="[% default.chfieldfrom.0 FILTER html %]">
-    and <input name="chfieldto" size="10" value="[% default.chfieldto.0 FILTER html %]">
-    <br>(YYYY-MM-DD or relative dates)
+    a <input name="chfieldto" size="10" value="[% default.chfieldto.0 FILTER html %]">
+    <br>(RRRR-MM-DD nebo relativní data)
   </dd>
-  <dt>where one or more of the following changed:</dt>
+  <dt>u kterých se změnilo alespoň jedno z následujícího:</dt>
   <dd>
     <select name="chfield" multiple="multiple" size="4">
     [% FOREACH field = chfield %]
@@ -751,7 +751,7 @@ function selectProduct(f) {
     [% END %]
     </select>
   </dd>
-  <dt>and the new value was:</dt>
+  <dt>a nová hodnota byla:</dt>
   <dd>
     <input name="chfieldvalue" size="20" value="[% default.chfieldvalue.0 FILTER html %]">
   </dd>

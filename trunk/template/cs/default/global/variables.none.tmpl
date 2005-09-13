@@ -74,14 +74,6 @@
   "x_chyba_5pl" => "é chyby",
   "x_chyba_6pl" => "ých chybách",
   "x_chyba_7pl" => "ými chybami",
-  "koncovka" => "a",			# koncovka slovesa (M->"", F->"a", N->"o")
-  "x_1sg" => "á",
-  "x_2sg" => "é",
-  "x_3sg" => "é",
-  "x_4sg" => "ou",
-  "x_5sg" => "á",
-  "x_6sg" => "é",
-  "x_7sg" => "ou",
   "tatochyba_1sg" => "tato chyba",
   "tatochyba_2sg" => "této chyby",
   "tatochyba_3sg" => "této chybě",
@@ -98,5 +90,55 @@
   "Bugzilla_5sg" => "Bugzillo",
   "Bugzilla_6sg" => "Bugzille",
   "Bugzilla_7sg" => "Bugzillou",
+  }
+%]
+
+[% koncovky = {
+  "verb" => "a"				# koncovka slovesa (M->"", F->"a", N->"o")
+  "adj_1sg" => "á",			# koncovky příd. jmen (velk_)
+  "adj_2sg" => "é",
+  "adj_3sg" => "é",
+  "adj_4sg" => "ou",
+  "adj_5sg" => "á",
+  "adj_6sg" => "é",
+  "adj_7sg" => "ou",
+  "jarni_1sg" => ""			# koncovka příd. jmen vzoru 'jarní' (jarní_)
+  "jarni_2sg" => ""
+  "mlady_1sg" => "á"			# koncovka příd. jmen vzoru 'mladý' (mlad_)
+  "mlady_2pl" => "ých"
+  "mlady_3pl" => "ým"
+  "mlady_4pl" => "é"
+  "Bugzilla" => "a",			# koncovka slovesa s podmětem=Bugzilla (M->"", F->"a", N->"o")
+  }
+%]
+
+[% statuscs = {
+  "UNCONFIRMED" => "NEOVĚŘENÁ",
+  "NEW" => "NOVÁ",
+  "ASSIGNED" => "PŘIDĚLENÁ",
+  "REOPENED" => "ZNOVUOTEVŘENÁ",
+  "RESOLVED" => "VYŘEŠENO",
+  "VERIFIED" => "OVĚŘENO",
+  "CLOSED" => "UZAVŘENÁ"
+  }
+%]
+
+[% resolutioncs = {
+  "FIXED" => "OPRAVENO",
+  "INVALID" => "NEPLATNÁ",
+  "WONTFIX" => "ZAMÍTNUTO",
+  "DUPLICATE" => "DUPLIKÁT",
+  "WORKSFORME" => "MNĚFUNGUJE",
+  "MOVED" => "PŘESUNUTO"
+  }
+%]
+
+[% severitycs = {
+  "Blocker" => "Blokuje",
+  "Critical" => "Kritická",
+  "Major" => "Větší",
+  "Minor" => "Menší",
+  "Trivial" => "Drobnost",
+  "Enhancement" => "Vylepšení"
   }
 %]

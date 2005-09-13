@@ -33,7 +33,7 @@
 [% PROCESS global/variables.none.tmpl %]
 
 [% PROCESS global/header.html.tmpl
-  title = "Select keyword"
+  title = "Zvolte klíčové slovo"
 %]
 
 [% max_table_size = 50 %]
@@ -41,10 +41,10 @@
 [% BLOCK table_header %]
   <table border="1" cellpadding="4" cellspacing="0">
     <tr bgcolor="#6666FF">
-      <th align="left">Edit keyword ...</th>
-      <th align="left">Description</th>
-      <th align="left">[% terms.Bugs %]</th>
-      <th align="left">Action</th>
+      <th align="left">Upravit…</th>
+      <th align="left">Popis</th>
+      <th align="left">[% terms.Chyby %]</th>
+      <th align="left">Činnost</th>
     </tr>
 [% END %]
 
@@ -67,18 +67,18 @@
       [% IF keyword.description %]
         [%  keyword.description FILTER html %]
       [% ELSE %]
-        <font color="red">missing</font>
+        <font color="red">chybí</font>
       [% END %]
     </td>
     <td valign="top" align="right">
       [% IF keyword.bug_count %]
         [% keyword.bug_count %]
       [% ELSE %]
-        none
+        žádné
       [% END %]
     </td>
     <th valign="top">
-      <a href="editkeywords.cgi?action=delete&amp;id=[% keyword.id %]">Delete</a>
+      <a href="editkeywords.cgi?action=delete&amp;id=[% keyword.id %]">Smazat</a>
     </th>
   </tr>
 
@@ -88,8 +88,8 @@
 [% END %]
 
   <tr>
-    <td valign="top" colspan="3">Add a new keyword</td>
-    <td><a href="editkeywords.cgi?action=add">Add</a></td>
+    <td valign="top" colspan="3">Přidat nové klíčové slovo</td>
+    <td><a href="editkeywords.cgi?action=add">Přidat</a></td>
   </tr>
 
 [% PROCESS table_footer %]

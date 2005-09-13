@@ -30,39 +30,39 @@
 [% PROCESS global/variables.none.tmpl %]
 
 [% PROCESS global/header.html.tmpl
-  title = "Edit keyword"
+  title = "Upravit klíčové slovo"
 %]
 
 <form method="post" action="editkeywords.cgi">
   <table border="0" cellpadding="4" cellspacing="0">
     <tr>
-      <th align="right">Name:</th>
+      <th align="right">Název:</th>
       <td><input size="64" maxlength="64" name="name" value="[% name FILTER html %]"></td>
     </tr>
     <tr>
-      <th align="right">Description:</th>
+      <th align="right">Popis:</th>
       <td>
         <textarea rows="4" cols="64" wrap="virtual"
         name="description">[% description FILTER html %]</textarea>
       </td>
     </tr>
     <tr>
-      <th align="right">[% terms.Bugs %]:</th>
+      <th align="right">[% terms.Chyby %]:</th>
       <td>
         [% IF bug_count %]
           [% bug_count %]
         [% ELSE %]
-          none
+          žádné
         [% END %]
       </td>
     </tr>
   </table>
 
-  <input type="submit" value="Update">
+  <input type="submit" value="Uložit">
   <input type="hidden" name="action" value="update">
   <input type="hidden" name="id" value="[% keyword_id %]">
 </form>
 
-<p><a href="editkeywords.cgi">Edit other keywords</a>.</p>
+<p><a href="editkeywords.cgi">Upravit jiná klíčová slova</a>.</p>
 
 [% PROCESS global/footer.html.tmpl %]

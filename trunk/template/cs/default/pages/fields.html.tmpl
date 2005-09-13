@@ -21,11 +21,10 @@
   #%]
 
 [% PROCESS global/variables.none.tmpl %]
-[% INCLUDE global/header.html.tmpl title = "A $terms.Bug's Life Cycle" %]
+[% INCLUDE global/header.html.tmpl title = "Životní cyklus $terms.chyba_2sg" %]
 
 <p>
-The <b>status</b> and <b>resolution</b> fields define and track the life
-cycle of [% terms.abug %].  
+Pole <b>stav</b> a <b>řešení</b> určují životní cyklus [% terms.chyba_2sg %].
 </p>
 
 <a name="status"></a>
@@ -34,65 +33,65 @@ cycle of [% terms.abug %].
 <table border="1" cellpadding="4">
   <tr align="center" valign="top">
     <td width="50%">
-      <h1>STATUS</h1>
+      <h1>STAV</h1>
     </td>
 
     <td>
-      <h1>RESOLUTION</h1>
+      <h1>ŘEŠENÍ</h1>
     </td>
   </tr>
 
   <tr valign="top">
-    <td>The <b>status</b> field indicates the general health of a 
-    [% terms.bug %]. Only certain status transitions are allowed.</td>
+    <td>Pole <b>stav</b> všeobecně popisuje situaci [% terms.chyba_2sg %]. Jsou dovoleny
+    jen některé přechody mezi stavy.</td>
 
-    <td>The <b>resolution</b> field indicates what happened to this
-    [% terms.bug %].</td>
+    <td>Pole <b>řešení</b> popisuje, co se s [% terms.tatochyba_7sg %] stalo.</td>
   </tr>
 
   <tr valign="top">
     <td>
       <dl>
         <dt>
-          <b>UNCONFIRMED</b>
+          <b>[% statuscs.UNCONFIRMED %]</b>
         </dt>
         <dd>
-          This [% terms.bug %] has recently been added to the database. 
-          Nobody has validated that this [% terms.bug %] is true. Users
-          who have the "canconfirm" permission set may confirm
-          this [% terms.bug %], changing its state to NEW. Or, it may be
-          directly resolved and marked RESOLVED.
+          [% terms.tatochyba_1sg FILTER ucfirst %] byl[% koncovky.verb %] teprve nedávno
+	  vložen[% koncovky.verb %] do databáze. Nikdo dosud neověřil, že je hlášení
+	  pravdivé. Uživatelé s oprávněním <i>canconfirm</i> mohou [% terms.tatochyba_4sg %]
+	  ověřit, čímž nastaví stav na [% statuscs.NEW %]. Nebo v případě rychlého
+	  řešení je možno stav změnit přímo na [% statuscs.RESOLVED %].
         </dd>
 
         <dt>
-          <b>NEW</b>
+          <b>[% statuscs.NEW %]</b>
         </dt>
         <dd>
-          This [% terms.bug %] has recently been added to the assignee's
-          list of [% terms.bugs %] and must be processed. [% terms.Bugs %] in
-          this state may be accepted, and become <b>ASSIGNED</b>, passed
-          on to someone else, and remain <b>NEW</b>, or resolved and marked
-          <b>RESOLVED</b>.
+	  [% terms.tatochyba_1sg FILTER ucfirst %] byl[% koncovky.verb %] nedávno
+	  přidána do majitelova seznamu [% terms.chyba_2pl %] a musí být zpracován[% koncovky.verb %]. [% terms.chyba_4pl FILTER ucfirst %]
+	  v tomto stavu lze přijímat a stav
+	  měnit na <b>[% statuscs.ASSIGNED %]</b>, předávat někomu jinému a ponechávat
+          jako <b>[% statuscs.NEW %]</b> nebo vyřešit a označit jako <b>[% statuscs.RESOLVED %]</b>.
         </dd>
 
         <dt>
-          <b>ASSIGNED</b>
+          <b>[% statuscs.ASSIGNED %]</b>
         </dt>
         <dd>
-          This [% terms.bug %] is not yet resolved, but is assigned to the 
-          proper person. From here [% terms.bugs %] can be given to another 
-          person and become <b>NEW</b>, or resolved and become <b>RESOLVED</b>.
+          [% terms.tatochyba_1sg FILTER ucfirst %] dosud nebyl[% koncovky.verb %] vyřešen[% koncovky.verb %], ale je
+	  přidělen[% koncovky.verb %] příslušné osobě. Z tohoto stavu lze [% terms.chyba_4pl %] předávat
+	  jiným lidem a měnit na <b>[% statuscs.NEW %]</b> nebo vyřešit a změnit na <b>[% statuscs.RESOLVED %]</b>.
         </dd>
 
         <dt>
-          <b>REOPENED</b>
+          <b>[% statuscs.REOPENED %]</b>
         </dt>
         <dd>
-          This [% terms.bug %] was once resolved, but the resolution was 
-          deemed incorrect. For example, a <b>WORKSFORME</b> [% terms.bug %] is
-          <b>REOPENED</b> when more information shows up and
-          the [% terms.bug %] is now reproducible. From here [% terms.bugs %] are
-          either marked <b>ASSIGNED</b> or <b>RESOLVED</b>.
+          [% terms.tatochyba_1sg FILTER ucfirst %] byl[% koncovky.verb %] původně vyřešen[% koncovky.verb %], ale
+	  bylo zjištěno, že řešení je nesprávné.
+          Například řešení <b>[% resolutioncs.WORKSFORME %]</b> může být změněno na
+          <b>[% statuscs.REOPENED %]</b> v případě, že se objeví nové informace, na základě kterých již lze [%terms.chyba_4sg %]
+	  reprodukovat. Z tohoto stavu lze [% terms.chyba_4pl %] převádět do stavů <b>[% statuscs.ASSIGNED %]</b>
+	  či <b>[% statuscs.RESOLVED %]</b>.
         </dd>
       </dl>
     </td>
@@ -100,10 +99,9 @@ cycle of [% terms.abug %].
     <td>
       <dl>
         <dd>
-          No resolution yet. All [% terms.bugs %] which are in one of 
-          these "open" states have the resolution set to blank. All 
-          other [% terms.bugs %] will be marked with one of the following 
-          resolutions.
+	  Dosud nevyřešeno. [% terms.Chyby %] v jednom z těchto „otevřených“ stavů
+	  mají řešení prázdné. Ostatní [% terms.chyby %] mají v tomto poli
+	  jedno z následujících řešení.
         </dd>
       </dl>
     </td>
@@ -113,33 +111,32 @@ cycle of [% terms.abug %].
     <td>
       <dl>
         <dt>
-          <b>RESOLVED</b>
+          <b>[% statuscs.RESOLVED %]</b>
         </dt>
         <dd>
-          A resolution has been taken, and it is awaiting verification by
-          QA. From here [% terms.bugs %] are either re-opened and become 
-          <b>REOPENED</b>, are marked <b>VERIFIED</b>, or are closed for
-          good and marked <b>CLOSED</b>.
+	  Problém byl vyřešen a očekává se ověření od QA. Z tohoto stavu
+	  je možno [% terms.chyba_4sg %] znovu otevřít a přejít do
+	  stavu <b>[% statuscs.REOPENED %]</b>, ověřit řešení a přejít do
+	  stavu <b>[% statuscs.VERIFIED %]</b>, nebo trvale uzavřít a označit
+          jako <b>[% statuscs.CLOSED %]</b>.
         </dd>
 
         <dt>
-          <b>VERIFIED</b>
+          <b>[% statuscs.VERIFIED %]</b>
         </dt>
         <dd>
-          QA has looked at the [% terms.bug %] and the resolution and 
-          agrees that the appropriate resolution has been taken. [% terms.Bugs %] remain
-          in this state until the product they were reported
-          against actually ships, at which point they become
-          <b>CLOSED</b>.
+          QA zkontrolovali řešení [% terms.chyba_2sg %] a souhlasí, že je
+	  vše v pořádku. V tomto stavu [% terms.chyba %] zůstane do chvíle,
+	  kdy je příslušný produkt zveřejněn, v té chvíli přejdou do stavu
+          <b>[% statuscs.CLOSED %]</b>.
         </dd>
 
         <dt>
-          <b>CLOSED</b>
+          <b>[% statucs.CLOSED %]</b>
         </dt>
         <dd>
-          The [% terms.bug %] is considered dead, the resolution is correct. 
-          Any zombie [% terms.bugs %] who choose to walk the earth again must 
-          do so by becoming <b>REOPENED</b>.
+          [% terms.Chyba %] byl[% koncovky.verb %] vyřešen[% koncovky.verb %], řešení je v pořádku.
+          K jakémukoli zmrtvýchvstání může dojít jen přechodem do stavu <b>[% statuscs.REOPENED %]</b>.
         </dd>
       </dl>
     </td>
@@ -147,118 +144,112 @@ cycle of [% terms.abug %].
     <td>
       <dl>
         <dt>
-          <b>FIXED</b>
+          <b>[% resolutioncs.FIXED %]</b>
         </dt>
         <dd>
-          A fix for this [% terms.bug %] is checked into the tree and 
-          tested.
+          Oprava [% terms.tatochyba_2sg %] byla uložena a otestována.
         </dd>
 
         <dt>
-          <b>INVALID</b>
+          <b>[% resolutioncs.INVALID %]</b>
         </dt>
         <dd>
-          The problem described is not [% terms.abug %].
+          Popisovaná záležitost není [% terms.chyba %].
         </dd>
 
         <dt>
-          <b>WONTFIX</b>
+          <b>[% resolutioncs.WONTFIX %]</b>
         </dt>
         <dd>
-          The problem described is [% terms.abug %] which will never be 
-          fixed.
+          Popisovaná záležitost je [% terms.chyba %], ale nebude opraven[% koncovky.verb %].
         </dd>
 
         <dt>
-         <b>DUPLICATE</b>
+         <b>[% resolutioncs.DUPLICATE %]</b>
         </dt>
         <dd>
-          The problem is a duplicate of an existing [% terms.bug %].
-          Marking [% terms.abug %] duplicate requires the [% terms.bug %]#
-          of the duplicating [% terms.bug %] and will at least put
-          that [% terms.bug %] number in the description field.
+	  Problém je duplikát existující[% koncovky.jarni_2sg %] [%+ terms.chyba_2sg %].
+	  Označení jako duplikát vyžaduje číslo duplicitní[% koncovky.jarni_2sg %] [%+ terms.chyba_2sg %],
+	  číslo [% terms.tatochyba_2sg %] se objeví v popisu.
         </dd>
 
         <dt>
-          <b>WORKSFORME</b>
+          <b>[% resolutioncs.WORKSFORME %]</b>
         </dt>
         <dd>
-          All attempts at reproducing this [% terms.bug %] were futile, 
-          and reading the code produces no clues as to why the described
-          behavior would occur. If more information appears later,
-          the [% terms.bug %] can be reopened.
+	  Všechny pokusy o reprodukování [% terms.tatochyba_2sg %] byly marné,
+	  kontrola kódu neobjevila žádné důvody, proč by se mělo popisované
+	  chování dít. Pokud se v budoucnu objeví další informace,
+	  je možno [% terms.chyba_4sg %] znovu otevřít.
         </dd>
 
         <dt>
-          <b>MOVED</b>
+          <b>[% resolutioncs.MOVED %]</b>
         </dt>
         <dd>
-          The problem was specific to a related product 
-          whose [% terms.bugs %] are tracked in
-          another [% terms.bug %] database.
-          The [% terms.bug %] has been moved to that database.
+	  Popisovaná situace se vztahovala ke konkrétnímu produktu,
+	  u kterého se [% terms.chyby %] sledují v jiné databázi. [% terms.tatochyba FILTER ucfirst %]
+	  byl[% koncovky.verb %] přesunut[% koncovky.verb %] do oné databáze.
         </dd>
       </dl>
     </td>
   </tr>
 </table>
 
-<h2><a name="bug_severity">Severity</a></h2>
-This field describes the impact of [% terms.abug %]. 
+<h2><a name="bug_severity">Závažnost</a></h2>
+Toto pole popisuje závažnost důsledků [% terms.chyba_2sg %]. 
 
 <table>
   <tr>
-    <th>Blocker</th>
+    <th>[% severitycs.Blocker %]</th>
 
-    <td>Blocks development and/or testing work</td>
+    <td>Blokuje další vývoj nebo testování</td>
   </tr>
 
   <tr>
-    <th>Critical</th>
+    <th>[% severitycs.Critical %]</th>
 
-    <td>crashes, loss of data, severe memory leak</td>
+    <td>Havárie, ztráta dat, závažné paměťové leaky</td>
   </tr>
 
   <tr>
-    <th>Major</th>
+    <th>[% severitycs.Major %]</th>
 
-    <td>major loss of function</td>
+    <td>Závažné nedostatky funkčnosti</td>
   </tr>
 
   <tr>
-    <th>Minor</th>
+    <th>[% severitycs.Minor %]</th>
 
-    <td>minor loss of function, or other problem where easy
-    workaround is present</td>
+    <td>Menší nedostatky funkčnosti, případně jiný problém, pro který
+        existuje způsob, jak jej obejít</td>
   </tr>
 
   <tr>
-    <th>Trivial</th>
+    <th>[% severitycs.Trivial %]</th>
 
-    <td>cosmetic problem like misspelled words or misaligned
-    text</td>
+    <td>Kosmetický problém, např. překlep či špatně zarovnaný text</td>
   </tr>
 
   <tr>
-    <th>Enhancement</th>
+    <th>[% severitycs.Enhancement %]</th>
 
-    <td>Request for enhancement</td>
+    <td>Žádost o nové vylepšení</td>
 </table>
 
-<h2><a name="priority">Priority</a></h2>
-This field describes the importance and order in which [% terms.abug %]
-should be fixed. This field is utilized by the
-programmers/engineers to prioritize their work to be done. The
-available priorities range from <b>P1</b> (most important) to 
-<b>P5</b> (least important.) 
+<h2><a name="priority">Priorita</a></h2>
+Toto pole popisuje důležitost a pořadí, v jakém se [% terms.chyby %]
+budou opravovat. Toto pole používají vývojáři pro prioritizaci své
+práce. Dostupné priority jsou <b>P1</b> (nejdůležitější) až
+<b>P5</b> (nejméně důležité).
 
 
-<h2><a name="rep_platform">Platform</a></h2>
-This is the hardware platform against which the [% terms.bug %] was
-reported. Legal platforms include: 
+<h2><a name="rep_platform">Platforma</a></h2>
+Zde je uvedena hardwarová platforma, na které byl[% koncovky.verb %] [%+ terms.chyba %]
+hlášen[% koncovky.verb %]. Platné platformy jsou:
 
 <ul>
-  <li>All (happens on all platforms; cross-platform [% terms.bug %])</li>
+  <li>Všechny (děje se na všech platformách)</li>
 
   <li>Macintosh</li>
 
@@ -268,18 +259,16 @@ reported. Legal platforms include:
 
   <li>HP</li>
 </ul>
-<b>Note:</b> When searching, selecting the option "All" does not 
-select [% terms.bugs %]
-assigned against any platform. It merely selects [% terms.bugs %] that are
-marked as occurring on all platforms, i.e. are designated "All". 
+<b>Poznámka:</b> Při hledání volba „Všechny“ nenalezne [% terms.chyba_4pl %]
+na libovolné platformě. Vybere pouze [% terms.chyba_4pl %] s platformou
+nastavenou na „Všechny“.
 
-<h2><a name="op_sys">Operating System</a></h2>
-This is the operating system against which the [% terms.bug %] was
-reported. Legal operating systems include: 
+<h2><a name="op_sys">Operační systém</a></h2>
+Zde je uveden operační systém, na kterém byl[% koncovky.verb %] [%+ terms.chyba %]
+hlášen[% koncovky.verb %]. Platné operační systémy jsou například:
 
 <ul>
-  <li>All (happens on all operating systems; cross-platform
-  [% terms.bug %])</li>
+  <li>Všechny (děje se ve všech operačních systémech)</li>
 
   <li>Windows 95</li>
 
@@ -287,21 +276,19 @@ reported. Legal operating systems include:
 
   <li>Linux</li>
 </ul>
-Sometimes the operating system implies the platform, but not
-always. For example, Linux can run on PC and Macintosh and
-others. 
+Někdy operační systém implikuje platformu, někde ne. Například Linux
+může běžet na PC, Macintoshi i dalších platformách.
 
-<h2><a name="assigned_to">Assigned To</a></h2>
+<h2><a name="assigned_to">Majitel</a></h2>
+
+<p>Toto je osoba, která za opravu [% terms.chyba_2sg %] zodpovídá. Pokaždé,
+když je toto pole změněno, je stav automaticky změněn na <b>[% statuscs.NEW %]</b>,
+takže lze snadno sledovat nov[% koncovky.mlady_4pl %] [%+ terms.chyba_4pl %]
+na seznamu příslušné osoby.</p>
 
 <p>
-This is the person in charge of resolving the [% terms.bug %]. Every time
-this field changes, the status changes to <b>NEW</b> to make it
-easy to see which new [% terms.bugs %] have appeared on a person's list.</p>
-
-<p>
-The default status for queries is set to NEW, ASSIGNED and
-REOPENED. When searching for [% terms.bugs %] that have been resolved or
-verified, remember to set the status field appropriately. 
+Implicitní vyhledávací dotaz hledá jen [% terms.chyba_4pl %] ve stavech [% statuscs.NEW %], [% statuscs.ASSIGNED %] a [% statuscs.REOPENED %].
+Nezapomeňte v případě potřeby změnit tento parametr vyhledávání, jinak nic nenajdete.
 </p>
 
 [% INCLUDE global/footer.html.tmpl %]
