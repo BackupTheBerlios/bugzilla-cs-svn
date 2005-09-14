@@ -30,7 +30,7 @@
 [% PROCESS global/variables.none.tmpl %]
 
 [% PROCESS global/header.html.tmpl
-  title = "$terms.Bugzilla Keyword Descriptions"
+  title = "Popisy klíčových slov v $terms.Bugzilla_6sg"
 %]
 
 [% FOREACH keyword = keywords %]
@@ -41,9 +41,9 @@
 
     <table border="1" cellpadding="4" cellspacing="0">
       <tr bgcolor="#6666FF">
-        <th align="left">Name</th>
-        <th align="left">Description</th>
-        <th align="left">[% terms.Bugs %]</th>
+        <th align="left">Název</th>
+        <th align="left">Popis</th>
+        <th align="left">[% terms.Chyby %]</th>
       </tr>
   [% END %]
 
@@ -58,7 +58,7 @@
         <a href="buglist.cgi?keywords=[% keyword.name FILTER url_quote %]">
           [% keyword.bugcount %]</a>
       [% ELSE %]
-        none
+        žádn[% koncovky.mlady_1pl %]
       [% END %]
     </td>
   </tr>
@@ -70,7 +70,7 @@
 
 [% IF caneditkeywords %]
   <p>
-    <a href="editkeywords.cgi">Edit keywords</a>.
+    <a href="editkeywords.cgi">Upravit klíčová slova</a>.
   </p>
 [% END %]
 

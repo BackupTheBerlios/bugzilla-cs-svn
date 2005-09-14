@@ -22,8 +22,8 @@
 [% PROCESS global/variables.none.tmpl %]
 
 [%# Define strings that will serve as the title and header of this page %]
-[% title = BLOCK %]Vytvoøit novou pøílohu k [% terms.chyba_3sg %] #[% bugid %][% END %]
-[% h1 = BLOCK %]Vytvoøit novou pøílohu k
+[% title = BLOCK %]VytvoÅ™it novou pÅ™Ã­lohu k [% terms.chyba_3sg %] #[% bugid %][% END %]
+[% h1 = BLOCK %]VytvoÅ™it novou pÅ™Ã­lohu k
   [%+ GetBugLink(bugid, "$terms.chyba_3sg $bugid") %][% END %]
 [% h2 = BLOCK %][% bugsummary FILTER html %][% END %]
 
@@ -55,14 +55,14 @@
     <tr>
       <th>Soubor:</th>
       <td>
-        <em>Zadejte cestu k souboru na vašem poèítaèi.</em><br>
+        <em>Zadejte cestu k souboru na vaÅ¡em poÄÃ­taÄi.</em><br>
         <input type="file" name="data" size="50">
       </td>
     </tr>
     <tr>
       <th>Popis:</th>
       <td>
-        <em>Struènì popište pøílohu.</em><br>
+        <em>StruÄnÄ› popiÅ¡te pÅ™Ã­lohu.</em><br>
         <input type="text" name="description" size="60" maxlength="200">
       </td>
     </tr>
@@ -74,12 +74,12 @@
     <tr>
       <th>Typ obsahu:</th>
       <td>
-        <em>Pokud je tato pøíloha patch, zaškrtnìte následující ètvereèek.</em><br>
+        <em>Pokud je tato pÅ™Ã­loha patch, zaÅ¡krtnÄ›te nÃ¡sledujÃ­cÃ­ ÄtvereÄek.</em><br>
         <input type="checkbox" id="ispatch" name="ispatch" value="1"
                onchange="setContentTypeDisabledState();">
         <label for="ispatch">patch</label><br><br>
 
-        <em>Jinak zvolte, jak se má urèit typ obsahu.</em><br>
+        <em>Jinak zvolte, jak se mÃ¡ urÄit typ obsahu.</em><br>
         <input type="radio" id="autodetect"
                name="contenttypemethod" value="autodetect">
           <label for="autodetect">autodetekce</label><br>
@@ -92,25 +92,25 @@
           </select><br>
         <input type="radio" id="manual"
                      name="contenttypemethod" value="manual">
-          <label for="manual">zadat ruènì:</label>
+          <label for="manual">zadat ruÄnÄ›:</label>
           <input type="text" name="contenttypeentry" size="30" maxlength="200"
                  onchange="if (this.value) this.form.contenttypemethod[2].checked = true;">
       </td>
     </tr>
     [% IF (Param("insidergroup") && UserInGroup(Param("insidergroup"))) %]
       <tr>
-        <th>Soukromí:</th>
+        <th>SoukromÃ­:</th>
         <td>
-          <em>Pokud je pøíloha soukromá, zaškrtnìte následující ètvereèek.</em><br>
+          <em>Pokud je pÅ™Ã­loha soukromÃ¡, zaÅ¡krtnÄ›te nÃ¡sledujÃ­cÃ­ ÄtvereÄek.</em><br>
           <input type="checkbox" name="isprivate" id="isprivate" value="1">
-        <label for="isprivate">Soukromá</label>
+        <label for="isprivate">SoukromÃ¡</label>
         </td>
       </tr>
     [% END %]
     <tr>
-      <th>Zneplatòuje:</th>
+      <th>ZneplatÅˆuje:</th>
       <td>
-        <em>(volitelné) Zaškrtnìte kadou existující pøílohu, která se nahráním vaší pøílohy stává neplatnou.</em><br>
+        <em>(volitelnÃ©) ZaÅ¡krtnÄ›te kaÅ¾dou existujÃ­cÃ­ pÅ™Ã­lohu, kterÃ¡ se nahrÃ¡nÃ­m vaÅ¡Ã­ pÅ™Ã­lohy stÃ¡vÃ¡ neplatnou.</em><br>
         [% IF attachments.size %]
           [% FOREACH attachment = attachments %]
             [% IF ((attachment.isprivate == 0) || (Param("insidergroup")
@@ -121,26 +121,26 @@
             [% END %]
           [% END %]
         [% ELSE %]
-            [neexistují ádné pøílohy, které by bylo mono zneplatnit]
+            [neexistujÃ­ Å¾Ã¡dnÃ© pÅ™Ã­lohy, kterÃ© by bylo moÅ¾no zneplatnit]
         [% END %]
       </td>
     </tr>
 
     [% IF (user.id != bugassignee_id) AND user.groups.editbugs %]
       <tr>
-        <th>Zmìnit pøidìlení:</th>
+        <th>ZmÄ›nit pÅ™idÄ›lenÃ­:</th>
         <td>
-          <em>Pokud si pøejete pøidìlit [% terms.tatochyba_4sg %] sobì,
-              zaškrtnìte následující ètvereèek.</em><br>
+          <em>Pokud si pÅ™ejete pÅ™idÄ›lit [% terms.tatochyba_4sg %] sobÄ›,
+              zaÅ¡krtnÄ›te nÃ¡sledujÃ­cÃ­ ÄtvereÄek.</em><br>
           <input type="checkbox" id="takebug" name="takebug" value="1">
-          <label for="takebug">pøevzít [% terms.chyba_4sg %]</label>
+          <label for="takebug">pÅ™evzÃ­t [% terms.chyba_4sg %]</label>
         </td>
       </tr>
     [% END %]
     <tr>
-      <th>Komentáø:</th>
+      <th>KomentÃ¡Å™:</th>
       <td>
-        <em>(volitelnı) Pøidejte komentáø o této pøíloze do [% terms.chyba_2sg %].</em><br>
+        <em>(volitelnÃ½) PÅ™idejte komentÃ¡Å™ o tÃ©to pÅ™Ã­loze do [% terms.chyba_2sg %].</em><br>
         <textarea wrap="soft" name="comment" rows="6" cols="80"></textarea>
       </td>
     </tr>

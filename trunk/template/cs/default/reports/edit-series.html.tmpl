@@ -19,7 +19,7 @@
   # Contributor(s): Gervase Markham <gerv@gerv.net>
   #%]
 
-[% title = "Edit Series" %]
+[% title = "Editace řady" %]
 [% h2 = BLOCK %]
   [% default.category FILTER html %] / 
   [%+ default.subcategory FILTER html %] /
@@ -31,7 +31,7 @@
 [% IF changes_saved %]
   <p>
     <font color="red">
-      Series updated.
+      Řada aktualizována.
     </font>
   </p>
 [% END %]
@@ -39,7 +39,7 @@
 <form method="get" action="chart.cgi" name="chartform">
   
   [% PROCESS reports/series.html.tmpl 
-     button_name = "Change Data Set" %]
+     button_name = "Upravit tabulku" %]
   <input type="hidden" name="action" value="alter">
   
   [% IF default.series_id %]
@@ -53,22 +53,20 @@
     <a href="mailto:[% creator.email FILTER html %]">
     [% creator.email FILTER html %]</a>
   [% ELSE %]
-    (automatically created by [% terms.Bugzilla %])
+    (automaticky vytvořeno [% terms.Bugzilla_7sg %])
   [% END %]
 </p>
 
-<p>Note: it is not yet possible to edit the search associated with this data
-set.
+<p>Poznámka: Dosud nelze upravovat hledání sdružené s touto tabulkou.
 </p>
 
 <p>
-  <a href="query.cgi?[% default.query FILTER html %]">View 
-    series search parameters</a> |
+  <a href="query.cgi?[% default.query FILTER html %]">Zobrazit parametry hledání</a> |
   <a href="buglist.cgi?cmdtype=dorem&amp;namedcmd=
     [% default.category FILTER url_quote %]-
     [% default.subcategory FILTER url_quote %]-
     [% default.name FILTER url_quote %]&amp;remaction=runseries&amp;series_id=
-    [% default.series_id %]">Run series search</a>
+    [% default.series_id %]">Provést hledání</a>
 </p>
 
 [% PROCESS global/footer.html.tmpl %]

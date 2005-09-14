@@ -30,7 +30,7 @@
   
 [% filtered_product = product FILTER html %]
 [% PROCESS global/header.html.tmpl 
-  title = "Components for $product"
+  title = "Komponenty pro $product"
   h2 = filtered_product %]
 
 [% IF Param("useqacontact") %]
@@ -40,14 +40,14 @@
 [% END %]
 
 [% IF components.size == 0 %]
-  This product has no components.
+  Tento produkt nemá definované žádné komponenty.
 [% ELSE %]
   <table>
     <tr>
-      <th align="left">Component</th>
-      <th align="left">Default Owner</th>
+      <th align="left">Komponenty</th>
+      <th align="left">Implicitní majitel</th>
       [% IF Param("useqacontact") %]
-        <th align="left">Default QA Contact</th>
+        <th align="left">Implicitní kontakt QA</th>
       [% END %]
     </tr>
 

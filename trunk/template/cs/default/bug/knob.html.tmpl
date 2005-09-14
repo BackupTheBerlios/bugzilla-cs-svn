@@ -27,8 +27,8 @@
   <br>
   <input type="radio" id="knob-leave" name="knob" value="none" checked="checked">
   <label for="knob-leave">
-    Ponechat <b>[% bug.bug_status FILTER html %]&nbsp;
-                [% bug.resolution FILTER html %]</b>
+    Ponechat <b>[% statuscs.${bug.bug_status} FILTER html %]&nbsp;
+                [% resolutioncs.${bug.resolution} FILTER html %]</b>
   </label>
   <br>
 
@@ -37,7 +37,7 @@
   [% IF bug.isunconfirmed && bug.user.canconfirm %]
     <input type="radio" id="knob-confirm" name="knob" value="confirm">
     <label for="knob-confirm">
-      Potvrdit [% terms.chyba_4sg %] (změnit status na <b>NOVÁ</b>)
+      Potvrdit [% terms.chyba_4sg %] (změnit stav na <b>[% statuscs.NEW %]</b>)
     </label>
     <br>
     [% knum = knum + 1 %]
@@ -45,12 +45,12 @@
 
   [% IF bug.user.canedit %]
     [% IF bug.isopened %]
-      [% IF bug.bug_status != "PŘIDĚLENO" && bug.user.canconfirm %]
+      [% IF bug.bug_status != "ASSIGNED" && bug.user.canconfirm %]
         <input type="radio" id="knob-accept" name="knob" value="accept">
         <label for="knob-accept">
           Převzít [% terms.chyba_4sg %] (
           [% IF bug.isunconfirmed %]potvrdit [% terms.chyba_4sg %], [% END %]změnit
-          status na <b>PŘIDĚLENO</b>)
+          stav na <b>[% statuscs.ASSIGNED %]</b>)
         </label>
         <br>
         [% knum = knum + 1 %]
@@ -74,7 +74,7 @@
       <select name="resolution"
               onchange="document.changeform.knob[[% knum %]].checked=true">
         [% FOREACH r = bug.choices.resolution %]
-          <option value="[% r FILTER html %]">[% r FILTER html %]</option>
+          <option value="[% r FILTER html %]">[% resolutioncs.$r FILTER html %]</option>
         [% END %]
       </select>
       <br>
@@ -92,7 +92,7 @@
 
       <input type="radio" id="knob-reassign" name="knob" value="reassign">
       <label for="knob-reassign">
-        <a href="page.cgi?id=fields.html#assigned_to">Změnit přidělení</a> 
+        Změnit <a href="page.cgi?id=fields.html#assigned_to">přidělení</a> 
         [% terms.chyba_2sg %] na
       </label>
       <input name="assigned_to" size="32"
@@ -105,7 +105,7 @@
       [% IF bug.isunconfirmed && bug.user.canconfirm %]
         &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="andconfirm" name="andconfirm">
         <label for="andconfirm">
-          a potvrdit [% terms.chyba_4sg %] (změnit status na <b>NOVÁ</b>)
+          a potvrdit [% terms.chyba_4sg %] (změnit stav na <b>[% statuscs.CONFIRMED %]</b>)
         </label>
         <br>
       [% END %]
@@ -121,14 +121,14 @@
       [% IF bug.isunconfirmed && bug.user.canconfirm %]
         &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="compconfirm" name="compconfirm">
         <label for="compconfirm">
-          a potvrdit [% terms.chyba_4sg %] (změnit status na <b>NOVÁ</b>)
+          a potvrdit [% terms.chyba_4sg %] (změnit stav na <b>[% statuscs.NEW %]</b>)
         </label>
         <br>
       [% END %]
       [% knum = knum + 1 %]
     [% ELSE %]
-      [% IF bug.resolution != "PŘESUNUTO" ||
-           (bug.resolution == "PŘESUNUTO" && bug.user.canmove) %]
+      [% IF bug.resolution != "MOVED" ||
+           (bug.resolution == "MOVED" && bug.user.canmove) %]
         <input type="radio" id="knob-reopen" name="knob" value="reopen">
         <label for="knob-reopen">
           Znovuotevřít [% terms.chyba_4sg %]
@@ -139,15 +139,15 @@
       [% IF bug.bug_status == "RESOLVED" %]
         <input type="radio" id="knob-verify" name="knob" value="verify">
         <label for="knob-verify">
-          Označit [% terms.chyba_4sg %] jako <b>OVĚŘENO</b>
+          Označit [% terms.chyba_4sg %] jako <b>[% statuscs.VERIFIED %]</b>
         </label>
         <br>
         [% knum = knum + 1 %]
       [% END %]
-      [% IF bug.bug_status != "UZAVŘENO" %]
+      [% IF bug.bug_status != "CLOSED" %]
         <input type="radio" id="knob-close" name="knob" value="close">
         <label for="knob-close">
-          Označit [% terms.chyba_4sg %] jako <b>UZAVŘENO</b>
+          Označit [% terms.chyba_4sg %] jako <b>[% statuscs.CLOSED %]</b>
         </label>
         <br>
         [% knum = knum + 1 %]

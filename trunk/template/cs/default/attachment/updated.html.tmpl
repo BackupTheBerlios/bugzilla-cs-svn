@@ -28,7 +28,7 @@
 [% PROCESS global/variables.none.tmpl %]
 
 [% PROCESS global/header.html.tmpl
-  title = "Zmìny uloženy"
+  title = "ZmÄ›ny uloÅ¾eny"
   style = "th { text-align: left; }"
 %]
 
@@ -37,15 +37,15 @@
 <table border="1">
   <tr>
     <td>
-      <h2>Zmìny
-        <a href="attachment.cgi?id=[% attachid %]&amp;action=edit">pøílohy [% attachid %]</a>
-        of [% terms.bug %] [%+ bugid %] uloženy
+      <h2>ZmÄ›ny
+        <a href="attachment.cgi?id=[% attachid %]&amp;action=edit">pÅ™Ã­lohy [% attachid %]
+	</a> [% terms.chyba_2sg %] [%+ bugid %] uloÅ¾eny
       </h2>
       [% PROCESS "bug/process/bugmail.html.tmpl" mailing_bugid = bugid %]
     </td>
 
     <td>
-      <a href="show_bug.cgi?id=[% bugid %]">Zpìt k [% terms.chyba_2sg %] #[% bugid %]</a>
+      <a href="show_bug.cgi?id=[% bugid %]">ZpÄ›t k [% terms.chyba_3sg %] #[% bugid %]</a>
     </td>
   </tr>
 </table>

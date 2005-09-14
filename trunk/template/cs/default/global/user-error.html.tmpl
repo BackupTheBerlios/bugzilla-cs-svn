@@ -194,17 +194,7 @@
     všechny uživatele na seznamu CC: a přidejte dotyčného uživatele na tento seznam.
 
   [% ELSIF error == "flag_requestee_unauthorized_attachment" %]
-    [% title = "Flag Requestee Not Authorized" %]
-
-    You asked [% requestee.identity FILTER html %]
-    for <code>[% flag_type.name FILTER html %]</code> on 
-    [%+ terms.bug %] [%+ bug_id FILTER html %],
-    attachment [% attach_id FILTER html %], but that attachment is restricted 
-    to users
-    in the [% Param("insidergroup") FILTER html %] group, and the user
-    you asked isn't in that group.  Please choose someone else to ask,
-    or ask an administrator to add the user to the group.
-
+    [% title = "Neautorizovaný žádaný o příznak" %]
     Požádali jste uživatele [% requestee.identity FILTER html %]
     o příznak <code>[% flag_type.name FILTER html %]</code> na [%+ terms.chyba_6sg %] 
     [%+ bug_id FILTER html -%],
@@ -214,72 +204,72 @@
     do této skupiny.
 
   [% ELSIF error == "flag_type_cc_list_invalid" %]
-    [% title = "Flag Type CC List Invalid" %]
-    The CC list [% cc_list FILTER html %] must be less than 200 characters long.
+    [% title = "Neplatný seznam CC typu příznaku" %]
+    Seznam CC [% cc_list FILTER html %] musí být kratší než 200 znaků.
 
   [% ELSIF error == "flag_type_description_invalid" %]
-    [% title = "Flag Type Description Invalid" %]
-    The description must be less than 32K.
+    [% title = "Neplatný popis typu příznaku" %]
+    Popis musí být kratší než 32 KB.
 
   [% ELSIF error == "flag_type_name_invalid" %]
-    [% title = "Flag Type Name Invalid" %]
-    The name <em>[% name FILTER html %]</em> must be 1-50 characters long
-    and must not contain any spaces or commas.
+    [% title = "Neplatný název typu příznaku" %]
+    Název <em>[% name FILTER html %]</em> musí mít 1–50 znaků
+    a nesmí obsahovat žádné mezery ani čárky.
 
   [% ELSIF error == "format_not_found" %]
-    [% title = "Format Not Found" %]
-    The requested format <em>[% format FILTER html %]</em> does not exist with
-    a content type of <em>[% ctype FILTER html %]</em>.
+    [% title = "Formát nenalezen" %]
+    Požadovaný formát <em>[% format FILTER html %]</em> u typu obsahu
+    <em>[% ctype FILTER html %]</em> neexistuje.
     
   [% ELSIF error == "flag_type_sortkey_invalid" %]
-    [% title = "Flag Type Sort Key Invalid" %]
-    The sort key must be an integer between 0 and 32767 inclusive.
-    It cannot be <em>[% sortkey FILTER html %]</em>.
+    [% title = "Klíč řazení typu příznaku neplatný" %]
+    Klíč řazení musí být celé číslo mezi 0 a 32767 včetně.
+    Nemůže být <em>[% sortkey FILTER html %]</em>.
   
   [% ELSIF error == "illegal_at_least_x_votes" %]
-    [% title = "Your Search Makes No Sense" %]
-    The <em>At least ___ votes</em> field must be a simple number. 
-    You entered <tt>[% value FILTER html %]</tt>, which isn't.
+    [% title = "Vaše hledání nedává smysl" %]
+    Položka <em>Nejméně ___ hlasů</em> musí obsahovat prosté číslo.
+    Zadali jste <tt>[% value FILTER html %]</tt>, což číslem není.
     
   [% ELSIF error == "illegal_attachment_edit" %]
-    [% title = "Unauthorised Action" %]
-    You are not authorised to edit attachment [% attach_id FILTER html %].
+    [% title = "Neautorizovaná činnost" %]
+    Nemáte oprávnění upravovat přílohu [% attach_id FILTER html %].
 
   [% ELSIF error == "illegal_attachment_edit_bug" %]
-    [% title = "Unauthorised Action" %]
-    You are not authorised to edit attachments on [% terms.bug %] 
+    [% title = "Neautorizovaná činnost" %]
+    Nemáte oprávnění upravovat přílohy [% terms.chyba_2sg %] 
     [%+ bug_id FILTER html %].
          
   [% ELSIF error == "illegal_attachment_is_patch" %]
-    [% title = "Your Search Makes No Sense" %]
-    The only legal values for the <em>Attachment is patch</em> field are
-    0 and 1.
+    [% title = "Vaše hledání nedává smysl" %]
+    Jediné platné hodnoty pro pole <em>Příloha je patch</em> jsou 0 a 1.
          
   [% ELSIF error == "illegal_change" %]
-    [% title = "Not allowed" %]
-    You tried to change the 
-    <strong>[% field_descs.$field FILTER html %]</strong> field 
-    from <em>[% oldvalue FILTER html %]</em> to 
+    [% title = "Nepovoleno" %]
+    Pokusili jste se změnit pole
+    <strong>[% field_descs.$field FILTER html %]</strong>
+    z <em>[% oldvalue FILTER html %]</em> na
     <em>[% newvalue FILTER html %]</em>, 
-    but only the owner or submitter of the [% terms.bug %], or a 
-    sufficiently empowered user, may change that field.
+    ale toto pole smí měnit jen vlastník či ohlašovatel [% terms.chyba_2sg %]
+    nebo uživatel s dostatečnými právy.
   
   [% ELSIF error == "illegal_changed_in_last_x_days" %]
-    [% title = "Your Search Makes No Sense" %]
-    The <em>Changed in last ___ days</em> field must be a simple number. 
-    You entered <tt>[% value FILTER html %]</tt>, which isn't.
+    [% title = "Vaše hledání nedává smysl" %]
+    Položka <em>Změněno v posledních ___ dnech</em> musí obsahovat prosté číslo.
+    Zadali jste <tt>[% value FILTER html %]</tt>, což číslem není.
     
   [% ELSIF error == "illegal_date" %]
-    [% title = "Illegal Date" %]
-    '<tt>[% date FILTER html %]</tt>' is not a legal date.
+    [% title = "Neplatné datum" %]
+    „<tt>[% date FILTER html %]</tt>“ není platné datum.
     
   [% ELSIF error == "illegal_email_address" %]
-    [% title = "Invalid Email Address" %]
-    The e-mail address you entered (<b>[% addr FILTER html %]</b>) 
-    didn't pass our syntax checking for a legal email address. 
+    [% title = "Neplatný e-mail" %]
+    Vámi zadaná e-mailová adresa (<b>[% addr FILTER html %]</b>) 
+    neprošla naší kontrolou.
     [%+ Param('emailregexpdesc') %]
+    Také nesmí obsahovat žádné z následujících speciálních znaků:
     It must also not contain any of these special characters:
-    <tt>\ ( ) &amp; &lt; &gt; , ; : &quot; [ ]</tt>, or any whitespace.
+    <tt>\ ( ) &amp; &lt; &gt; , ; : &quot; [ ]</tt>, ani žádné bílé znaky.
     
   [% ELSIF error == "illegal_frequency" %]
     [% title = "Too Frequent" %]

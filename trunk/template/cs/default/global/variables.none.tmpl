@@ -95,25 +95,28 @@
 
 [% koncovky = {
   "verb" => "a"				# koncovka slovesa (M->"", F->"a", N->"o")
-  "adj_1sg" => "á",			# koncovky příd. jmen (velk_)
-  "adj_2sg" => "é",
-  "adj_3sg" => "é",
-  "adj_4sg" => "ou",
-  "adj_5sg" => "á",
-  "adj_6sg" => "é",
-  "adj_7sg" => "ou",
   "jarni_1sg" => ""			# koncovka příd. jmen vzoru 'jarní' (jarní_)
   "jarni_2sg" => ""
   "mlady_1sg" => "á"			# koncovka příd. jmen vzoru 'mladý' (mlad_)
+  "mlady_2sg" => "é"
+  "mlady_3sg" => "é"
+  "mlady_4sg" => "ou"
+  "mlady_5sg" => "á"
+  "mlady_6sg" => "é"
+  "mlady_7sg" => "ou"
+  "mlady_1pl" => "é"
   "mlady_2pl" => "ých"
   "mlady_3pl" => "ým"
   "mlady_4pl" => "é"
+  "mlady_5pl" => "é"
+  "mlady_6pl" => "ých"
+  "mlady_7pl" => "ými"
   "Bugzilla" => "a",			# koncovka slovesa s podmětem=Bugzilla (M->"", F->"a", N->"o")
   }
 %]
 
 [% statuscs = {
-  "UNCONFIRMED" => "NEOVĚŘENÁ",
+  "UNCONFIRMED" => "NEPOTVRZENÁ",
   "NEW" => "NOVÁ",
   "ASSIGNED" => "PŘIDĚLENÁ",
   "REOPENED" => "ZNOVUOTEVŘENÁ",
@@ -129,16 +132,19 @@
   "WONTFIX" => "ZAMÍTNUTO",
   "DUPLICATE" => "DUPLIKÁT",
   "WORKSFORME" => "MNĚFUNGUJE",
-  "MOVED" => "PŘESUNUTO"
+  "MOVED" => "PŘESUNUTO",
+  "LATER" => "POZDĚJI",
+  "REMIND" => "PŘIPOMENOUT"
   }
 %]
 
 [% severitycs = {
-  "Blocker" => "Blokuje",
-  "Critical" => "Kritická",
-  "Major" => "Větší",
-  "Minor" => "Menší",
-  "Trivial" => "Drobnost",
-  "Enhancement" => "Vylepšení"
+  "blocker" => "blokuje",
+  "critical" => "kritická",
+  "major" => "větší",
+  "normal" => "normální",
+  "minor" => "menší",
+  "trivial" => "drobnost",
+  "enhancement" => "vylepšení"
   }
 %]

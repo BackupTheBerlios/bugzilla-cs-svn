@@ -49,16 +49,16 @@
 [% IF bug_ids.size > 0 %]
   <table border>
     <tr bgcolor="#CCCCCC">
-      [% FOREACH column = [ { name => "id", description => "$terms.Bug #" },
-                            { name => "count", description => "Dupe<br>Count" },
+      [% FOREACH column = [ { name => "id", description => "$terms.Chyba #" },
+                            { name => "count", description => "Počet<br>duplikátů" },
                             { name => "delta",
-                        description => "Change in last<br>$changedsince day(s)" },
-                            { name => "component", description => "Component" },
-                            { name => "bug_severity", description => "Severity" },
-                            { name => "op_sys", description => "Op Sys" },
+                        description => "Změn za posledních<br>$changedsince dní" },
+                            { name => "component", description => "Komponenta" },
+                            { name => "bug_severity", description => "Závažnost" },
+                            { name => "op_sys", description => "Op. sys" },
                             { name => "target_milestone",
-                              description => "Target<br>Milestone" },
-                            { name => "short_desc", description => "Summary" } ]
+                              description => "Cílový<br>milník" },
+                            { name => "short_desc", description => "Shrnutí" } ]
        %]
 
         [%# Small hack to keep delta column out if we don't need it %]
@@ -145,5 +145,5 @@
 
   </table>
 [% ELSE %]
-  <h3>No duplicate [% terms.bugs %] found.</h3>
+  <h3>Nebyly nalezeny žádné duplikátní [% terms.chyby %].</h3>
 [% END %]

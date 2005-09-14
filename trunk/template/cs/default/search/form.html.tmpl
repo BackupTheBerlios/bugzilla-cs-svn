@@ -513,10 +513,11 @@ function selectProduct(f) {
     <td>
       <table>
         <tr>
-          <th align="left">St<u>a</u>tus:</th>
+          <th align="left">St<u>a</u>v:</th>
         </tr>
         <tr valign="top">
-          [% PROCESS select sel = { name => 'bug_status',
+          [% PROCESS filtselect sel = { name => 'bug_status',
+				    filter => statuscs,
                                     size => 7,
                                     accesskey => 'a' } %]
         </tr>
@@ -526,13 +527,14 @@ function selectProduct(f) {
       <table>
         <tr>
           <th align="left">
-            <u>R</u>ozhodnutí:
+            Ř<u>e</u>šení:
           </th>
         </tr>
         <tr valign="top">
-          [% PROCESS select sel = { name => 'resolution',
+          [% PROCESS filtselect sel = { name => 'resolution',
+				    filter => resolutioncs,
                                     size => 7,
-                                    accesskey => 'r' } %]
+                                    accesskey => 'e' } %]
         </tr>
       </table>
     </td>
@@ -542,7 +544,8 @@ function selectProduct(f) {
           <th align="left"><u>Z</u>ávažnost:</th>
         </tr>
         <tr valign="top">
-          [% PROCESS select sel = { name => 'bug_severity',
+          [% PROCESS filtselect sel = { name => 'bug_severity',
+				    filter => severitycs,
                                     size => 7,
                                     accesskey => 'z' } %]
         </tr>
@@ -775,6 +778,21 @@ function selectProduct(f) {
         <option value="[% name FILTER html %]"
           [% " selected" IF lsearch(default.${sel.name}, name) != -1 %]>
           [% name FILTER html %]</option>
+      [% END %]
+      </select>
+    </label>
+  </td>
+[% END %]
+
+[% BLOCK filtselect %]
+  <td align="left">
+    <label for="[% sel.name %]" accesskey="[% sel.accesskey %]">
+      <select name="[% sel.name %]" id="[% sel.name %]"
+              multiple="multiple" size="[% sel.size %]">
+      [% FOREACH name = ${sel.name} %]
+        <option value="[% name FILTER html %]"
+          [% " selected" IF lsearch(default.${sel.name}, name) != -1 %]>
+          [% sel.filter.$name FILTER html %]</option>
       [% END %]
       </select>
     </label>

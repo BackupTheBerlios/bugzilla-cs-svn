@@ -20,7 +20,7 @@
   #%]
 
 [% data = chart.data %]
-Date\Series,
+Datum\Údaje,
 [% FOREACH label = chart.labels %]
   [% label FILTER csv %][% "," UNLESS loop.last %]
 [% END %]

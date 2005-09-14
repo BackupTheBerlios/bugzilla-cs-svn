@@ -23,9 +23,9 @@
 
 [% IF bug_list && bug_list.size > 0 %]
   [% this_bug_idx = lsearch(bug_list, bug.bug_id) %]
-  <b>[% terms.Bug %] List:</b>
+  <b>Seznam [% terms.chyba_2pl %]:</b>
   [% IF this_bug_idx != -1 %]
-    ([% this_bug_idx + 1 %] of [% bug_list.size %])
+    ([% this_bug_idx + 1 %] z [% bug_list.size %])
   [% END %]
 
   <a href="show_bug.cgi?id=[% bug_list.first %]">První</a>
@@ -37,14 +37,14 @@
         [% prev_bug = this_bug_idx - 1 %]
         <a href="show_bug.cgi?id=[% bug_list.$prev_bug %]">Předchozí</a>
       [% ELSE %]
-        <i><font color="#777777">Prev</font></i>
+        <i><font color="#777777">Předchozí</font></i>
       [% END %]
 
       [% IF this_bug_idx + 1 < bug_list.size %]
         [% next_bug = this_bug_idx + 1 %]
         <a href="show_bug.cgi?id=[% bug_list.$next_bug %]">Další</a>
       [% ELSE %]
-        <i><font color="#777777">Next</font></i>
+        <i><font color="#777777">Další</font></i>
       [% END %]
     [% ELSE %]
       (Ve vašem seznamu [% terms.tatochyba_1sg %] není)

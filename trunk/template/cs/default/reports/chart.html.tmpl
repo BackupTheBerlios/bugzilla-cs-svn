@@ -27,8 +27,8 @@
 %]
 
 [% PROCESS global/header.html.tmpl 
-  title = "Chart"
-  h3 = time2str("%Y-%m-%d %H:%M:%S", time)
+  title = "Graf"
+  h3 = time2str("%d. %L. %Y %H:%M:%S", time)
 %]
 
 <div align="center">
@@ -38,27 +38,26 @@
     [% width %]&amp;height=[% height -%]
   [% END %]
 
-  <img alt="Graphical report results" src="[% imageurl %]"
+  <img alt="Výsledný grafický report" src="[% imageurl %]"
     width="[% width %]" height="[% height %]">
   <p>
     [% sizeurl = BLOCK %]chart.cgi?
       [% imagebase FILTER html %]&amp;action=wrap
     [% END %]
     <a href="[% sizeurl %]&amp;width=[% width %]&amp;height=
-             [% height + 100 %]">Taller</a><br>
+             [% height + 100 %]">Vyšší</a><br>
     <a href="[% sizeurl %]&amp;width=[% width - 100 %]&amp;height=
-             [% height %]">Thinner</a> * 
+             [% height %]">Užší</a> * 
     <a href="[% sizeurl %]&amp;width=[% width + 100 %]&amp;height=
-             [% height %]">Fatter</a>&nbsp;&nbsp;&nbsp;&nbsp;<br>
+             [% height %]">Širší</a>&nbsp;&nbsp;&nbsp;&nbsp;<br>
     <a href="[% sizeurl %]&amp;width=[% width %]&amp;height=
-             [% height - 100 %]">Shorter</a><br>
+             [% height - 100 %]">Nižší</a><br>
   </p>
   
   <p>
     <a href="chart.cgi?
       [% imagebase FILTER html %]&amp;ctype=csv&amp;action=plot">CSV</a> |
-    <a href="chart.cgi?[% imagebase FILTER html %]&amp;action=assemble">Edit 
-    this chart</a>
+    <a href="chart.cgi?[% imagebase FILTER html %]&amp;action=assemble">Upravit tento graf</a>
   </p>
  
 </div>

@@ -27,47 +27,43 @@
 [% PROCESS global/variables.none.tmpl %]
 
 [% PROCESS global/header.html.tmpl
-  title = "Reporting and Charting Kitchen"
+  title = "Laboratoř tabulek a reportů"
 %]
 
 <p>
-  [% terms.Bugzilla %] allows you to view and track the state of the [% terms.bug %] database in
-  all manner of exciting ways.
+  [% terms.Bugzilla %] vám umožňuje prohlížet a sledovat stav databáze [% terms.chyba_2pl %] mnoha
+  zajímavými způsoby.
 </p>
 
-<h2>Current State</h2>
+<h2>Aktuální situace</h2>
 
 <ul>
   <li>
-    <strong><a href="query.cgi">Search</a></strong> -
-    list sets of [% terms.bugs %].
+    <strong><a href="query.cgi">Hledání</a></strong> – vypisuje seznamy [% terms.chyba_2pl %].
   </li>
   <li>
     <strong>
-      <a href="query.cgi?format=report-table">Tabular reports</a>
-    </strong> -
-    tables of [% terms.bug %] counts in 1, 2 or 3 dimensions, as HTML or CSV.
+      <a href="query.cgi?format=report-table">Tabulkové reporty</a>
+    </strong> – tabulky [% terms.chyba_2pl %] v jednom, dvou nebo třech rozměrech, v HTML či CSV.
   </li>
   <li>
     <strong>
-      <a href="query.cgi?format=report-graph">Graphical reports</a>
-    </strong> -
-    line graphs, bar and pie charts.
+      <a href="query.cgi?format=report-graph">Grafické reporty</a>
+    </strong> – čárové, pruhové a koláčové grafy
   </li>
 </ul>
 
-<h2>Change Over Time</h2>
+<h2>Změny s časem</h2>
 
 <ul>
   <li>
-    <strong><a href="reports.cgi">Old Charts</a></strong> - 
-    plot the status and/or resolution of [% terms.bugs %] against
-    time, for each product in your database.
+    <strong><a href="reports.cgi">Starší grafy</a></strong> – vykreslit
+    stav a řešení [% terms.chyba_2pl %] u každého produktu v závislosti na čase
   </li>
   [% IF UserInGroup(Param("chartgroup")) %]
     <li>
-      <strong><a href="chart.cgi">New Charts</a></strong> - 
-      plot any arbitrary search against time. Far more powerful.
+      <strong><a href="chart.cgi">Nové grafy</a></strong> – vykreslení závislosti
+      libovolného hledání na čase. Mnohem silnější funkce.
     </li>
   [% END %]
 </ul>

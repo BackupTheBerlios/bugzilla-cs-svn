@@ -154,8 +154,8 @@ function set_assign_to() {
            value="[% default.priority FILTER html %]">
   [% END %]
 
-  [% sel = { description => 'Závažnost', name => 'bug_severity' } %]
-  [% INCLUDE select %]
+  [% sel = { description => 'Závažnost', name => 'bug_severity', filter => severitycs } %]
+  [% INCLUDE filtselect %]
   </tr>
 
   <tr>
@@ -167,11 +167,11 @@ function set_assign_to() {
 [% IF bug_status.size <= 1 %]
   <input type="hidden" name="bug_status" 
          value="[% default.bug_status FILTER html %]">
-    <td align="right" valign="top"><strong>Počáteční status:</strong></td>
-    <td valign="top">[% default.bug_status FILTER html %]</td>
+    <td align="right" valign="top"><strong>Počáteční stav:</strong></td>
+    <td valign="top">[% statuscs.${default.bug_status} FILTER html %]</td>
 [% ELSE %]
-    [% sel = { description => 'Počáteční status', name => 'bug_status' } %]
-    [% INCLUDE select %]
+    [% sel = { description => 'Počáteční stav', name => 'bug_status', filter => statuscs } %]
+    [% INCLUDE filtselect %]
 [% END %]
     <td colspan="2"></td>
   </tr>
@@ -363,6 +363,27 @@ function set_assign_to() {
     [%- FOREACH x = ${sel.name} %]
       <option value="[% x FILTER html %]"
         [% " selected=\"selected\"" IF x == default.${sel.name} %]>[% x FILTER html -%]
+      </option>
+    [%- END %]
+    </select>
+  </td>
+[% END %]
+
+[% BLOCK filtselect %]
+  [% IF sel.description %]
+  <td align="right">
+    <strong>
+      <a href="page.cgi?id=fields.html#[% sel.name %]">
+        [% sel.description %]</a>:
+    </strong>
+  </td>
+  [% END %]
+
+  <td>
+    <select name="[% sel.name %]">
+    [%- FOREACH x = ${sel.name} %]
+      <option value="[% x FILTER html %]"
+        [% " selected=\"selected\"" IF x == default.${sel.name} %]>[% sel.filter.$x FILTER html -%]
       </option>
     [%- END %]
     </select>

@@ -73,7 +73,7 @@
     .t4     { background-color: #c3d3ed } /* darker blue */
     .ttotal { background-color: #cfffdf } /* light green */
   "
-  h3 = time2str("%Y-%m-%d %H:%M:%S", time)
+  h3 = time2str("%d. %L. %Y %H:%M:%S", time)
 %]
 
 [% IF debug %]
@@ -84,7 +84,7 @@
 
   [% FOREACH tbl = tbl_names %]    
     [% IF tbl == "-total-" %]
-      [% tbl_disp = "Total" %]
+      [% tbl_disp = "Celkem" %]
     [% ELSE %]
       [% tbl_disp = tbl %]
     [% END %]
@@ -111,7 +111,7 @@
         [% END %]width=[% width %]&amp;height=[% height %]      
       [% END %]
       
-      <img alt="Graphical report results" src="[% imageurl %]"
+      <img alt="Výsledný grafický report" src="[% imageurl %]"
         width="[% width %]" height="[% height %]">
     [% END %]
     <br>
@@ -120,10 +120,10 @@
   <table>
     <tr>
       <td>
-        [% formats = [ { name => "pie",   description => "Pie" },
-                       { name => "bar",   description => "Bar" },
-                       { name => "line",  description => "Line" },
-                       { name => "table", description => "Table" } ] %]
+        [% formats = [ { name => "pie",   description => "Koláčový" },
+                       { name => "bar",   description => "Pruhový" },
+                       { name => "line",  description => "Čárový" },
+                       { name => "table", description => "Tabulka" } ] %]
 
         [% formaturl = "report.cgi?$switchbase&width=$width&height=$height" _ 
                        "&action=wrap" %]
@@ -148,13 +148,13 @@
           [% format FILTER html %][% END %]
         <td align="center">
           <a href="[% sizeurl %]&amp;width=[% width %]&amp;height=
-                   [% height + 100 %]">Taller</a><br>
+                   [% height + 100 %]">Vyšší</a><br>
           <a href="[% sizeurl %]&amp;width=[% width - 100 %]&amp;height=
-                   [% height %]">Thinner</a> * 
+                   [% height %]">Užší</a> * 
           <a href="[% sizeurl %]&amp;width=[% width + 100 %]&amp;height=
-                   [% height %]">Fatter</a>&nbsp;&nbsp;&nbsp;&nbsp;<br>
+                   [% height %]">Širší</a>&nbsp;&nbsp;&nbsp;&nbsp;<br>
           <a href="[% sizeurl %]&amp;width=[% width %]&amp;height=
-                   [% height - 100 %]">Shorter</a><br>
+                   [% height - 100 %]">Nižší</a><br>
         </td>
       [% END %]
     <tr>
@@ -162,12 +162,11 @@
 
   <p>
     [% IF format == "table" %]
-      <a href="query.cgi?[% switchbase %]&amp;format=report-table">Edit 
-      this report</a>
+      <a href="query.cgi?[% switchbase %]&amp;format=report-table">Upravit tento report</a>
     [% ELSE %]
       <a href="query.cgi?[% switchbase %]&amp;chart_format=
         [% format %]&amp;format=report-graph&amp;cumulate=[% cumulate %]">
-        Edit this report
+        Upravit tento report
       </a>
     [% END %]
   </p>
