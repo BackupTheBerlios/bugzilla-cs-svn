@@ -26,266 +26,250 @@
   #%]
   
 [% PROCESS global/variables.none.tmpl %] 
-[% INCLUDE global/header.html.tmpl title = "$terms.Bug Writing Guidelines" %] 
+[% INCLUDE global/header.html.tmpl title = "Rady pro hlášení $terms.chyba_2pl" %] 
 
-<h3>Why You Should Read This</h3>
+<h3>Proč byste si tohle měli přečíst</h3>
 
 <blockquote>
-  <p>Simply put, the more effectively you report [% terms.abug %], the more
-  likely an
-  engineer will actually fix it.</p>
+  <p>Jednoduše řečeno, čím lépe [% terms.chyba_2sg %] nahlásíte, tím větší
+  šance máte na to, že [% terms.chyba_4sg %] někdo opraví.</p>
 
-  <p>These guidelines are a general tutorial to teach novice and
-  intermediate [% terms.bug %] reporters how to compose effective 
-  [% terms.bug %] reports. Not
-  every sentence may precisely apply to your software project.</p>
+  <p>Tento návod obsahuje obecné rady pro nováčky a mírně pokročilé.
+  Pro váš konkrétní projekt nemusí přesně platit úplně každá věta.</p>
 </blockquote>
 
-<h3>How to Write a Useful [% terms.Bug %] Report</h3>
+<h3>Jak napsat užitečné hlášení o [% terms.chyba_6sg %]</h3>
 
 <blockquote>
-  <p>Useful [% terms.bug %] reports are ones that get [% terms.bugs %] fixed. 
-  A useful [% terms.bug %] report normally has two qualities:</p>
+  <p>Užitečné hlášení je takové, díky kterému se [% terms.chyba_4sg %] povede
+  opravit. Užitečné hlášení obvykle splňuje dvě podmínky:</p>
 
   <ol>
-    <li><b>Reproducible.</b> If an engineer can't see the [% terms.bug %]
-    herself to prove that it exists, she'll probably stamp your [% terms.bug %]
-    report "WORKSFORME" or "INVALID" and move on to the next [% terms.bug %].
-    Every detail you can provide helps.<br>
+    <li><b>Je reprodukovatelné.</b> Pokud se vývojáři nepodaří [% terms.chyba_4sg %]
+    ani spatřit, pravděpodobně situaci vyřeší označením „[% resolutioncs.WORKSFORME %]“
+    nebo „[% resolutioncs.INVALID %]“ a přesune se na další [% terms.chyba_4sg %].
+    Každá maličkost, kterou můžete poskytnout, může pomoci.<br>
     <br>
     </li>
 
-    <li><b>Specific.</b> The quicker the engineer can isolate the 
-    [% terms.bug %] to a specific area, the more likely she'll expediently 
-    fix it. (If a programmer or tester has to decipher [% terms.abug %], 
-    they may spend more time cursing the submitter than solving the 
-    problem.)<br>
+    <li><b>Je konkrétní.</b> Čím rychleji dokáže vývojář lokalizovat [% terms.chyba_4sg %],
+    tím spíše dokáže problém rychle vyřešit. (Pokud programátor či tester musí
+    hlášení dešifrovat, pravděpodobně stráví více času proklínáním zadavatele namísto
+    řešení problému.)<br>
     <br>
-    [ <a href="#tips" name="Anchor">Tell Me More</a> ]</li>
+    [ <a href="#tips" name="Anchor">Chtěl bych vědět víc</a> ]</li>
   </ol>
 
-  <p>Let's say the application you're testing is a web browser. You crash
-  at foo.com, and want to write up a [% terms.bug %] report:</p>
+  <p>Řekněme, že testuje webový prohlížeč. Na stránce foo.com vám zhavaruje
+  a vy chcete napsat hlášení [% terms.chyba_2sg %]:</p>
 
   <blockquote>
-    <p><b>BAD:</b> "My browser crashed. I think I was on www.foo.com. I
-    play golf with Bill Gates, so you better fix this problem, or I'll
-    report you to him. By the way, your Back icon looks like a squashed
-    rodent. UGGGLY. And my grandmother's home page is all messed up in your
-    browser. Thx 4 UR help."</p>
+    <p><b>ŠPATNĚ:</b> Můj prohlížeč havaroval. Myslím, že to bylo na www.foo.com.
+    Hraju golf s Billem Gatesem, tak si pospěšte, nebo si mu budu stěžovat.
+    Mimochodem, vaše ikonka Zpět vypadá jako uschlý kaktus. HNUUS. A domácí stránka
+    mojí babičky se ve vašem prohlížeči zobrazuje blbě. díki</p>
 
-    <p><b>GOOD:</b> "I crashed each time I went to www.foo.com, using the
-    2002-02-25 build on a Windows 2000 system. I also rebooted into Linux,
-    and reproduced this problem using the 2002-02-24 Linux build.</p>
+    <p><b>SPRÁVNĚ:</b> Prohlížeč havaruje pokaždé, když navštívím www.foo.com,
+    používám verzi 2002-02-25 na počítači s Windows 2000. Také jsem zkusil nabootovat
+    do Linuxu a tentýž problém se děje na linuxové verzi 2002-02-24.</p>
 
-    <p>It again crashed each time upon drawing the Foo banner at the top of
-    the page. I broke apart the page, and discovered that the following
-    image link will crash the application reproducibly, unless you remove
-    the "border=0" attribute:</p>
+    <p>Pokaždé havaruje ve chvíli, kdy se vykresluje obrázek navrchu stránky.
+    Rozebral jsem stránku a zjistil jsem, že následující odkaz na obrázek
+    vždy shodí aplikaci, pokud z něj neodstraníte atribut "border=0":</p>
 
     <p><tt>&lt;IMG SRC="http://www.foo.com/images/topics/topicfoos.gif"
-    width="34" height="44" border="0" alt="News"&gt;</tt></p>
+    width="34" height="44" border="0" alt="Novinky"&gt;</tt></p>
   </blockquote>
 </blockquote>
 
-<h3>How to Enter your Useful [% terms.Bug %] Report 
-    into [% terms.Bugzilla %]:</h3>
+<h3>Jak do [% terms.Bugzilla_2sg %] zadávat užitečná hlášení:</h3>
 
 <blockquote>
-  <p>Before you enter your [% terms.bug %], use [% terms.Bugzilla %]'s 
-  <a href="query.cgi">search page</a> to determine whether the defect 
-  you've discovered is a known, already-reported [% terms.bug %]. If 
-  your [% terms.bug %] is the 37th duplicate of a known issue,
-  you're more likely to annoy the engineer. (Annoyed engineers fix fewer
-  [% terms.bugs %].)</p>
+  <p>Před tím, než ohlásíte [% terms.chyba_4sg %], použijte funkci
+  <a href="query.cgi">hledání</a> a pokuste se zjistit, zda se nejedná
+  o znám[% koncovky.mlady_4sg %], již hlášen[% koncovky.mlady_4sg %] [%+ terms.chyba_4sg %].
+  Pokud se pokusíte zadat 37. duplikát známého problému, je vyšší
+  šance, že tím budete vývojáře poněkud otravovat. (Otrávení vývojáři
+  odstraňují méně [% terms.chyba_2pl %].)</p>
 
-  <p>Next, be sure to reproduce your [% terms.bug %] using a recent build. 
-  Engineers tend to be most interested in problems affecting the code base 
-  that they're actively working on. After all, the [% terms.bug %] you're 
-  reporting may already be fixed.</p>
+  <p>Poté se ujistěte, že se [% terms.chyba %] vyskytuje v nejnovější
+  verzi. Vývojáře zajímají hlavně problémy, které jsou v programu, na
+  kterém pracují. Konečně, [% terms.chyba %], kter[% koncovky.mlady_4sg %]
+  hlásíte, mohl[% koncovky.verb %] již být v aktuální verzi
+  opraven[% koncovky.verb %].</p>
 
-  <p>If you've discovered a new [% terms.bug %] using a current build, report 
-  it in [% terms.Bugzilla %]:</p>
+  <p>Pokud jste opravdu odhalili nov[% koncovky.mlady_4sg %] [%+ terms.chyba_4sg %]
+  aktuální verze, vytvořte nové hlášení:</p>
 
   <ol>
-    <li>From your [% terms.Bugzilla %] main page, choose 
-    "<a href="enter_bug.cgi">Enter a new [% terms.bug %]</a>".</li>
+    <li>Na hlavní strany [% terms.Bugzilla_2sg %] zvolte
+    „<a href="enter_bug.cgi">Ohlásit nov[% koncovky.mlady_4sg %] [%+ terms.chyba_4sg %]</a>“.</li>
 
-    <li>Select the product that you've found a [% terms.bug %] in.</li>
+    <li>Zvolte produkt, ve kterém jste [% terms.chyba_4sg %] nalezli.</li>
 
-    <li>Enter your e-mail address, password, and press the "Login" button.
-    (If you don't yet have a password, leave the password field empty, and
-    press the "E-mail me a password" button instead. You'll quickly receive
-    an e-mail message with your password.)</li>
+    <li>Zadejte svou e-mailovou adresu, heslo a stiskněte tlačítko
+    „Přihlásit se“. (Pokud dosud nemáte účet, můžete si ho
+    <a href="createaccount.cgi">založit</a>.)</li>
   </ol>
 
-  <p>Now, fill out the form. Here's what it all means:</p>
+  <p>Nyní vyplňte formulář. Co jednotlivé položky znamenají:</p>
 
-  <p><b>Where did you find the [% terms.bug %]?</b></p>
+  <p><b>Kde jste [% terms.chyba_4sg %] nalezli?</b></p>
 
   <blockquote>
-    <p><b>Product: In which product did you find the [% terms.bug %]?</b><br>
-     You just specified this on the last page, so you can't edit it
-    here.</p>
+    <p><b>Produkt: Ve kterém produktu jste [% terms.chyba_4sg %] nalezli?</b><br>
+     To jste určili na předchozí stránce, takže to zde již změnit nemůžete.</p>
 
-    <p><b>Version: In which product version did you find 
-          the [% terms.bug %]?</b><br>
-     (If applicable)</p>
+    <p><b>Verze: Ve které verzi produktu jste [% terms.chyba_4sg %] nalezli?</b><br></p>
 
-    <p><b>Component: In which component does the [% terms.bug %] 
-          exist?</b><br>
-    [% terms.Bugzilla %] requires that you select a component to enter 
-    a [% terms.bug %]. (Not sure which to choose? Click on the Component link. 
-    You'll see a description of each component, to help you make the best 
-    choice.)</p>
+    <p><b>Komponenta: Ve které komponentě se [% terms.chyba %] vyskytuje?</b><br>
+    [% terms.Bugzilla %] vyžaduje, abyste komponentu vyplnili. (Nejste si jisti,
+    co si máte vybrat? Klikněte na odkaz Komponenta, zobrazí se popisy všech komponent,
+    abyste se dokázali správně rozhodnout.)</p>
 
-    <p><b>OS: On which Operating System (OS) did you find 
-          this [% terms.bug %]?</b>
-    (e.g. Linux, Windows 2000, Mac OS 9.)<br>
-    If you know the [% terms.bug %] happens on all OSs, choose 'All'. 
-    Otherwise, select the OS that you found the [% terms.bug %] on, or 
-    "Other" if your OS isn't listed.</p>
+    <p><b>OS: Na kterém operačním systému (OS) jste [% terms.tatochyba_4sg %] nalezli?</b>
+    (např. Linux, Windows 2000, Mac OS 9.)<br>
+    Pokud víte, že se [% terms.chyba %] objevuje na všech OS, zvolte „Všechny“.
+    Jinak vyberte ze seznamu OS, na kterém jste [% terms.chyba_4sg %] nalezli, případně
+    „Jiný“, pokud váš OS není v seznamu.</p>
   </blockquote>
 
-  <p><b>How important is the [% terms.bug %]?</b></p>
+  <p><b>Jak závažná je [% terms.chyba %]?</b></p>
 
   <blockquote>
-    <p><b>Severity: How damaging is the [% terms.bug %]?</b><br>
-     This item defaults to 'normal'. If you're not sure what severity your
-    [% terms.bug %] deserves, click on the Severity link. You'll see a
-    description of each severity rating.<br>
-    </p>
+    <p><b>Závažnost: Jak škodlivá je [% terms.tatochyba_1sg %]?</b><br>
+    Implicitní hodnotou je „normální“. Pokud si nejste jisti, jak
+    závažnost [% terms.chyba_2sg %] ohodnotit, klikněte na odkaz Závažnost,
+    zobrazí se popis všech úrovní.</p>
   </blockquote>
 
-  <p><b>Who will be following up on the [% terms.bug %]?</b></p>
+  <p><b>Kdo bude [% terms.chyba_4sg %] sledovat?</b></p>
 
   <blockquote>
-    <p><b>Assigned To: Which engineer should be responsible for fixing
-    this [% terms.bug %]?</b><br>
-    [% terms.Bugzilla %] will automatically assign the [% terms.bug %] to a
-    default engineer upon submitting [% terms.abug %] report. If you'd prefer
-    to directly assign the [% terms.bug %] to someone else, enter their e-mail
-    address into this field. (To see the list of default engineers for each
-    component, click on the Component link.)</p>
+    <p><b>Přidělit: Který vývojář by měl být zodpovědný za opravu
+    [% terms.tatochyba_2sg %]?</b><br>
+    [% terms.Bugzilla %] ve chvíli vyplnění žádosti [% terms.chyba_4sg %] automaticky
+    přidělí implicitnímu vývojáři. Pokud raději chcete [% terms.chyba_4sg %] přidělit
+    někomu jinému, zadejte jeho e-mailovou adresu do tohoto pole. (Seznam
+    implicitních vývojářů jednotlivých komponent získáte kliknutím na odkaz
+    Komponenta.)</p>
 
-    <p><b>Cc: Who else should receive e-mail updates on changes to this
-    [% terms.bug %]?</b><br>
-     List the full e-mail addresses of other individuals who should receive
-    an e-mail update upon every change to the [% terms.bug %] report. You can
-    enter as many e-mail addresses as you'd like, separated by spaces or 
-    commas, as long as those people have [% terms.Bugzilla %] accounts.</p>
+    <p><b>Cc: Komu dalšímu by měly být posílány e-mailové zprávy o změnách
+    [% terms.tatochyba_2sg %]?</b><br>
+    Uveďte úplné e-mailové adresy dalších osob, kterým by měly být zasílány
+    zprávy o každé změně [% terms.tatochyba_2sg %]. Můžete zadat libovolný počet
+    adres, oddělených mezerami či čárkami. Všechny osoby však musí mít
+    na [% terms.Bugzilla_6sg %] registrován účet.</p>
   </blockquote>
 
-  <p><b>What else can you tell the engineer about the [% terms.bug %]?</b></p>
+  <p><b>Co můžete vývojáři o [% terms.chyba_6sg %] sdělit?</b></p>
 
   <blockquote>
-    <p><b>Summary:</b> <b>How would you describe the [% terms.bug %], in 
-    approximately 60 or fewer characters?</b><br>
-     A good summary should <b>quickly and uniquely identify [% terms.abug %]
-    report</b>. Otherwise, an engineer cannot meaningfully identify your
-    [% terms.bug %] by its summary, and will often fail to pay attention to 
-    your [% terms.bug %] report when skimming through a 10 
-    page [% terms.bug %] list.<br>
+    <p><b>Shrnutí: Jak byste popsali [% terms.chyba_4sg %] v přibližně
+    60 znacích?</b><br>
+    Užitečné shrnutí <b>rychle a jednoznačně popisuje [% terms.chyba_4sg %]</b>.
+    V opačném případě není vývojář schopen [% terms.chyba_4sg %] smysluplně
+    identifikovat a může [% terms.zajmeno_4sg %] v desetistránkovém seznamu
+    snadno přehlédnout.<br>
     <br>
-     A useful summary might be "<tt>PCMCIA install fails on Tosh Tecra
-    780DVD w/ 3c589C</tt>". "<tt>Software fails</tt>" or "<tt>install
-    problem</tt>" would be examples of a bad summary.<br>
+    Užitečné shrnutí může vypadat např. „<tt>Nefunguje instalace PCMCIA
+    na Tosh Tecra 780DVD s 3c589C</tt>“. „<tt>Program nefunguje</tt>“ nebo
+    „<tt>problémy s instalací</tt>“ jsou příklady špatného shrnutí.<br>
     <br>
-     [ <a href="#summary">Tell Me More</a> ]<br>
+     [ <a href="#summary">Chtěl bych vědět víc</a> ]<br>
     <br>
-     <b>Description:</b><br>
-     Please provide a detailed problem report in this field. Your 
-     [% terms.bug %]'s recipients will most likely expect the following 
-     information:</p>
+     <b>Popis:</b><br>
+     V tomto poli laskavě poskytněte detailní popis problému. Příjemci
+     vašeho hlášení budou nejspíše očekávat následující informace:</p>
 
     <blockquote>
-      <p><b>Overview Description:</b> More detailed expansion of
-      summary.</p>
+      <p><b>Hrubý popis:</b> Podrobněji rozepsané shrnutí.</p>
 
       <blockquote>
 <pre>
-Drag-selecting any page crashes Mac builds in NSGetFactory
+Při označování textu na stránce myší verze pro Macintosh havaruje v NSGetFactory.
 </pre>
       </blockquote>
 
-      <p><b>Steps to Reproduce:</b> Minimized, easy-to-follow steps that
-      will trigger the [% terms.bug %]. Include any special setup steps.</p>
+      <p><b>Jak [% terms.chyba_4sg %] zopakovat:</b> Minimalizovaný seznam jednoduchých kroků,
+      jak [% terms.chyba_4sg %] vyvolat. Nezapomeňte zmínit případné
+      zvláštní postupy při instalaci.</p>
 
       <blockquote>
 <pre>
-1) View any web page. (I used the default sample page,
+1) Zobrazte libovolnou webovou stránku. (Používal jsem
+standardní testovací stránku,
 resource:/res/samples/test0.html)
 
-2) Drag-select the page. (Specifically, while holding down 
-the mouse button, drag the mouse pointer downwards from any 
-point in the browser's content region to the bottom of the 
-browser's content region.)                   
+2) Označte text stránky myší. (Přesněji řečeno: držte tlačítko myši
+a pohybujte myší z libovolného místa v zobrazené stránce směrem
+dolů ke konec zobrazované plochy.)
 </pre>
       </blockquote>
 
-      <p><b>Actual Results:</b> What the application did after performing
-      the above steps.</p>
+      <p><b>Co se děje:</b> Jak se aplikace chová po provedení
+      výše uvedených kroků.</p>
 
       <blockquote>
 <pre>
-The application crashed. Stack crawl appended below from MacsBug.
+Aplikace havarovala, níže je uveden výpis zásobníku z programu MacsBug.
 </pre>
       </blockquote>
 
-      <p><b>Expected Results:</b> What the application should have done,
-      were the [% terms.bug %] not present.</p>
+      <p><b>Co jsem čekal, že se stane:</b> Co by aplikace měla dělat,
+      pokud by v ní nebyl[% koncovky.verb %] [% terms.chyba %].</p>
 
       <blockquote>
 <pre>
-The window should scroll downwards. Scrolled content should be selected. 
-(Or, at least, the application should not crash.)
+Okno by mělo začít posouvat svůj obsah a nově zobrazovaný obsah by měl
+být vybrán. (Nebo by přinejmenším aplikace neměla havarovat.)
 </pre>
       </blockquote>
 
-      <p><b>Build Date &amp; Platform:</b> Date and platform of the build
-      that you first encountered the [% terms.bug %] in.</p>
+      <p><b>Verze &amp; platforma:</b> Označení verze a platformy,
+      na které jste poprvé [% terms.chyba_4sg %] zaznamenali.</p>
 
       <blockquote>
 <pre>
-Build 2002-03-15 on Mac OS 9.0
+Build 2002-03-15 na Mac OS 9.0
 </pre>
       </blockquote>
 
-      <p><b>Additional Builds and Platforms:</b> Whether or not 
-      the [% terms.bug %] takes place on other platforms (or browsers, 
-      if applicable).</p>
+      <p><b>Další verze a platformy:</b> Uveďte, zda se [% terms.chyba %]
+      objevuje i na jiných platformách.</p>
 
       <blockquote>
 <pre>
-- Also Occurs On        
-Mozilla (2002-03-15 build on Windows NT 4.0) 
+- Vyskytuje se také na
+Mozilla (build 2002-03-15 na Windows NT 4.0) 
 
-- Doesn't Occur On        
-Mozilla (2002-03-15 build on Red Hat Linux; feature not supported)        
-Internet Explorer 5.0 (shipping build on Windows NT 4.0)        
-Netscape Communicator 4.5 (shipping build on Mac OS 9.0)
+- Nevyskytuje se na
+Mozilla (build 2002-03-15 na Red Hat Linuxu; tuto funkci postrádá)
+Internet Explorer 5.0 (verze u Windows NT 4.0)        
+Netscape Communicator 4.5 (verze u Mac OS 9.0)
 </pre>
       </blockquote>
 
-      <p><b>Additional Information:</b> Any other debugging information.
-      For crashing [% terms.bugs %]:</p>
+      <p><b>Dodatečné informace:</b> Libovolné další informace,
+      které mohou pomoci ladění. U [% terms.chyba_2pl %] způsobujících
+      pád aplikace:</p>
 
       <ul>
-        <li><b>Win32:</b> if you receive a Dr. Watson error, please note
-        the type of the crash, and the module that the application crashed
-        in. (e.g. access violation in apprunner.exe)</li>
+        <li><b>Win32:</b> pokud se objevilo hlášení Dr. Watsona, poznamenejte
+	si laskavě typ havárie a modul, ve kterém aplikace havarovala
+        (např. neplatná operace v aplikace.exe)</li>
 
-        <li><b>Mac OS:</b> if you're running MacsBug, please provide the
-        results of a <b>how</b> and an <b>sc</b>:</li>
+        <li><b>Mac OS:</b> pokud používáte program MacsBug, poskytněte laskavě
+	výsledky příkazů <b>how</b> a <b>sc</b>:</li>
       </ul>
 
       <blockquote>
 <pre>
 *** MACSBUG STACK CRAWL OF CRASH (Mac OS)
-Calling chain using A6/R1 links 
-Back chain  ISA  Caller 
-00000000    PPC  0BA85E74   
-03AEFD80    PPC  0B742248   
+Calling chain using A6/R1 links
+Back chain  ISA  Caller
+00000000    PPC  0BA85E74
+03AEFD80    PPC  0B742248
 03AEFD30    PPC  0B50FDDC  NSGetFactory+027FC
 PowerPC unmapped memory exception at 0B512BD0 NSGetFactory+055F0
 </pre>
@@ -293,38 +277,36 @@ PowerPC unmapped memory exception at 0B512BD0 NSGetFactory+055F0
     </blockquote>
   </blockquote>
 
-  <p>You're done!<br>
+  <p>Hotovo!<br>
   <br>
-   After double-checking your entries for any possible errors, press the
-  "Commit" button, and your [% terms.bug %] report will now be in 
-  the [% terms.Bugzilla %] database.<br>
+   Poté, co překontrolujete případné chyby ve svém přípěvku, stiskněte tlačítko
+   „Uložit“ a [% terms.chyba %] bude uložen[% koncovky.verb %] do databáze [% terms.Bugzilla_2sg %].
   </p>
 </blockquote>
 <hr>
 
-<h3>More Information on Writing Good [% terms.Bugs %]</h3>
+<h3>Další informace o psaní užitečných hlášení</h3>
 
 <blockquote>
-  <p><b><a name="tips"></a> 1. General Tips for a Useful [% terms.Bug %] 
-     Report</b></p>
+  <p><b><a name="tips"></a> 1. Obecné tipy</b></p>
 
   <blockquote>
-    <p><b>Use an explicit structure, so your [% terms.bug %] reports are easy
-    to skim.</b> [% terms.Bug %] report users often need immediate access to 
-    specific sections of your [% terms.bug %]. If your [% terms.Bugzilla %] 
-    installation supports the [% terms.Bugzilla %] Helper, use it.</p>
+    <p><b>Používejte standardizovaný zřetelně strukturovaný formát, takže
+    lze vaše hlášení snadno přelétnout zrakem. Uživatelé často potřebují
+    z hlášení získat jednu konkrétní informaci. S udržováním standardizovaného
+    formátu vám může pomoci Průvodce, pokud ho vaše instalace podporuje.</p>
 
-    <p><b>Avoid cuteness if it costs clarity.</b> Nobody will be laughing
-    at your funny [% terms.bug %] title at 3:00 AM when they can't remember how 
-    to find your [% terms.bug %].</p>
+    <p><b>Vyhněte se srandičkám, pokud jsou na úkor srozumitelnosti.</b>
+    Vašemu vtipnému nadpisu [% terms.chyba_2sg %] se ve 3 hodiny ráno nikdo
+    smát nebude, pokud nejsou schopni si ani zapamatovat, podle čeho [% terms.chyba_4sg %]
+    najít.</p>
 
-    <p><b>One [% terms.bug %] per report.</b> Completely different people 
-    typically fix, verify, and prioritize different [% terms.bugs %]. If you 
-    mix a handful of [% terms.bugs %] into a single report, the right people 
-    probably won't discover your [% terms.bugs %] in a timely fashion, or at 
-    all. Certain [% terms.bugs %] are also more important than others. It's 
-    impossible to prioritize [% terms.abug %] report when
-    it contains four different issues, all of differing importance.</p>
+    <p><b>1 [% terms.chyba %], 1 hlášení.</b> Různ[% koncovky.mlady_4pl %] [%+ terms.chyba_4pl %]
+    obvykle opravují, ověřují a přidělují úplně různí lidé. Pokud do jednoho
+    hlášení zamícháte několik [% terms.chyba_2pl %], pravděpodobně ti správní
+    lidé neobjeví vaše hlášení včas, případně vůbec. Jisté druhy [% terms.chyba_2pl %]
+    jsou důležitější než jiné. Je nemožné přidělit hlášení správnou prioritu,
+    pokud obsahuje čtyři různé problémy, každý s jinou závažností.</p>
 
     <p><b>No [% terms.bug %] is too trivial to report.</b> Unless you're 
     reading the source code, you can't see actual software [% terms.bugs %], 

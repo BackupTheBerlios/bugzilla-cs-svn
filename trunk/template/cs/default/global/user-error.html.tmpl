@@ -268,500 +268,516 @@
     neprošla naší kontrolou.
     [%+ Param('emailregexpdesc') %]
     Také nesmí obsahovat žádné z následujících speciálních znaků:
-    It must also not contain any of these special characters:
     <tt>\ ( ) &amp; &lt; &gt; , ; : &quot; [ ]</tt>, ani žádné bílé znaky.
     
   [% ELSIF error == "illegal_frequency" %]
-    [% title = "Too Frequent" %]
-    Unless you are an administrator, you may not create series which are 
-    run more often than once every [% minimum FILTER html %] days.
+    [% title = "Příliš častý" %]
+    Pokud nejste správce, nemůžete vytvářet tabulky, které se
+    provádějí častěji než jednou za [% minimum FILTER html %] d.
     
   [% ELSIF error == "illegal_group_control_combination" %]
-    [% title = "Your Group Control Combination Is Illegal" %]
-    Your group control combination for group &quot;
-    [% groupname FILTER html %]&quot; is illegal.
+    [% title = "Neplatná kombinace nastavení skupin" %]
+    Vaše zadaná kombinace nastavení skupiny „[% groupname FILTER html %]“
+    je neplatná.
 
   [% ELSIF error == "illegal_is_obsolete" %]
-    [% title = "Your Search Makes No Sense" %]
-    The only legal values for the <em>Attachment is obsolete</em> field are
-    0 and 1.
+    [% title = "Vaše hledání nedává smysl" %]
+    Jediné platné hodnoty pro položku <em>Příloha je neplatná</em> jsou 0 a 1.
 
   [% ELSIF error == "illegal_query_name" %]
-    [% title = "Illegal Search Name" %]
-    The name of your search cannot contain any of the following characters: 
+    [% title = "Chybný název hledání" %]
+    Název hledání nesmí obsahovat žádný z následujících znaků:
     &lt;, &gt;, &amp;.
 
   [% ELSIF error == "illegal_series_creation" %]
-    You are not authorised to create series.
+    Nejste oprávněni vytvářet tabulky.
         
   [% ELSIF error == "illegal_series_edit" %]
-    You are not authorised to edit this series. To do this, you must either
-    be its creator, or an administrator.
+    Nejste oprávněni měnit tuto tabulku. K tomu musíte být
+    její autor nebo správce.
         
   [% ELSIF error == "insufficient_data" %]
-    [% title = "Insufficient Data" %]
-    None of the series you selected have any data associated with them, so a
-    chart cannot be plotted.
+    [% title = "Nedostatečná data" %]
+    Žádná vybraná tabulka neobsahuje žádná data, takže graf nelze vykreslit.
         
   [% ELSIF error == "insufficient_data_points" %]
-    We don't have enough data points to make a graph (yet).
+    Dosud není k dispozici dostatek dat pro vytvoření grafu.
         
   [% ELSIF error == "insufficient_privs_for_multi" %]
-    [% title = "Insufficient Privileges" %]
-    Sorry, you do not have sufficient privileges to edit multiple 
-    [% terms.bugs %].
+    [% title = "Nedostatečná oprávnění" %]
+    Je mi líto, ale pro hromadnou editaci [% terms.chyba_2pl %]
+    nemáte dostatečná oprávnění.
     
   [% ELSIF error == "invalid_attach_id" %]
-    [% title = "Invalid Attachment ID" %]
-    The attachment id [% attach_id FILTER html %] is invalid.
+    [% title = "Neplatné ID přílohy" %]
+    ID [% attach_id FILTER html %] není platné označení přílohy.
 
   [% ELSIF error == "invalid_bug_id_non_existent" %]
-    [% title = BLOCK %]Invalid [% terms.Bug %] ID[% END %]
-    [% terms.Bug %] #[% bug_id FILTER html %] does not exist.
+    [% title = BLOCK %]Neplatné ID [% terms.chyba_2sg %][% END %]
+    [% terms.Chyba %] #[% bug_id FILTER html %] neexistuje.
     
   [% ELSIF error == "invalid_bug_id_or_alias" %]
-    [% title = BLOCK %]Invalid [% terms.Bug %] ID[% END %]
+    [% title = BLOCK %]Neplatné ID [% terms.chyba_2sg %][% END %]
     [% IF bug_id %]
-      '[% bug_id FILTER html %]' is not a valid [% terms.bug %] number
+      '[% bug_id FILTER html %]' není platné číslo [% terms.chyba_2sg %]
       [% IF Param("usebugaliases") %]
-        nor an alias to [% terms.abug %] number
+        , ani alias k nějakému číslu [% terms.chyba_2sg %]
       [% END %].
     [% ELSE %]
       [% IF field %]
-        The '[% field_descs.$field FILTER html %]' field
-        cannot be empty.
+        Položka „[% field_descs.$field FILTER html %]“ nesmí
+	být prázdná.
       [% END %]
-      You must enter a valid [% terms.bug %] number!
+      Musíte zadat platné číslo [% terms.chyba_2sg %]!
     [% END %]
     <noscript>
-      If you are trying to use QuickSearch, you need to enable
-      JavaScript in your browser.
+      Pokud se pokoušíte použít QuickSearch, musíte ve svém prohlížeči
+      povolit JavaScript.
     </noscript>
 
   [% ELSIF error == "invalid_changedsince" %]
-    [% title = "Invalid 'Changed Since'" %]
-    The 'changed since' value, '[% changedsince FILTER html %]', must be an
-    integer >= 0.
+    [% title = "Neplatná položka „Změněno od“" %]
+    Hodnota položky „změněno od“, „[% changedsince FILTER html %]“, musí
+    být celé nezáporné číslo.
 
   [% ELSIF error == "invalid_content_type" %]
-    [% title = "Invalid Content-Type" %]
-    The content type <em>[% contenttype FILTER html %]</em> is invalid.
-    Valid types must be of the form <em>foo/bar</em> where <em>foo</em>
-    is either <em>application, audio, image, message, model, multipart,
-    text,</em> or <em>video</em>.
+    [% title = "Neplatný typ obsahu" %]
+    Typ obsahu <em>[% contenttype FILTER html %]</em> není platný.
+    Platné typy mají tvar <em>foo/bar</em>, kde <em>foo</em>
+    je jedno z <em>application, audio, image, message, model, multipart,
+    text, video</em>.
     
   [% ELSIF error == "invalid_context" %]
-    [% title = "Invalid Context" %]
-    The context [% context FILTER html %] is invalid (must be a number,
-    "file" or "patch").
+    [% title = "Neplatný kontext" %]
+    Kontext [% context FILTER html %] není platný (musí jím být číslo,
+    „file“ nebo „patch“).
 
   [% ELSIF error == "invalid_format" %]
-    [% title = "Invalid Format" %]
-    The format "[% format FILTER html %]" is invalid (must be one of
+    [% title = "Neplatný formát" %]
+    Formát „[% format FILTER html %]“ je neplatný (musí jím byt jedno z 
     [% FOREACH my_format = formats %]
-      "[% my_format FILTER html %]"
+      „[% my_format FILTER html %]“
     [% END %]
     ).
 
   [% ELSIF error == "invalid_maxrows" %]
-    [% title = "Invalid Max Rows" %]
-    The maximum number of rows, '[% maxrows FILTER html %]', must be
-    a positive integer.
+    [% title = "Neplatný maximální počet řádků" %]
+    Maximální počet řádků, „[% maxrows FILTER html %]“, musí být být
+    kladné celé číslo.
 
   [% ELSIF error == "invalid_product_name" %]
-    [% title = "Invalid Product Name" %]
-    The product name '[% product FILTER html %]' is invalid or does not exist.
+    [% title = "Neplatný název produktu" %]
+    Název produktu „[% product FILTER html %]“ není platný, nebo takový produkt
+    neexistuje.
     
   [% ELSIF error == "invalid_username" %]
-    [% title = "Invalid Username" %]
-    The name <tt>[% name FILTER html %]</tt> is not a valid username.  
-    Either you misspelled it, or the person has not
-    registered for a [% terms.Bugzilla %] account.
+    [% title = "Neplatné uživatelské jméno" %]
+    Žádný uživatel nemá jméno <tt>[% name FILTER html %]</tt>.
+    Buď jste jméno zadali nepřesně, nebo tato osoba nemá
+    na [% terms.Bugzilla_6sg %] zaregistrovaný účet.
 
   [% ELSIF error == "invalid_username_or_password" %]
-    [% title = "Invalid Username Or Password" %]
-    The username or password you entered is not valid.
+    [% title = "Neplatné uživatelské jméno či heslo" %]
+    Uživatelské jméno a heslo, které jste zadali, nejsou platné.
 
   [% ELSIF error == "keyword_access_denied" %]
-    [% title = "Access Denied" %]
-    Sorry, you aren't a member of the 'editkeywords' group, and so
-    you aren't allowed to add, modify or delete keywords.
+    [% title = "Přístup zamítnut" %]
+    Je mi líto, ale nejste členem skupiny „editkeywords“, takže
+    nemáte dovoleno přidávat, měnit, ani mazat klíčová slova.
 
   [% ELSIF error == "keyword_already_exists" %]
-    [% title = "Keyword Already Exists" %]
-    A keyword with the name [% name FILTER html %] already exists.
+    [% title = "Klíčové slovo již existuje" %]
+    Klíčové slovo s názvem [% name FILTER html %] již existuje.
 
   [% ELSIF error == "keyword_blank_description" %]
-    [% title = "Blank Keyword Description Not Allowed" %]
-    You must enter a non-blank description for the keyword.
-     
+    [% title = "Klíčové slovo musí mít popis" %]
+    U klíčového slova musíte zadat neprázdný popis.
+    
   [% ELSIF error == "keyword_blank_name" %]
-    [% title = "Blank Keyword Name Not Allowed" %]
-    You must enter a non-blank name for the keyword.
+    [% title = "Klíčové slovo musí mít název" %]
+    U klíčového slova musíte zadat neprázdný název.
      
   [% ELSIF error == "keyword_invalid_name" %]
-    [% title = "Invalid Keyword Name" %]
-    You may not use commas or whitespace in a keyword name.
+    [% title = "Neplatný název klíčového slova" %]
+    V názvu klíčového slova nesmíte používat čárky ani bílé znaky.
      
   [% ELSIF error == "login_needed_for_password_change" %]
-    [% title = "Login Name Required" %]
-    You must enter a login name when requesting to change your password.
+    [% title = "Vyžadováno přihlašovací jméno" %]
+    Při žádání o změnu hesla musíte zadat své přihlašovací jméno.
 
   [% ELSIF error == "milestone_required" %]
-    [% title = "Milestone Required" %]
-    You must determine a target milestone for [% terms.bug %] 
-    [%+ bug_id FILTER html %]
-    if you are going to accept it.  Part of accepting 
-    [% terms.abug %] is giving an estimate of when it will be fixed.
+    [% title = "Vyžadován cílový milník" %]
+    Pokud chcete [% terms.chyba_4sg %] [%+ bug_id FILTER html %] převzít,
+    musíte zadat cílový milník. Součástí převzetí [% terms.chyba_2sg %] je
+    poskytnutí odhadu, kdy bude opraven[% koncovky.verb %].
 
   [% ELSIF error == "misarranged_dates" %]
-    [% title = "Misarranged Dates" %]
-    Your start date ([% datefrom FILTER html %]) is after 
-    your end date ([% dateto FILTER html %]).
+    [% title = "Přehozená data" %]
+    Vaše počáteční datum ([% datefrom FILTER html %]) je až po
+    vašem koncovém datu ([% dateto FILTER html %]).
     
   [% ELSIF error == "missing_attachment_description" %]
-    [% title = "Missing Attachment Description" %]
-    You must enter a description for the attachment.
+    [% title = "Chybí popis přílohy" %]
+    K příloze musíte dodat popis.
     
   [% ELSIF error == "missing_category" %]
-    [% title = "Missing Category" %]
-    You did not specify a category for this series.
+    [% title = "Chybí kategorie" %]
+    Pro tuto tabulku jste nezadali kategorii.
                 
   [% ELSIF error == "missing_content_type" %]
-    [% title = "Missing Content-Type" %]
-     You asked [% terms.Bugzilla %] to auto-detect the content type, but
-     your browser did not specify a content type when uploading the file, 
-     so you must enter a content type manually.
+    [% title = "Chybějící typ obsahu" %]
+     Žádali jste, aby [% terms.Bugzilla %] automaticky detekovala
+     typ obsahu, ale váš prohlížeč typ obsahu při zasílání souboru
+     neurčil, takže ho musíte zadat ručně.
                 
   [% ELSIF error == "missing_content_type_method" %]
-    [% title = "Missing Content-Type Determination Method" %]
-    You must choose a method for determining the content type,
-    either <em>auto-detect</em>, <em>select from list</em>, or <em>enter 
-    manually</em>.
+    [% title = "Nevyplněný způsob určení typu obsahu" %]
+    Musíte si vybrat metodu, jak se má určit typ obsahu, buď
+    <em>autodetekce</em>, <em>vybrat ze seznamu</em>, nebo <em>zadat
+    ručně</em>.
         
   [% ELSIF error == "missing_cookie" %]
-    [% title = "Missing Cookie" %]
-    Sorry, I seem to have lost the cookie that recorded
-    the results of your last search. I'm afraid you will have to start
-    again on the <a href="query.cgi">search page</a>.
+    [% title = "Chybějící cookie" %]
+    Je mi líto, ale zdá se, že se ztratila cookie, která
+    uchovávala výsledky vašeho posledního hledání. Obávám se, že
+    budete muset začít od začátku <a href="query.cgi">hledání</a>.
           
   [% ELSIF error == "missing_datasets" %]
-    [% title = "No Datasets Selected" %]
-    You must specify one or more datasets to plot.
+    [% title = "Nebyly zvoleny žádné tabulky" %]
+    Pro vykreslení musíte vybrat nejméně jednu tabulku.
     
   [% ELSIF error == "missing_email_type" %]
-    [% title = "Your Search Makes No Sense" %]
-    You must specify one or more fields in which to search for
+    [% title = "Vaše hledání nedává smysl" %]
+    Musíte určit nejméně jedno pole, ve kterém se má hledat
     <tt>[% email FILTER html %]</tt>.
     
   [% ELSIF error == "missing_frequency" %]
-    [% title = "Missing Frequency" %]
-    You did not specify a valid frequency for this series.
+    [% title = "Chybějící frekvence" %]
+    U této tabulky jste nezadali platnou frekvenci.
                 
   [% ELSIF error == "missing_name" %]
-    [% title = "Missing Name" %]
-    You did not specify a name for this series.
+    [% title = "Chybějící název" %]
+    U této tabulky jste nezadali název.
                 
   [% ELSIF error == "missing_query" %]
-    [% title = "Missing Search" %]
-    The search named <em>[% queryname FILTER html %]</em> does not
-    exist.
+    [% title = "Chybějící hledání" %]
+    Neexistuje hledání s názvem <em>[% queryname FILTER html %]</em>.
         
   [% ELSIF error == "must_be_patch" %]
-    [% title = "Attachment Must Be Patch" %]
-    Attachment #[% attach_id FILTER html %] must be a patch.
+    [% title = "Příloha musí být patch" %]
+    Příloha #[% attach_id FILTER html %] musí být patch.
 
   [% ELSIF error == "missing_subcategory" %]
-    [% title = "Missing Subcategory" %]
-    You did not specify a subcategory for this series.
+    [% title = "Chybějící podkategorie" %]
+    U této tabulky jste nezadali podkategorii.
                 
   [% ELSIF error == "need_component" %]
-    [% title = "Component Required" %]
-    You must specify a component to help determine the new owner of these 
-    [% terms.bugs %].
+    [% title = "Vyžadována komponenta" %]
+    Pro určení nového vlastníka [% terms.tatochyba_2pl %] musíte určit komponentu.
 
   [% ELSIF error == "need_product" %]
-    [% title = "Product Required" %]
-    You must specify a product to help determine the new owner of these [% terms.bugs %].
+    [% title = "Vyžadován produkt" %]
+    Pro určení nového vlastníka [% terms.tatochyba_2pl %] musíte určit produkt.
 
   [% ELSIF error == "need_quip" %]
-    [% title = "Quip Required" %]
-    Please enter a quip in the text field.
+    [% title = "Vyžadován vtípek" %]
+    Laskavě zadejte do textového pole vtípek.
 
   [% ELSIF error == "new_password_missing" %]
-    [% title = "New Password Missing" %]
-    You must enter a new password.
+    [% title = "Chybí nové heslo" %]
+    Musíte zadat nové heslo.
 
   [% ELSIF error == "no_axes_defined" %]
-    [% title = "No Axes Defined" %]
-    You didn't define any axes to plot.
+    [% title = "Nejsou definovány osy" %]
+    Neurčili jste žádné osy, které by měly být vykresleny.
 
   [% ELSIF error == "no_bugs_chosen" %]
-    [% title = BLOCK %]No [% terms.Bugs %] Chosen[% END %]
-    You apparently didn't choose any [% terms.bugs %] to modify.
+    [% title = BLOCK %]Nebyl[% koncovky.verb_pl %] vybrán[% koncovky.verb_pl %] žádn[% koncovky.mlady_1pl %] [% terms.chyby %][% END %]
+    Evidentně jste nezvolili žádn[% koncovky.mlady_1pl %] [% terms.chyby %],
+    kter[% koncovky.mlady_1pl %] by měl[% koncovky.verb_pl %] být
+    upraven[% koncovky.verb_pl %].
 
   [% ELSIF error == "no_component_change_for_multiple_products" %]
-    [% title = "Action Not Permitted" %]
-    You cannot change the component for a list of [% terms.bugs %] covering more than
-    one product.
+    [% title = "Úkon není dovolen" %]
+    Nemůžete měnit komponenty v seznamu [% terms.chyba_2pl %], ve kterém se
+    vyskytuje více než jeden produkt.
 
   [% ELSIF error == "no_components" %]
-    [% title = "No Components" %]
-    Sorry; there needs to be at least one component for this product in order
-    to create a new [% terms.bug %].
+    [% title = "Chybí komponenty" %]
+    Je mi líto, ale aby v tomto produktu šlo vytvářet [% terms.chyba_4pl %],
+    je v něm potřeba definovat nejméně jednu komponentu.
     [% IF UserInGroup("editcomponents") %]
-      <a href="editcomponents.cgi?product=[% product FILTER url_quote %]">Create
-        a new component</a>.
+      <a href="editcomponents.cgi?product=[% product FILTER url_quote %]">Vytvořit
+      novou komponentu</a>.
     [% ELSE %]
-       Please contact [% Param("maintainer") %], giving the name of
-       the product in which you tried to create a new [% terms.bug %].
+       Kontaktujte laskavě správce ([% Param("maintainer") %]) a předejte
+       mu název produktu, ve kterém jste se pokoušeli vytvořit [% terms.chyba_4sg %].
     [% END %]
 
   [% ELSIF error == "no_dupe_stats" %]
-    [% title = "Cannot Find Duplicate Statistics" %]
-    There are no duplicate statistics for today ([% today FILTER html %]) 
-    or yesterday.
+    [% title = "Nepodařilo se najít statistiku o duplikátech" %]
+    Pro dnešek ([% today FILTER html %]) ani včerejšek neexistuje
+    žádná statistika o duplikátech.
 
   [% ELSIF error == "no_dupe_stats_error_today" %]
-    [% title = "Error Reading Today's Dupes File" %]
-    An error occurred opening today's dupes file: [% error_msg FILTER html %].
+    [% title = "Chyba při čtení souboru s dnešními duplikáty" %]
+    Při otevírání souboru s dnešními duplikáty došlo k chybě: [% error_msg FILTER html %].
 
   [% ELSIF error == "no_dupe_stats_error_whenever" %]
-    [% title = "Error Reading Previous Dupes File" %]
-    An error occurred opening [% changedsince FILTER html %] days ago
-    ([% whenever FILTER html %])'s dupes file:
-    [% error_msg FILTER html %].
+    [% title = "Chyba při čtení souboru s předchozími duplikáty" %]
+    Při otevírání souboru s duplikáty z před [% changedsince FILTER html %] dní
+    ([% whenever FILTER html %]) došlo k chybě: [% error_msg FILTER html %].
 
   [% ELSIF error == "no_dupe_stats_error_yesterday" %]
     [% title = "Error Reading Yesterday's Dupes File" %]
-    There are no duplicate statistics for today ([% today FILTER html %]), 
-    and an error
-    occurred opening yesterday's dupes file: [% error_msg FILTER html %].
+    Pro dnešek ([% today FILTER html %]) neexistuje
+    žádná statistika o duplikátech a při otevírání souboru
+    se včerejšími duplikáty došlo k chybě: [% error_msg FILTER html %].
 
   [% ELSIF error == "no_html_in_quips" %]
-    [% title = "No HTML In Quips" %]
-    Sorry - for security reasons, support for HTML tags has been turned off
-    in quips.
+    [% title = "HTML je ve vtípcích zakázáno" %]
+    Je mi líto, ale z bezpečnostních důvodů není ve vtípcích dovoleno
+    používat HTML tagy.
 
   [% ELSIF error == "no_new_quips" %]
-    [% title = "No New Quips" %]
-    This site does not permit the addition of new quips.
+    [% title = "Nelze přidávat vtípky" %]
+    Na tomto serveru není dovoleno přidávat nové vtípky.
 
   [% ELSIF error == "no_page_specified" %]
-    [% title = "No Page Specified" %]
-    You did not specify the id of a page to display.
+    [% title = "Nebyla určena stránka" %]
+    Neurčili jste ID stránky, která se má zobrazit.
 
   [% ELSIF error == "no_products" %]
-    [% title = "No Products" %]
-    Either no products have been defined to enter [% terms.bugs %] against or you have not
-    been given access to any.
+    [% title = "Chybí produkty" %]
+    Buď nejsou definovány žádné produkty, do kterých lze zadávat [% terms.chyba_4pl %],
+    nebo k žádným z nich nemáte přístup.
 
   [% ELSIF error == "number_not_numeric" %]
-    [% title = "Numeric Value Required" %]
-    The value '[% num FILTER html %]' in the 
-    <em>[% field_descs.$field FILTER html %]</em> field 
-    is not a numeric value.
+    [% title = "Vyžadována číselná hodnota" %]
+    Hodnota „[% num FILTER html %]“ položky
+    <em>[% field_descs.$field FILTER html %]</em> není
+    číselná hodnota.
 
   [% ELSIF error == "number_too_large" %]
-    [% title = "Number Too Large" %]
-    The value '[% num FILTER html %]' in the 
-    <em>[% field_descs.$field FILTER html %]</em> field 
-    is more than the maximum allowable value of '[% max_num FILTER html %]'.
+    [% title = "Příliš velké číslo" %]
+    Hodnota „[% num FILTER html %]“ polžky
+    <em>[% field_descs.$field FILTER html %]</em>
+    přesahuje maximální dovolenou hodnotu „[% max_num FILTER html %]“.
 
   [% ELSIF error == "number_too_small" %]
-    [% title = "Number Too Small" %]
-    The value '[% num FILTER html %]' 
-    in the <em>[% field_descs.$field FILTER html %]</em> field 
-    is less than the minimum allowable value of '[% min_num FILTER html %]'.
+    [% title = "Příliš malé číslo" %]
+    Hodnota „[% num FILTER html %]“ polžky
+    <em>[% field_descs.$field FILTER html %]</em>
+    je menší než minimální dovolená hodnota „[% max_num FILTER html %]“.
 
   [% ELSIF error == "old_password_incorrect" %]
-    [% title = "Incorrect Old Password" %]
-    You did not enter your old password correctly.
+    [% title = "Původní heslo nesouhlasí" %]
+    Nezadali jste správné původní heslo.
 
   [% ELSIF error == "old_password_required" %]
-    [% title = "Old Password Required" %]
-    You must enter your old password to change your email address.
+    [% title = "Vyžadováno původní heslo" %]
+    Pro změnu e-mailové adresy je vyžadováno zadání původního hesla.
 
   [% ELSIF error == "passwords_dont_match" %]
-    [% title = "Passwords Don't Match" %]
-    The two passwords you entered did not match.
+    [% title = "Hesla nesouhlasí" %]
+    Zadaná dvě hesla se liší.
 
   [% ELSIF error == "password_too_long" %]
-    [% title = "Password Too Long" %]
-    The password is more than 16 characters long. It must be no more than
-    16 characters.
+    [% title = "Příliš dlouhé heslo" %]
+    Zadané heslo je delší než 16 znaků. Heslo smí být nejvýše
+    16 znaků dlouhé.
 
   [% ELSIF error == "password_too_short" %]
-    [% title = "Password Too Short" %]
-    The password is less than three characters long. It must be at least
-    three characters.
+    [% title = "Příliš krátké heslo" %]
+    Zadané heslo je kratší než tři znaky. Heslo musí obsahovat
+    nejméně tři znaky.
 
   [% ELSIF error == "patch_too_large" %]
-    [% title = "File Too Large" %]
-    The file you are trying to attach is [% filesize FILTER html %] 
-    kilobytes (KB) in size.
-    Patches cannot be more than [% Param('maxpatchsize') %] KB in size.
-    Try breaking your patch into several pieces.
+    [% title = "Příliš velký soubor" %]
+    Soubor, který chcete použít jako přílohu, je příliš velký
+    ([% filesize FILTER html %] KB). Patche mohou mít
+    maximálně [% Param('maxpatchsize') %] KB. Zkuste svůj
+    patch rozdělit na několik dílů.
 
   [% ELSIF error == "product_disabled" %]
-    [% title = BLOCK %]Product closed for [% terms.Bugs %] Entry[% END %]
-    Sorry, entering [% terms.bugs %] into
-    product <em>[% product FILTER html %]</em> has been disabled.
+    [% title = BLOCK %]Tento produkt je uzavřen zadávání [% terms.chyba_2pl %][% END %]
+    Je mi líto, ale do produktu <em>[% product FILTER html %]</em>
+    nyní nelze zadávat [% terms.chyba_4pl %].
 
   [% ELSIF error == "product_edit_denied" %]
-    [% title = "Product Edit Access Denied" %]
-    You are not permitted to edit [% terms.bugs %] in product 
-    [% product FILTER html %].
+    [% title = "Nedostatečná oprávnění pro editaci produktu" %]
+    Nejste oprávněni k editaci [% terms.chyba_2pl %]
+    v produktu [% product FILTER html %].
 
   [% ELSIF error == "query_name_missing" %]
-    [% title = "No Search Name Specified" %]
-    You must enter a name for your search.
+    [% title = "Nebyl zadán název hledání" %]
+    Pro své hledání musíte uvést název.
 
   [% ELSIF error == "quips_disabled" %]
-    [% title = "Quips Disabled" %]
-    Quips are disabled.
+    [% title = "Vtípky vypnuty" %]
+    Používání vtípků je vypnuto.
 
   [% ELSIF error == "quips_edit_denied" %]
-    [% title = "Permission Denied" %]
-    You do not have permission to edit quips.
+    [% title = "Přístup odepřen" %]
+    Nemáte oprávnění upravovat vtípky.
 
   [% ELSIF error == "reassign_to_empty" %]
-    [% title = "Illegal Reassignment" %]
-    To reassign [% terms.abug %], you must provide an address for
-    the new owner. If you did not intentionally clear out the 
-    "Reassign [% terms.bug %] to" field, [% Param("browserbugmessage") %]
+    [% title = "Neplatná změna přidělení" %]
+    Pro změnu přidělení [% terms.chyba_2sg %] musíte uvést
+    adresu nového vlastníka. Pokud jste jste pole
+    „Změnit přidělení [% terms.chyba_2sg %] na“ ručně
+    nevyprázdnili, [% Param("browserbugmessage") %]
 
   [% ELSIF error == "report_access_denied" %]
-    [% title = "Access Denied" %]
-    You do not have the permissions necessary to view reports for this product.
+    [% title = "Přístup odepřen" %]
+    Pro prohlížení reportů tohoto produktu nemáte dostatečná oprávnění.
 
   [% ELSIF error == "require_component" %]
-    [% title = "Component Needed" %]
-    You must choose a component to file this [% terms.bug %] in. If necessary,
-    just guess.
+    [% title = "Vyžadována komponenta" %]
+    Pro zadání [% terms.chyba_2sg %] musíte zvolit komponentu. Pokud
+    si nejste jisti, zkuste alespoň hádat.
 
   [% ELSIF error == "require_new_password" %]
-    [% title = "New Password Needed" %]
-    You cannot change your password without choosing a new one.
+    [% title = "Vyžadováno nové heslo" %]
+    Nemůžete si změnit heslo, když si nevyberete nové.
 
   [% ELSIF error == "require_summary" %]
-    [% title = "Summary Needed" %]
-    You must enter a summary for this [% terms.bug %].
+    [% title = "Vyžadováno shrnutí" %]
+    U [% terms.chyba_2sg %] musíte zadat shrnutí.
 
   [% ELSIF error == "resolving_remaining_time" %]
-    [% title = "Trying to Resolve with Hours Remaining" %]
-    You cannot resolve [% terms.abug %] with hours still remaining.  Set
-    Remaining Hours to zero if you want to resolve the [% terms.bug %].
+    [% title = "Nelze vyřešit a ponechat zbývající čas" %]
+    Nemůžete [% terms.chyba_4sg %] označit jako vyřešenou, a přitom
+    ponechat zbývající čas. Pokud chcete [% terms.chyba_4sg %] vyřešit,
+    nastavte pole <em>Zbývajících hodin</em> na nulu.
 
   [% ELSIF error == "sanity_check_access_denied" %]
-    [% title = "Access Denied" %]
-    You do not have the permissions necessary to run a sanity check.
+    [% title = "Přístup odepřen" %]
+    Pro kontrolu platnosti nemáte dostatečná oprávnění.
 
   [% ELSIF error == "search_content_without_matches" %]
-    [% title = "Illegal Search" %]
-    The "content" field can only be used with "matches" search 
-    and the "matches" search can only be used with the "content"
-    field.
+    [% title = "Neplatné hledání" %]
+    Pole „obsah“ lze používat pouze při hledání „odpovídá“
+    a hledání „odpovídá“ lze používat pouze s polem „obsah“.
 
   [% ELSIF error == "series_already_exists" %]
-    [% title = "Series Already Exists" %]
-      A series named <em>[% series.category FILTER html %] /
+    [% title = "Tabulka již existuje" %]
+      Tabulka se jménem <em>[% series.category FILTER html %] /
       [%+ series.subcategory FILTER html %] / 
       [%+ series.name FILTER html %]</em>
-      already exists.
+      již existuje.
     
   [% ELSIF error == "sidebar_supports_mozilla_only" %]
-    Sorry - sidebar.cgi currently only supports Mozilla based web browsers.
-    <a href="http://www.mozilla.org">Upgrade today</a>. :-)
+    Je mi líto, ale postranní lišta podporuje pouze prohlížeče založené na
+    Mozille. <a href="http://www.mozilla.org/">Pořiďte si jej ještě dnes</a>. :-)
 
   [% ELSIF error == "still_unresolved_bugs" %]
     [% IF dependency_count == 1 %]
-      [% terms.Bug %]# <a href="show_bug.cgi?id=[% dependencies.0.bug_id FILTER none %]">[% dependencies.0.bug_id FILTER none %]</a>
-      has still [% dependencies.0.dependencies FILTER html %] unresolved
+      Na [% terms.chyba_6sg %] #<a href="show_bug.cgi?id=[% dependencies.0.bug_id FILTER none %]">[% dependencies.0.bug_id FILTER none %]</a>
+      stále závisí [% dependencies.0.dependencies FILTER html %] nevyřešen
       [% IF dependencies.0.dependencies == 1 %]
-        dependency
+        [% koncovky.mlady_2sg %] [%+ terms.chyba_2sg %]
       [% ELSE %]
-        dependencies
-      [% END %]. Show
-      <a href="showdependencytree.cgi?id=[% dependencies.0.bug_id FILTER none %]">Dependency Tree</a>.
+        [% koncovky.mlady_2pl %] [%+ terms.chyba_2pl %]
+      [% END %]. Zobrazit
+      <a href="showdependencytree.cgi?id=[% dependencies.0.bug_id FILTER none %]">strom závislostí</a>.
     [% ELSE %]
-      There are [% dependency_count FILTER none %] open [% terms.bugs %] which
-      have unresolved dependencies.
+      [% IF dependency_count >= 2 && dependency_count <= 4 %]
+        Ještě existují [% dependency_count FILTER none %] [% terms.chyby_1pl %] s nevyřešenými
+        závislostmi.
+      [% ELSE %]
+        Ještě existuje [% dependency_count FILTER none %] [% terms.chyby_2pl %] s nevyřešenými
+        závislostmi.
+      [% END %]
       <br>
       [% FOREACH bug = dependencies %]
-        [% terms.Bug %]# <a href="show_bug.cgi?id=[% bug.bug_id FILTER none %]">[% bug.bug_id FILTER none %]</a>
-        has [% bug.dependencies FILTER html %] open
+        [% terms.Chyba %] #<a href="show_bug.cgi?id=[% bug.bug_id FILTER none %]">[% bug.bug_id FILTER none %]</a>
+	má [% bug.dependencies FILTER html %]
         [% IF bug.dependencies == 1 %]
-          dependency.
+          nevyřešenou závislost
+        [% ELSIF bug.dependencies >= 2 && bug.dependencies <= 4 %]
+	  nevyrešené závislosti
         [% ELSE %]
-          dependencies.
+          nevyřešených závislostí
         [% END %]
-        (<a href="showdependencytree.cgi?id=[% bug.bug_id FILTER none %]">Dependency Tree</a>)<br>
+        (<a href="showdependencytree.cgi?id=[% bug.bug_id FILTER none %]">Strom závislostí</a>).<br>
       [% END %]
     [% END %]
 
   [% ELSIF error == "too_many_votes_for_bug" %]
-    [% title = "Illegal Vote" %]
-    You may only use at most [% max FILTER html %] votes for a single
-    [%+ terms.bug %] in the
-    <tt>[% prod FILTER html %]</tt> product, but you are trying to
-    use [% votes FILTER html %].
+    [% title = "Neplatné hlasování" %]
+    U jedn[% koncovky.mlady_2sg %] [%+ terms.chyba_2sg %] můžete v produktu
+    <tt>[% prod FILTER html %]</tt> použít nejvýše [% max FILTER html %]
+    [% IF max == 1 %]
+      hlas
+    [% ELSIF max >= 2 && max <= 4 %]
+      hlasy
+    [% ELSE %]
+      hlasů
+    [% END %], ale zadali jste [% votes FILTER html %].
 
   [% ELSIF error == "too_many_votes_for_product" %]
-    [% title = "Illegal Vote" %]
-    You tried to use [% votes FILTER html %] votes,
-    which exceeds the [% max FILTER html %] vote per [% terms.bug %] limit
-    for the <tt>[% prod FILTER html %]</tt> product.
+    [% title = "Neplatné hlasování" %]
+    Pokusili jste se rozdělit [% votes FILTER html %]
+    [% IF votes == 1 %]
+      hlas
+    [% ELSIF votes >= 2 && votes <= 4 %]
+      hlasy
+    [% ELSE %]
+      hlasů
+    [% END %], což přesahuje limit [% max FILTER html %] platný
+    pro produkt <tt>[% prod FILTER html %]</tt>.
 
   [% ELSIF error == "token_inexistent" %]
-    [% title = "Token Does Not Exist" %]
-    The token you submitted does not exist, has expired, or has
-    been cancelled.
+    [% title = "Žeton neexistuje" %]
+    Žeton, který jste zadali, buď neexistuje, již vypršel, nebo
+    byl zrušen.
 
   [% ELSIF error == "too_soon_for_new_token" %]
-    [% title = "Too Soon For New Token" %]
-    You have requested a password token too recently to request
-    another.  Please wait a while and try again.
+    [% title = "Příliš brzy na nový žeton" %]
+    O nové heslo jste požádali příliš brzy po minulé
+    žádosti. Laskavě chvíli počkejte a zkuste to znovu.
 
   [% ELSIF error == "unknown_keyword" %]
-    [% title = "Unknown Keyword" %]
-    <code>[% keyword FILTER html %]</code> is not a known keyword.
-    The legal keyword names are <a href="describekeywords.cgi">listed here</a>.
+    [% title = "Neznámé klíčové slovo" %]
+    <code>[% keyword FILTER html %]</code> není platné klíčové slovo.
+    Můžete si prohlédnout <a href="describekeywords.cgi">seznam existujících
+    klíčových slov</a>.
 
   [% ELSIF error == "unknown_tab" %]
-    [% title = "Unknown Tab" %]
-    <code>[% current_tab_name FILTER html %]</code> is not a legal tab name.
+    [% title = "Neznámá záložka" %]
+    <code>[% current_tab_name FILTER html %]</code> není platný název záložky.
 
   [% ELSIF error == "votes_must_be_nonnegative" %]
-    [% title = "Votes Must Be Non-negative" %]
-    Only use non-negative numbers for your [% terms.bug %] votes.
+    [% title = "Počet hlasů musí být nezáporný" %]
+    Ve svém hlasování můžete používat pouze nezáporná čísla.
 
   [% ELSIF error == "wrong_token_for_cancelling_email_change" %]
-    [% title = "Wrong Token" %]
-    That token cannot be used to cancel an email address change.
+    [% title = "Chybný žeton" %]
+    Tento žeton nelze použít pro zrušení změny e-mailové adresy.
 
   [% ELSIF error == "wrong_token_for_changing_passwd" %]
-    [% title = "Wrong Token" %]
-    That token cannot be used to change your password.
+    [% title = "Chybný žeton" %]
+    Tento žeton nelze použít pro změnu hesla.
 
   [% ELSIF error == "wrong_token_for_confirming_email_change" %]
-    [% title = "Wrong Token" %]
-    That token cannot be used to change your email address.
+    [% title = "Chybný žeton" %]
+    Tento žeton nelze použít pro změnu e-mailové adresy.
 
   [% ELSIF error == "value_out_of_range" %]
-    [% title = "Value Out Of Range" %]
-    Value is out of range for field 
-    <em>[% field_descs.$field FILTER html %]</em>.
+    [% title = "Hodnota mimo povolený rozsah" %]
+    Hodnota pole <em>[% field_descs.$field FILTER html %]</em> je
+    mimo rozsah.
 
   [% ELSIF error == "zero_length_file" %]
-    [% title = "File Is Empty" %]
-    The file you are trying to attach is empty!
+    [% title = "Soubor je prázdný" %]
+    Snažíte se jako přílohu nahrát prázdný soubor!
 
   [% ELSE %]
-    [% title = "Error string not found" %]
-    The user error string <code>[% error FILTER html %]</code> was not found.
-    Please send email to [% Param("maintainer") %] describing the steps taken
-    to obtain this message.
+    [% title = "Chybové hlášení nebylo nalezeno" %]
+    Text hlášení o uživatelské chybě <code>[% error FILTER html %]</code> nebyl
+    nalezen. Laskavě zašlete e-mail na [% Param("maintainer") %] a popište kroky,
+    které vedly k této zprávě.
   [% END %]
 [% END %]
 
@@ -780,29 +796,29 @@
 </table>
 
 <p>
-  Please press <b>Back</b> and try again.
+  Stiskněte laskavě tlačítko <b>Zpět</b> a zkuste to znovu.
 </p>
 
-[%# If a saved search fails, people want the ability to edit or delete it. 
+[%# If a saved search fails, people want the ability to edit or delete it.
   # This is the best way of getting information about that possible saved
   # search from any error call location. %]
-  
+
 [% USE Bugzilla %]
 [% namedcmd = Bugzilla.cgi.param("namedcmd") %]
 [% IF namedcmd AND error != "missing_query" %]
-  <p>  
-    Alternatively, you can    
+  <p>
+    Případně také můžete
     <a href="buglist.cgi?cmdtype=dorem&amp;remaction=forget&amp;namedcmd=
-                  [% namedcmd FILTER html %]">forget</a>
-                  
+                  [% namedcmd FILTER html %]">zapomenout</a>
+
     [% FOREACH q = Bugzilla.user.queries %]
       [% IF q.name == namedcmd %]
-        or <a href="query.cgi?[% q.query FILTER html %]">edit</a>
+        nebo <a href="query.cgi?[% q.query FILTER html %]">upravit</a>
       [% END %]
     [% END %]
-    
-    the saved search '[% namedcmd FILTER html %]'.
+
+    uložené hledání s názvem „[% namedcmd FILTER html %]“.
   </p>
-[% END %]            
+[% END %]
 
 [% PROCESS global/footer.html.tmpl %]

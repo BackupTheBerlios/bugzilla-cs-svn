@@ -22,31 +22,29 @@
 
 [% PROCESS global/variables.none.tmpl %]
 
-[% PROCESS global/header.html.tmpl title="Confirm Group Control Change for product \'$product\'" %]
+[% PROCESS global/header.html.tmpl title="Potvrdit změny skupin u produktu „$product“" %]
 
 [% FOREACH group = mandatory_groups %]
 <P>
-group '[% group.name FILTER html %]' impacts [% group.count %] 
-[%+ terms.bugs %] for
-which the group is newly mandatory and will be added.
+Skupina „[% group.name FILTER html %]“ ovlivňuje [% terms.chyba_4pl %] (počet: [% group.count %]),
+u kterých je nově povinná a bude tam přidána.
 [% END %]
 
 [% FOREACH group = na_groups %]
 <P>
-group '[% group.name FILTER html %]' impacts [% group.count %]&nbsp;
-[% terms.bugs %] for which the group is no longer applicable and will
-be removed.[% END %]
+Skupina „[% group.name FILTER html %]“ ovlivňuje [% terms.chyba_4pl %] (počet: [% group.count %]),
+u kterých nově není povolena a bude odstraněna.[% END %]
 <form method="post" >
 
   [% PROCESS "global/hidden-fields.html.tmpl" exclude="^Bugzilla_(login|password)$" %]
 
   <br>
-     Click "Continue" to proceed with the change including the changes
-     indicated above.  If you do not want these changes, use "back" to
-     return to the previous page.
+     Klikněte na „Pokračovat“ pro potvrzení změn včetně změn uvedených
+     výše. Pokud si nepřejete provést tyto změny, použijte tlačítko
+     „zpět“ pro návrat na předchozí stránku.
   <p>
     <input type="hidden" name="confirmed" value="confirmed">
-    <input type="submit" value="Continue">
+    <input type="submit" value="Pokračovat">
   </p>
 
 </form>

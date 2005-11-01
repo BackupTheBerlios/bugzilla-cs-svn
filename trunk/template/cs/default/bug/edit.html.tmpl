@@ -212,10 +212,10 @@
     <tr>
       <td align="right">
         <b>
-          <a href="page.cgi?id=fields.html#status">Status</a>:
+          <a href="page.cgi?id=fields.html#status">Stav</a>:
         </b>
       </td>
-      <td>[% bug.bug_status FILTER html %]</td>
+      <td>[% statuscs.${bug.bug_status} FILTER html %]</td>
       <td>&nbsp;</td>
 
       <td align="right">
@@ -231,7 +231,7 @@
         </b>
       </td>
       <td>
-        [% bug.resolution FILTER html %]
+        [% resolutioncs.${bug.resolution} FILTER html %]
         [% IF bug.resolution == "DUPLICATE" %]
           [% terms.chyba_2sg %] [%+ "${bug.dup_id}" FILTER bug_link(bug.dup_id) %]
         [% END %]
@@ -241,7 +241,7 @@
       <td align="right">
         <b><a href="page.cgi?id=fields.html#bug_severity">Závažnost</a>:</b>
       </td>
-      [% PROCESS select selname = "bug_severity" %]
+      [% PROCESS filtselect selname = "bug_severity" selfilter = severitycs %]
 
     </tr>
 
@@ -575,6 +575,21 @@
         [% FOREACH x = bug.choices.${selname} %]
           <option value="[% x FILTER html %]"
             [% " selected" IF x == bug.${selname} %]>[% x FILTER html %]
+          </option>
+        [% END %]
+      </select>
+    </label>
+  </td>
+  <td>&nbsp;</td>
+[% END %]
+
+[% BLOCK filtselect %]
+  <td>
+    <label for="[% selname %]" accesskey="[% accesskey %]">
+      <select name="[% selname %]" id="[% selname %]">
+        [% FOREACH x = bug.choices.${selname} %]
+          <option value="[% x FILTER html %]"
+            [% " selected" IF x == bug.${selname} %]>[% selfilter.$x FILTER html %]
           </option>
         [% END %]
       </select>

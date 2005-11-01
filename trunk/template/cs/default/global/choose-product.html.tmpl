@@ -27,7 +27,7 @@
 [% PROCESS global/variables.none.tmpl %]
 
 [% IF target == "enter_bug.cgi" %]
-  [% title = "Zadejte $terms.chyba_4sg" %]
+  [% title = "Zadání $terms.chyba_2sg" %]
   [% h2 = BLOCK %]Nejdříve musíte zvolit produkt, ke kterému budete [% terms.chyba_4sg %] zadávat. [% END %]
 [% ELSIF target == "describecomponents.cgi" %]
   [% title = "Popisky komponent na $terms.Bugzilla_6sg" %]

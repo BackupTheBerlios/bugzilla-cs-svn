@@ -25,33 +25,33 @@
 [% name = BLOCK %][% flag_type.name FILTER html %][% END %]
 
 [% PROCESS global/header.html.tmpl
-  title = "Confirm Deletion of Flag Type '$name'"
+  title = "Potvrdit smazání typu příznaku „$name“"
 %]
 
 <p>
-   There are [% flag_count %] flags of type [% name FILTER html %].
-   If you delete this type, those flags will also be deleted.  Note that
-   instead of deleting the type you can
-   <a href="editflagtypes.cgi?action=deactivate&amp;id=[% flag_type.id %]">deactivate it</a>,
-   in which case the type and its flags will remain in the database
-   but will not appear in the [% terms.Bugzilla %] UI.
+   Příznak typu [% name FILTER html %] se používá (počet použití: [% flag_count %]).
+   Pokud tento typ smažete, tyto příznaku budou také smazány. Uvědomte si,
+   že místo mazání tohoto typu jej můžete
+   <a href="editflagtypes.cgi?action=deactivate&amp;id=[% flag_type.id %]">deaktivovat</a>,
+   v takovém případě tento typ a příslušné příznaky zůstanou v databázi,
+   ale nebudou se zobrazovat v uživatelském rozhraní [% terms.Bugzilla_2sg %].
 </p>
 
 <table>
    <tr>
       <td colspan="2">
-         Do you really want to delete this type?
+         Opravdu chcete smazat tento typ?
       </td>
    </tr>
    <tr>
       <td>
          <a href="editflagtypes.cgi?action=delete&amp;id=[% flag_type.id %]">
-            Yes, delete
+            Ano, smazat
          </a>
       </td>
       <td align="right">
          <a href="editflagtypes.cgi">
-            No, don't delete
+            Ne, nemazat
          </a>
       </td>
    </tr>

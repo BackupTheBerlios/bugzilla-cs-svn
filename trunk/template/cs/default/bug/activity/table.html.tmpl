@@ -33,7 +33,7 @@
   #                  it was affected by an old Bugzilla bug.)
   #%]
 
-[% PROCESS global/variables.none.tmpl %]
+[% PROCESS "global/field-descs.none.tmpl" %]
 
 [% PROCESS bug/time.html.tmpl %]
 
@@ -72,7 +72,7 @@
                 <a href="attachment.cgi?id=[% change.attachid %]&amp;action=view">
                 Příloha #[% change.attachid %]</a>
               [% END %]
-              [% change.field %]
+              [% field_descs.${change.fieldname} %]
             </td>
             <td>
               [% IF change.removed %]
@@ -80,7 +80,13 @@
                       change.fieldname == 'remaining_time' ||
                       change.fieldname == 'work_time' %]
                   [% PROCESS formattimeunit time_unit=change.removed %]
-                [% ELSE %]
+                [% ELSIF change.fieldname == 'bug_status' %]
+                  [% statuscs.${change.removed} FILTER html %]
+                [% ELSIF change.fieldname == 'resolution' %]
+                  [% resolutioncs.${change.removed} FILTER html %]
+                [% ELSIF change.fieldname == 'bug_severity' %]
+                  [% severitycs.${change.removed} FILTER html %]
+		[% ELSE %]
                   [% change.removed FILTER html %]
                 [% END %]
               [% ELSE %]
@@ -93,6 +99,12 @@
                       change.fieldname == 'remaining_time' ||
                       change.fieldname == 'work_time' %]
                   [% PROCESS formattimeunit time_unit=change.added %]
+                [% ELSIF change.fieldname == 'bug_status' %]
+                  [% statuscs.${change.added} FILTER html %]
+                [% ELSIF change.fieldname == 'resolution' %]
+                  [% resolutioncs.${change.added} FILTER html %]
+                [% ELSIF change.fieldname == 'bug_severity' %]
+                  [% severitycs.${change.added} FILTER html %]
                 [% ELSE %]
                   [% change.added FILTER html %]
                 [% END %]

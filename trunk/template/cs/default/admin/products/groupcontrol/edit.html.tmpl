@@ -23,7 +23,7 @@
 
 [% filt_product = product FILTER html %]
 [% PROCESS global/header.html.tmpl
-  title = "Edit Group Controls for '$filt_product'"
+  title = "Upravit nastavení skupin pro „$filt_product“"
 %]
 
 <form method="post" action="editproducts.cgi">
@@ -32,12 +32,12 @@
 
   <table id="form" cellspacing="0" cellpadding="4" border="1">
     <tr bgcolor="#6666ff">
-      <th>Group</th>
-      <th>Entry</th>
-      <th>MemberControl</th>
-      <th>OtherControl</th>
-      <th>Canedit</th>
-      <th>[% terms.Bugs %]</th>
+      <th>Skupina</th>
+      <th>Zadávání</th>
+      <th>Členové</th>
+      <th>Ostatní</th>
+      <th>SmíEditovat</th>
+      <th>[% terms.Chyby %]</th>
     </tr>
     [% FOREACH group = groups %]
       [% IF group.isactive == 0 AND group.bugcount > 0 %]
@@ -46,7 +46,7 @@
             [% group.name FILTER html %]
           </td>
           <td align="center" colspan=4>
-            Disabled
+            Vypnuto
           </td>
           <td>
             [% group.bugcount %]
@@ -66,22 +66,22 @@
               <option value=[% const.CONTROLMAPNA %]
                 [% " selected=\"selected\""
                   IF group.membercontrol == const.CONTROLMAPNA %]
-                >NA
+                >Nic
               </option>
               <option value=[% const.CONTROLMAPSHOWN %]
                 [% " selected=\"selected\""
                   IF group.membercontrol == const.CONTROLMAPSHOWN %]
-                >Shown
+                >Zobrazená
               </option>
               <option value=[% const.CONTROLMAPDEFAULT %]
                 [% " selected=\"selected\""
                   IF group.membercontrol == const.CONTROLMAPDEFAULT %]
-                >Default
+                >Implicitní
               </option>
               <option value=[% const.CONTROLMAPMANDATORY %]
                 [% " selected=\"selected\""
                   IF group.membercontrol == const.CONTROLMAPMANDATORY %]
-                >Mandatory
+                >Povinná
               </option>
             </select>
           </td>
@@ -90,22 +90,22 @@
               <option value=[% const.CONTROLMAPNA %]
                 [% " selected=\"selected\""
                   IF group.othercontrol == const.CONTROLMAPNA %]
-                >NA
+                >Nic
               </option>
               <option value=[% const.CONTROLMAPSHOWN %]
                 [% " selected=\"selected\""
                   IF group.othercontrol == const.CONTROLMAPSHOWN %]
-                >Shown
+                >Zobrazená
               </option>
               <option value=[% const.CONTROLMAPDEFAULT %]
                 [% " selected=\"selected\""
                   IF group.othercontrol == const.CONTROLMAPDEFAULT %]
-                >Default
+                >Implicitní
               </option>
               <option value=[% const.CONTROLMAPMANDATORY %]
                 [% " selected=\"selected\""
                   IF group.othercontrol == const.CONTROLMAPMANDATORY %]
-                >Mandatory
+                >Povinná
               </option>
             </select>
           </td>
@@ -122,156 +122,149 @@
 
   </table>
   <br>
-  <input type=submit name="submit" value="submit">
+  <input type=submit name="submit" value="odeslat">
   <br>
 </form>
 
 
 <p>
-These settings control the relationship of the groups to this
-product.
+Tato nastavení řídí vztah skupin k tomuto produktu.
 <p>
-If any group has <b>Entry</b> selected, then this product will
-restrict [% terms.bug %] entry to only those users who are members of all the
-groups with entry selected.
+Pokud má libovolná skupina zvoleno <b>Zadávání</b>, mohou k tomuto produktu
+zadávat [% terms.chyba_4pl %] pouze ti uživatelé, kteří jsou členy všech
+skupin s tímto příznakem.
 <p>
-If any group has <b>Canedit</b> selected, then this product
-will be read-only for any users who are not members of all of
-the groups with Canedit selected. ONLY users who are members of
-all the canedit groups will be able to edit. This is an additional
-restriction that further restricts what can be edited by a user.
+Pokud má libovolná skupina zvoleno <b>SmíEditovat</b>, bude tento
+produkt pouze pro čtení pro všechny uživatele, kteří nejsou členové
+všech skupin s tímto příznakem. POUZE uživatelé, kteří jsou členové
+všech skupin SmíEditovat, budou moci provádět úpravy. Toto je další
+omezení editací dovolených uživateli.
 <p>
-The <b>MemberControl</b> and <b>OtherControl</b> fields
-indicate which [% terms.bugs %] will be placed in
-this group according to the following definitions.
+Příznaky <b>Členové</b> a <b>Ostatní</b> určují, kter[% koncovky.mlady_1pl %]
+[%+ terms.chyby %] budou do této skupiny umístěny, podle následujících definic:
 <br>
 <table border=1>
   <tr>
     <th>
-      MemberControl
+      Členové
     </th>
     <th>
-      OtherControl
+      Ostatní
     </th>
     <th>
-      Interpretation
+      [% terms.Chyby %] v tomto produktu…
     </th>
   </tr>
   <tr>
     <td>
-      NA
+      Nic
     </td>
     <td>
-      NA
+      Nic
     </td>
     <td>
-      [% terms.Bugs %] in this product are never associated with this group.
-    </td>
-  </tr>
-  <tr>
-    <td>
-      Shown
-    </td>
-    <td>
-      NA
-    </td>
-    <td>
-      [% terms.Bugs %] in this product are permitted to be restricted to this
-      group.  Users who are a member of this group will be able to place [% terms.bugs %] in
-      this group.
+      …nikdy nepoužívají tuto skupinu.
     </td>
   </tr>
   <tr>
     <td>
-      Shown
+      Zobrazená
     </td>
     <td>
-      Shown
+      Nic
     </td>
     <td>
-      [% terms.Bugs %] in this product can be placed in this group by anyone
-      with permission to edit the [% terms.bug %] even if they are not a member
-      of this group.
-    </td>
-  </tr>
-  <tr>
-    <td>
-      Shown
-    </td>
-    <td>
-      Default
-    </td>
-    <td>
-      [% terms.Bugs %] in this product can be placed in this group by anyone
-      with permission to edit the [% terms.bug %] even if they are not a member
-      of this group. Non-members place [% terms.bugs %] in this group by default.
+      …mohou být omezen[% koncovky.verb_pl %] na tuto skupinu. Uživatelé, kteří jsou členy
+      této skupiny, mohou do této chyby umisťovat [% terms.chyba_4pl %].
     </td>
   </tr>
   <tr>
     <td>
-      Shown
+      Zobrazená
     </td>
     <td>
-      Mandatory
+      Zobrazená
     </td>
     <td>
-      [% terms.Bugs %] in this product are permitted to be restricted to this
-      group.  Users who are a member of this group will be able to place [% terms.bugs %]
-       in this group.  Non-members will be forced to restrict [% terms.bugs %] to
-       this group when they initially enter [% terms.abug %] in this product.
+      …mohou být do této skupiny umisťovány kýmkoli, kdo k nim má právo
+      editovat, bez ohledu na to, zda je takový uživatel členem této skupiny.
     </td>
   </tr>
   <tr>
     <td>
-      Default
+      Zobrazená
     </td>
     <td>
-      NA
+      Implicitní
     </td>
     <td>
-      [% terms.Bugs %] in this product are permitted to be restricted to this
-      group and are placed in this group by default.  Users who are a member of this
-      group will be able to place [% terms.bugs %] in this group.
-    </td>
-  </tr>
-  <tr>
-    <td>
-      Default
-    </td>
-    <td>
-      Default
-    </td>
-    <td>
-      [% terms.Bugs %] in this product are permitted to be restricted to this
-      group and are placed in this group by default.  Users who are a member of this group
-      will be able to place [% terms.bugs %] in this group.  Non-members will be
-      able to restrict [% terms.bugs %] to this group on entry and will do so by default
+      …mohou být do této skupiny umisťovány kýmkoli, kdo k nim má právo
+      editovat, bez ohledu na to, zda je takový uživatel členem této skupiny.
+      Nečlenové do této skupiny [% terms.chyba_4pl %] umisťují implicitně.
     </td>
   </tr>
   <tr>
     <td>
-      Default
+      Zobrazená
     </td>
     <td>
-      Mandatory
+      Povinná
     </td>
     <td>
-      [% terms.Bugs %] in this product are permitted to be restricted to this
-      group and are placed in this group by default.  Users who are a member of this group
-      will be able to place [% terms.bugs %] in this group. Non-members will be forced
-      to place [% terms.bugs %] in this group on entry.
+      …mohou být omezen[% koncovky.verb_pl %] na tuto skupinu. Uživatelé, kteří jsou členy
+      této skupiny, mohou do této chyby umisťovat [% terms.chyba_4pl %].
+      Nečlenové do této skupiny nově zadan[% koncovky.mlady_4pl %] [%+ terms.chyba_4pl %] umisťují
+      povinně.
     </td>
   </tr>
   <tr>
     <td>
-      Mandatory
+      Implicitní
     </td>
     <td>
-      Mandatory
+      Nic
     </td>
     <td>
-      [% terms.Bugs %] in this product are required to be restricted to this
-      group.  Users are not given any option.
+      …mohou být omezen[% koncovky.verb_pl %] na tuto skupinu a jsou do ní umisťován[% koncovky.verb_pl %]
+      implicitně. Uživatelé, kteří jsou členy této skupiny, mohou do této chyby umisťovat [% terms.chyba_4pl %].
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Implicitní
+    </td>
+    <td>
+      Implicitní
+    </td>
+    <td>
+      …mohou být omezen[% koncovky.verb_pl %] na tuto skupinu a jsou do ní umisťován[% koncovky.verb_pl %]
+      implicitně. Uživatelé, kteří jsou členy této skupiny, mohou do této chyby umisťovat [% terms.chyba_4pl %].
+      Uživatelé, kteří členy této skupiny nejsou, do této chyby také mohou umisťovat [% terms.chyba_4pl %],
+      což se také bude dít implicitně.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Implicitní
+    </td>
+    <td>
+      Povinná
+    </td>
+    <td>
+      …mohou být omezen[% koncovky.verb_pl %] na tuto skupinu a jsou do ní umisťován[% koncovky.verb_pl %]
+      implicitně. Uživatelé, kteří jsou členy této skupiny, mohou do této chyby umisťovat [% terms.chyba_4pl %].
+      Uživatelé, kteří členy této skupiny nejsou, do této chyby také [% terms.chyba_4pl %] umisťují povinně.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Povinná
+    </td>
+    <td>
+      Povinná
+    </td>
+    <td>
+      …jsou vždy omezen[% koncovky.verb_pl %] na tuto skupinu, uživatelé nemají možnost volby.
     </td>
   </tr>
 </table>
